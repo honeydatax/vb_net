@@ -144,7 +144,7 @@ exits:
 
            if bbox.ww(bbox.order(7)).closed=0 then		
 		if x>bbox.ww(bbox.order(7)).x and x<bbox.ww(bbox.order(7)).x+bbox.ww(bbox.order(7)).w and y>bbox.ww(bbox.order(7)).y and y<bbox.ww(bbox.order(7)).y+bbox.ww(bbox.order(7)).h then
-		    if x>bbox.ww(bbox.order(7)).x+bbox.ww(bbox.order(7)).controlss.x and x<bbox.ww(bbox.order(7)).x+bbox.ww(bbox.order(7)).controlss.x++bbox.ww(bbox.order(7)).controlss.w and y>bbox.ww(bbox.order(7)).y+bbox.ww(bbox.order(7)).controlss.y and y<bbox.ww(bbox.order(7)).y+bbox.ww(bbox.order(7)).controlss.y+bbox.ww(bbox.order(7)).h then		    		
+		    if x>bbox.ww(bbox.order(7)).x+bbox.ww(bbox.order(7)).controlss.x and x<bbox.ww(bbox.order(7)).x+bbox.ww(bbox.order(7)).controlss.x+bbox.ww(bbox.order(7)).controlss.w and y>bbox.ww(bbox.order(7)).y+bbox.ww(bbox.order(7)).controlss.y and y<bbox.ww(bbox.order(7)).y+bbox.ww(bbox.order(7)).controlss.y+bbox.ww(bbox.order(7)).controlss.h then		    		
 			if nw=-1 then nw=0
 			i=-1
 	   	     end if
