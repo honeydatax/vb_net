@@ -73,20 +73,20 @@ Public Class WinVBApp
 			dim s as string()=c.split(chr(13))
 			iii=10
 			t=chr(13)+chr(10)+" ret"+chr(13)+chr(10)+chr(13)+chr(10)+"L0print:"+chr(13)+chr(10)+" mov ah,9"+chr(13)+chr(10)+" int 0x21"+chr(13)+chr(10)+" ret"+chr(13)+chr(10)
-			t=t+chr(13)+chr(10)+" ret"+chr(13)+chr(10)+chr(13)+chr(10)+"L2keycheck:"+chr(13)+chr(10)+"	mov bx,L4"+chr(13)+chr(10)+"	mov al,[bx]"+chr(13)+chr(10)+"	inc al"+chr(13)+chr(10)+"	mov [bx],al"+chr(13)+chr(10)+" cmp al,20"+chr(13)+chr(10)
-			t=t+chr(13)+chr(10)+" jnz L5"+chr(13)+chr(10)+chr(13)+chr(10)+"	xor al,al"+chr(13)+chr(10)+"	mov [bx],al"+chr(13)+chr(10)+"	mov ah,al"+chr(13)+chr(10)+" int 0x16"+chr(13)+chr(10)
-			t=t+chr(13)+chr(10)+"L5:"+chr(13)+chr(10)+chr(13)+chr(10)+"	call L0print"+chr(13)+chr(10)+"	ret"+chr(13)+chr(10)+chr(13)+chr(10)
-			t=t+chr(13)+chr(10)+"	ret"+chr(13)+chr(10)+"section .data"+chr(13)+chr(10)+"L4 db 0,0,0,0,0"+chr(13)+chr(10)
-			tt="section .text"+chr(13)+chr(10)+"main:"+chr(13)+chr(10)+chr(13)+chr(10)
+			t=t+chr(13)+chr(10)+" ret"+chr(13)+chr(10)+chr(13)+chr(10)+"L2keycheck:"+chr(13)+chr(10)+"	mov bx,L4"+chr(13)+chr(10)+"	mov al,[bx]"+chr(13)+chr(10)+"	inc al"+chr(13)+chr(10)+"	mov [bx],al"+chr(13)+chr(10)+"	cmp al,20"+chr(13)+chr(10)
+			t=t+chr(13)+chr(10)+"	jnz L5"+chr(13)+chr(10)+chr(13)+chr(10)+"	xor al,al"+chr(13)+chr(10)+"	mov [bx],al"+chr(13)+chr(10)+chr(13)+chr(10)+"	mov si,dx"+chr(13)+chr(10)+"	mov ah,9"+chr(13)+chr(10)+"	mov dx,L6"+chr(13)+chr(10)+"	int 0x21"+chr(13)+chr(10)+"	mov dx,si"+chr(13)+chr(10)+"	mov ah,al"+chr(13)+chr(10)+"	int 0x16"+chr(13)+chr(10)+"	cmp al,27"+chr(13)+chr(10)+"	jz L7"+chr(13)+chr(10)
+			t=t+chr(13)+chr(10)+"L5:"+chr(13)+chr(10)+chr(13)+chr(10)+"	call L0print"+chr(13)+chr(10)+"	ret"+chr(13)+chr(10)+chr(13)+chr(10)+chr(13)+chr(10)+"L7:"+chr(13)+chr(10)+chr(13)+chr(10)+chr(13)+chr(10)+"	xor ax,ax"+chr(13)+chr(10)+chr(13)+chr(10)+chr(13)+chr(10)+"	int 0x21"+chr(13)+chr(10)+chr(13)+chr(10)+chr(13)+chr(10)+"	ret"+chr(13)+chr(10)+chr(13)+chr(10)
+			t=t+chr(13)+chr(10)+"	ret"+chr(13)+chr(10)+"section .data"+chr(13)+chr(10)+"L4 db 0,0,0,0,0"+chr(13)+chr(10)+chr(13)+chr(10)+"L6 db 'press a key to go on, esc key to exit scroll',13,10,'$'"+chr(13)+chr(10)
+			tt="section .text"+chr(13)+chr(10)+"org 0x100"+chr(13)+chr(10)+"main:"+chr(13)+chr(10)+chr(13)+chr(10)
 			dim ss as string
 			for each ss in s
 				ss=ss.replace(chr(10),"")				
 				ss=ss.replace("'",chr(34))				
 				tt =tt+"	mov dx,L"+trim(str(iii))+chr(13)+chr(10)+"	call L2keycheck"+chr(13)+chr(10)
-				t =t+"L"+trim(str(iii))+" db '"+ss+"'"+chr(13)+chr(10)
+				t =t+"L"+trim(str(iii))+" db '"+ss+"',13,10,'$'"+chr(13)+chr(10)
 				iii=iii+1
 			next 			
-			tt=tt+chr(13)+chr(10)+"xor ax,ax"+chr(13)+chr(10)+"int 0x21"
+			tt=tt+chr(13)+chr(10)+"	xor ax,ax"+chr(13)+chr(10)+"	int 0x21"+chr(13)+chr(10)
                  catch ee as Exception 
 			   text0.text ="ERROR same data is not correct line :"+str(iii-9)
 			   end try
