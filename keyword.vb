@@ -74,6 +74,7 @@ Public Class WinVBApp
 		dim vars(100) as string
 		dim errorss as integer
 		dim parcount as integer
+		dim par1 as string
 		keycount=2
 		varscount=0
 		errorss=0
@@ -83,6 +84,7 @@ Public Class WinVBApp
 		par(1)=3
 		try           	
 			c= text2.text
+			c=c.replace("	","        ")				
 			dim s as string()=c.split(chr(13))
 			iii=10
 			t=chr(13)+chr(10)+" ret"+chr(13)+chr(10)+chr(13)+chr(10)+"L0print:"+chr(13)+chr(10)+" mov ah,9"+chr(13)+chr(10)+" int 0x21"+chr(13)+chr(10)+" ret"+chr(13)+chr(10)
@@ -97,11 +99,11 @@ Public Class WinVBApp
 				ss=ss.replace("'",chr(34))				
 				dim separete as string()=ss.split(",")
 				if separete.length>0 then 
-					separete(0)=lcase(trim(separete(0)))
-					if separete(0)=keywords(0) and par(0)=separete.length then
+					par1=lcase(trim(separete(0)))
+					if par1=keywords(0) and par(0)=separete.length then
 						tt =tt+"	mov dx,"+ucase(trim(separete(1)))+chr(13)+chr(10)+"	call print"+chr(13)+chr(10)
 					end if 
-					if separete(0)=keywords(1) and par(1)=separete.length then
+					if par1=keywords(1) and par(1)=separete.length then
 						t =t+ucase(trim(separete(1)))+" db '"+separete(2)+"',13,10,'$'"+chr(13)+chr(10)
 					end if
 					iii=iii+1
