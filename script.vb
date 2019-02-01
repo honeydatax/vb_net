@@ -70,7 +70,8 @@ Public Class WinVBApp
 		dim iii as integer
 		try           	
 			c= text2.text
-			dim s as string()=c.split(chr(13))
+			c=c.replace(chr(13),"")				 
+			dim s as string()=c.split(chr(10))
 			iii=10
 			t=chr(13)+chr(10)+" ret"+chr(13)+chr(10)+chr(13)+chr(10)+"L0print:"+chr(13)+chr(10)+" mov ah,9"+chr(13)+chr(10)+" int 0x21"+chr(13)+chr(10)+" ret"+chr(13)+chr(10)
 			t=t+chr(13)+chr(10)+" ret"+chr(13)+chr(10)+chr(13)+chr(10)+"L2keycheck:"+chr(13)+chr(10)+"	mov bx,L4"+chr(13)+chr(10)+"	mov al,[bx]"+chr(13)+chr(10)+"	inc al"+chr(13)+chr(10)+"	mov [bx],al"+chr(13)+chr(10)+"	cmp al,20"+chr(13)+chr(10)
@@ -80,7 +81,7 @@ Public Class WinVBApp
 			tt="section .text"+chr(13)+chr(10)+"org 0x100"+chr(13)+chr(10)+"main:"+chr(13)+chr(10)+chr(13)+chr(10)
 			dim ss as string
 			for each ss in s
-				ss=ss.replace(chr(10),"")				
+			
 				ss=ss.replace("'",chr(34))				
 				tt =tt+"	mov dx,L"+trim(str(iii))+chr(13)+chr(10)+"	call L2keycheck"+chr(13)+chr(10)
 				t =t+"L"+trim(str(iii))+" db '"+ss+"',13,10,'$'"+chr(13)+chr(10)
