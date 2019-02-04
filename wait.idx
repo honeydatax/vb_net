@@ -1,0 +1,4 @@
+echo, press a key to go on.
+set,a,  
+wait,a
+print,a

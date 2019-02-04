@@ -1,0 +1,5 @@
+set,a, hello world. 
+set,ok,ok. 
+print,a
+
+print,ok

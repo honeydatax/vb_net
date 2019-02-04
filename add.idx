@@ -1,0 +1,17 @@
+integer,a,0
+integer,b,1
+set,z,  
+let,a,45
+add,a,a,b
+print,a
+add,a,a,b
+print,a
+add,a,a,b
+print,a
+add,a,a,b
+print,a
+add,a,a,b
+print,a
+add,a,a,b
+print,a
+

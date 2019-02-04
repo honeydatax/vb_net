@@ -1,0 +1,15 @@
+integer,a,0
+integer,b,0
+integer,c,0
+integer,d,0
+integer,e,0
+integer,f,0
+set,z,  
+let,a,50
+let,b,49
+let,c,48
+let,d,47
+let,e,46
+let,f,45
+print,a
+

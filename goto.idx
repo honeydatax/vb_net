@@ -1,0 +1,4 @@
+goto,l1
+exit
+label,l1
+echo,line 1
