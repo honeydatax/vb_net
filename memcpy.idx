@@ -1,0 +1,7 @@
+                rem,define vars
+        integer,var1,12
+        set,var2,HELLO WORLD!.....................
+        set,var3,.................................
+                rem,fill mem
+        memcopy,var3,var2,var1
+        print,var3
