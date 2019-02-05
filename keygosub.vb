@@ -43,6 +43,7 @@ Public Class WinVBApp
 	dim tc2 as string
 	dim varstype(100) as integer
 	dim line11(100) as integer
+	dim debug as string
         Dim button As New Button
         Dim text0 As New textbox
         Dim text1 As New textbox
@@ -100,7 +101,7 @@ Public Class WinVBApp
 	addcode ("        gosub,lessthan")
 	addcode ("        goto,l8")	
 	addcode ("label,l0")
-	addcode ("        gosub,lessthan")
+	addcode ("        gosub,gratherthan")
 	addcode ("label,l8")
 	addcode ("        return")
 
@@ -421,7 +422,7 @@ Public Class WinVBApp
 								errorss=0
 							else
 
-								if bbb>0 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								if bbb>-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
 									addtail("	jmp LL"+trim(str(labeladdress(bbb)+8000)))
 									errorssi=-1
 									errorss=0
@@ -488,7 +489,7 @@ Public Class WinVBApp
 
 									else
 	
-										if bbb2>0 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
+										if bbb2>-1 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
 											addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
 											addtail("	mov ax,[bx]")
 											addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
@@ -559,7 +560,7 @@ Public Class WinVBApp
 
 									else
 	
-										if bbb2>0 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
+										if bbb2>-1 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
 											addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
 											addtail("	mov ax,[bx]")
 											addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
@@ -630,7 +631,7 @@ Public Class WinVBApp
 
 									else
 	
-										if bbb2>0 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
+										if bbb2>-1 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
 											addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
 											addtail("	mov ax,[bx]")
 											addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
@@ -701,7 +702,7 @@ Public Class WinVBApp
 
 									else
 	
-										if bbb2>0 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
+										if bbb2>-1 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
 											addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
 											addtail("	mov ax,[bx]")
 											addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
@@ -764,6 +765,7 @@ Public Class WinVBApp
 							tc=ucase(trim(separete(1)))
 							bbb=findlabel(tc)
 							if bbb=-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								
 								addlabel(tc,0,iii)
 								addtail("	call LL"+trim(str(iii+8000)))
 
@@ -771,7 +773,8 @@ Public Class WinVBApp
 								errorss=0
 							else
 
-								if bbb>0 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								if bbb>-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								
 									addtail("	call LL"+trim(str(labeladdress(bbb)+8000)))
 									errorssi=-1
 									errorss=0
@@ -816,7 +819,7 @@ Public Class WinVBApp
 		
 			goto escapehandler
 			errorhandler:
-				text0.text ="error on line "+str(iii)+" keyword :"+keywords(errorssi)
+				text0.text ="error on line "+str(iii)+" keyword :"+keywords(errorssi)+debug
      			escapehandler:
 
         
