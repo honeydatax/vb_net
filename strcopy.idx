@@ -1,0 +1,7 @@
+                rem,define vars
+        string,var3,50
+        set,var1,HELLO ******* $
+                rem,fill mem
+        strcopy,var3,var1
+        print,var3
+
