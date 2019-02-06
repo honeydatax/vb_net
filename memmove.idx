@@ -1,0 +1,8 @@
+                rem,define vars
+        string,var3,50
+        integer,var2,6
+        set,var1,HELLO ******* $
+                rem,fill mem
+        memmove,var3,var1,var2
+        print,var3
+
