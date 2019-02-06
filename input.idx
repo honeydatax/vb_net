@@ -1,0 +1,11 @@
+                rem,define vars
+        string,var3,50
+        integer,var2,6
+        echo,name:? $
+                rem,input
+        input,var3,var2
+                rem,print enter line
+        echo,
+        echo,
+        print,var3
+

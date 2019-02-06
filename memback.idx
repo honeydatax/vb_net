@@ -1,0 +1,9 @@
+                rem,define vars
+        integer,var1,4
+        integer,var2,15
+        set,var3,----HELLO WORLD.............
+                rem,input
+        print,var3
+        memback,var3,var1,var2
+        print,var3
+
