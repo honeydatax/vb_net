@@ -1,0 +1,12 @@
+                rem,define vars
+        integer,var1,0
+        integer,from,0
+        integer,into,5
+        integer,step,1
+        rem,for
+        for,var1,from,into,step
+        rem,echo
+                echo,----HELLO WORLD.............
+        rem,next
+        next
+
