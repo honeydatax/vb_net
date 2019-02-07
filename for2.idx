@@ -1,0 +1,13 @@
+                rem,define vars
+        integer,var1,0
+        set,z,  
+        integer,from,37
+        integer,into,41
+        integer,step,1
+        rem,for
+        for,var1,from,into,step
+        rem,echo
+                print,var1
+        rem,next
+        next
+
