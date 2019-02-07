@@ -1,0 +1,14 @@
+                rem,define vars
+        integer,p1,0
+        integer,p2,0
+        integer,size,15
+        integer,count,4
+        set,s,----hello world $............
+        string,ss,50
+        
+        pointer,p1,s
+        pointer,p2,ss
+        add,p1,p1,count
+        copy,p2,p1,size
+        print,ss
+

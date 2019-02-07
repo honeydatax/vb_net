@@ -1,0 +1,11 @@
+                rem,define vars
+        integer,n,0
+        integer,from,0
+        integer,into,15
+        integer,step,1
+        set,s,..........
+        for,n,from,into,step
+                str,s,n
+                print,s
+        next
+
