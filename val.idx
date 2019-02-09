@@ -1,0 +1,12 @@
+               rem,define vars
+        integer,n,0
+        integer,c,36
+        integer,d,5
+        set,s,..........
+        set,ss,..........
+        echo,enter a number?
+        input,s,d
+        val,n,s
+        str,ss,n
+        print,ss
+
