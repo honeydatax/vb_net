@@ -1,0 +1,7 @@
+                rem,define vars
+        echo,hello world
+                rem,machine code int 20
+        machine,205,32
+                rem,code never gets this
+        echo,end.
+
