@@ -1,0 +1,16 @@
+                rem,define vars
+        integer,n,0
+        integer,zero,0
+        integer,total,0
+        set,ss,..........
+        echo,0
+        label,l0
+        getnumber,n
+        echo,
+        like,n,zero,l2
+        add,total,total,n
+        printnumber,total
+        echo,=
+        goto,l0
+        label,l2
+
