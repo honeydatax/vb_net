@@ -1,0 +1,44 @@
+keywords list:
+print,2 par print a string sample : print,string1
+set,3 pars set sets a constant string than can be change sample: set,string1,hello world
+echo,2 pars echo prints a constant string sample: echo,hello world
+wait,2 pars waits for a key and return is key code sample: wait,a
+integer,3 pars integer set a var as integer and set is value number sample: integer,a,0
+let,3 pars let define a integer value sample: let,a,0
+add,4 pars add 2 integers add,varToPut,value1,value2 sample: add,var1,var2,var3 
+sub,4 pars sub 2 integers sub,varToPut,value1,value2 sample: sub,var1,var2,var3
+exit,1 pars exit exit to dos or to operation system sample: exit
+label,2 pars label define a label to be use in a gosub goto or like sample: label,l0
+goto,2 pars jump into a label sample: goto,l0
+return,1 pars return from a gosub call sample: return
+like,4 pars like compere 2 integer vars if is = then jumps into label sample: like,a,b,l0 
+diferent,4 pars diferent compere 2 integer vars if is not = then jumps into label sample: diferent,a,b,l0 
+big,4 pars big compere 2 integer vars if is big number then jumps into label sample: big,a,b,l0 
+less,4 pars less compere 2 integer vars if is big number then jumps into label sample: less,a,b,l0 
+rem,2 pars rem ignore the line used to write code remembers sample : rem, me code is for codeit
+gosub,2 pars jump into a label and waits for a return to continue sample: gosub,l0
+memfill,4 pars memfill fill a memory places id chars ina integer value sample: memfill,varToFill,varchar,varsize
+memcopy,4 pars memcopy copys a var text into other var of text n chars sample: memcopy,into,from,size
+string,3 pars string define a var as string a text vars and string size sample: string,s,10
+strcat,3 pars strcat add a string to other sample: strcat,var1,var2
+strcopy,3 pars strcopy copys a var into other sample: strcopy,into,from
+memmove,4 pars memmove copy or moves memory into sample:  memmove,into,from,size
+input,3 pars input gets a string out of a keyboard  sample: input,vartext
+memback,4 pars memback moves memory to back n places sample: memback,into,from,size
+memford,4 pars memford moves memory to front n places sample: memford,into,from,size
+strfrom,4 pars strfrom append a string to other from point n sample: strfrom,into,from,invar
+for,5 pars for next cycle sample : for,var,from,into,step
+next,1 pars for next cycle sample :next
+pointer,3 pars gets the var address into a integer to be used as pointer sample : pointer,a,b
+copy,4 pars copy a block of memory from 2 pointers to easy copy sample: copy,into,from,size
+str,3 pars str convert a number into a text var to be show on the screen sample: str,vartext,varint
+val,3 pars val get a number integer out of a string sample: val,intvar,textvar
+getnumber,2 pars, get a number of the keyboard into a integer var sample: getnumber,varinto
+printnumber,2 pars prints a number in the screen sample: printnumber,intvar
+machine,more than 2 pars call a machine code subrotina sample: machine,205,32
+
+
+
+
+
+
