@@ -1,0 +1,19 @@
+                rem,define vars
+        integer,a,0
+        integer,b,0
+        integer,c,8
+        integer,fora,0
+        integer,into,10
+        integer,step,1
+        echo,make a table X of number
+        getnumber,c
+        for,a,fora,into,step
+                printnumber,c
+                echo, X $
+                printnumber,a
+                mul,b,c,a
+                echo,=$
+                printnumber,b
+                echo, 
+        next
+
