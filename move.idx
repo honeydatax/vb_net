@@ -1,0 +1,13 @@
+                rem,define vars
+        integer,a,2048
+        integer,b,1
+                echo,befor
+                printnumber,a
+                echo, 
+                echo,afther
+                rem,move
+                move,a,b
+                rem,end move
+                printnumber,a
+                echo, 
+
