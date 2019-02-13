@@ -1,0 +1,20 @@
+                rem,define vars
+	integer,ax,8
+	integer,bx,0
+	integer,cx,16
+	integer,dx,0
+
+                     rem,call
+	call,addfunction,ax,bx,cx,dx 
+                     rem,end call
+
+	printnumber,ax
+	echo, + $
+	printnumber,cx
+
+	echo, = $
+	printnumber,bx
+	exit
+label,addfunction
+        machine,137,198,139,4,137,206,139,12,1,200,137,7
+	return
