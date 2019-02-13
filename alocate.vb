@@ -41,11 +41,15 @@ Public Class WinVBApp
 	dim bbb2 as integer
 	dim bbb3 as integer
 	dim bbb4 as integer
+	dim bbb5 as integer
+	dim bbb6 as integer
 	dim tc as string
 	dim tc1 as string
 	dim tc2 as string
 	dim tc3 as string
 	dim tc4 as string
+	dim tc5 as string
+	dim tc6 as string
 	dim forvar(100) as integer
 	dim forfrom(100) as integer
 	dim forinto(100) as integer
@@ -1828,6 +1832,68 @@ Public Class WinVBApp
 
 
 
+'key call,label1,var1ax,var2bx,var3cx,var4dx
+					if par1=keywords(43) then
+						errorssi=43
+						if par(43)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+							tc3=ucase(trim(separete(4)))
+							tc4=ucase(trim(separete(5)))
+
+							bbb=findlabel(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							bbb3=findvar(tc3)
+							bbb4=findvar(tc4)
+							if bbb<>-1 and tc<>"" then 
+								if bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" and bbb3<>-1 and tc3<>"" and bbb4<>-1 and tc4<>"" then
+
+
+									if varstype(bbb1)<7 and varstype(bbb2)<7 and varstype(bbb3)<7 and varstype(bbb4)<7 then	 
+										addtail("	mov ax,L"+(trim(line11(bbb1)+9000)))
+										addtail("	mov bx,L"+(trim(line11(bbb2)+9000)))
+										addtail("	mov cx,L"+(trim(line11(bbb3)+9000)))
+										addtail("	mov dx,L"+(trim(line11(bbb4)+9000)))
+										addtail("	call LL"+trim(str(labeladdress(bbb)+8000)))
+										errorssi=-1
+										errorss=0
+
+									 
+									else
+										iii=1+iii
+										goto errorhandler
+									end if
+								end if
+							else
+
+								if bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" and bbb3<>-1 and tc3<>"" and bbb4<>-1 and tc4<>"" then
+
+
+									if varstype(bbb1)<7 and varstype(bbb2)<7 and varstype(bbb3)<7 and varstype(bbb4)<7 then	 
+										addlabel(tc,0,iii)
+										addtail("	mov ax,L"+(trim(line11(bbb1)+9000)))
+										addtail("	mov bx,L"+(trim(line11(bbb2)+9000)))
+										addtail("	mov cx,L"+(trim(line11(bbb3)+9000)))
+										addtail("	mov dx,L"+(trim(line11(bbb4)+9000)))
+									 	addtail("	call LL"+trim(str(iii+8000)))
+										errorssi=-1
+										errorss=0
+
+									 
+									else
+										iii=1+iii
+										goto errorhandler
+									end if
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
 
 
 'line count
@@ -2054,7 +2120,7 @@ private sub startcode()
 		addkey ("div",4)
 		addkey ("move",3)
 		addkey ("alocate",3)
-
+		addkey ("call",6)
 
 'code head
 			t1=""
