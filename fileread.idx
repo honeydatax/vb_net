@@ -1,0 +1,11 @@
+        integer,file1,0
+        integer,size,12
+        string,s,50
+		rem,open
+        file.open,my.txt,file1
+		rem,read
+        file.read,s,file1,size
+		rem,close
+        file.close,file1
+		rem,print
+        print,s
