@@ -1,0 +1,16 @@
+	integer,data,0
+	set,x,$
+	integer,c,28
+	integer,e,9264
+	integer,n,0
+	integer,forn,0
+	integer,into,10
+	integer,step,1
+	echo,
+	for,n,forn,into,step
+		timer.rnd,data
+		div,data,data,c
+		add,data,data,e
+		print,data
+	next
+	echo,
