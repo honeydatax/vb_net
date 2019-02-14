@@ -1,0 +1,3 @@
+	integer,i,90
+	echo,wait 5 seconds
+	timer.sleep,i
