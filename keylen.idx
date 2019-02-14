@@ -1,0 +1,5 @@
+	set,s,hello world$
+	integer,i,0
+	string.len,i,s
+	print,s
+	printnumber,i
