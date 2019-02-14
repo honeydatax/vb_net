@@ -1,0 +1,14 @@
+        integer,file1,0
+        integer,size,12
+        set,s,hello world ......
+		rem,open
+        file.creat,my.txt
+        file.open,my.txt,file1
+		rem,read
+        file.write,s,file1,size
+        file.write,s,file1,size
+        file.write,s,file1,size
+		rem,close
+        file.close,file1
+		rem,print
+        print,s
