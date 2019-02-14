@@ -1,0 +1,12 @@
+	integer,data,0
+	integer,c,6
+	integer,n,0
+	integer,forn,0
+	integer,into,10
+	integer,step,1
+	for,n,forn,into,step
+		timer.rnd,data
+		div,data,data,c
+		printnumber,data
+		echo,
+	next
