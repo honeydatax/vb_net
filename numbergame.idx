@@ -1,0 +1,42 @@
+	integer,data,0
+	integer,i,0
+	integer,c,100
+	integer,e,255
+	integer,n,0
+	integer,forn,0
+	integer,into,10
+	integer,step,1
+	echo,
+		timer.rnd,data
+		mul,data,data,c
+		div,data,data,e
+		echo,guess a number from 0 to 100?
+	for,n,forn,into,step
+		gosub,inputs
+	next
+	echo,
+
+label,lose
+	echo,
+	printnumber,data
+	echo, you lose
+	exit
+label,win
+	echo,
+	printnumber,data
+	echo, you win
+	exit
+label,nbig
+	echo, number is big
+	return
+label,inputs
+	getnumber,i
+	echo,
+	printnumber,i
+	like,i,data,win
+	big,data,i,nbig
+label,nless
+	echo, number is less
+	return
+
+
