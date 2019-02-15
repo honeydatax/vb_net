@@ -1,0 +1,12 @@
+	integer,i,0
+	integer,ii,0
+	echo,hello world ....
+	like,i,ii,onexitcode
+	echo,error i not = ii
+	exit
+label,onreturns
+	echo,i = ii
+	exit
+label,onexitcode
+	stack.push,onreturns
+	return
