@@ -1,0 +1,7 @@
+	integer,i,0
+	integer,ii,0
+	set,ss,$$$$$
+	set,s,a$
+	pointer,i,s
+	mem.peek,ii,i
+	print,ii
