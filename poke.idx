@@ -1,0 +1,9 @@
+	integer,i,0
+	integer,ii,36
+	integer,iii,6
+	set,s,hello world
+	print,s
+	pointer,i,s
+	add,i,i,iii
+	mem.poke,i,ii
+	print,s
