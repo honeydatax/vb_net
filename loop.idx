@@ -1,0 +1,20 @@
+	integer,n,0
+	integer,forn,0
+	integer,into,32000
+	integer,step,1
+	integer,i,0
+	integer,ii,36
+	integer,iii,0
+	integer,iiii,0
+	set,s,hello world$
+	pointer,i,s
+		rem,loop
+	for,n,forn,into,step
+		mem.peek,iii,i
+		like,iii,ii,exitdo
+		add,i,i,step
+	next
+		rem,end loop
+label,exitdo
+	printnumber,n
+	echo,
