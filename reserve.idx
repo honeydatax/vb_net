@@ -1,0 +1,27 @@
+                rem,define vars
+        integer,var1.pointer,0
+        integer,var1.size,1000
+        integer,var2.pointer,0
+        integer,var2.size,1000
+        integer,var3.pointer,0
+        integer,var3.size,1000
+	                rem,reserve far memory
+                mem.reserve,var1.pointer,var1.size
+                mem.reserve,var2.pointer,var2.size
+                mem.reserve,var3.pointer,var3.size
+                echo,reserve mem var1: $
+                printnumber,var1.pointer
+                echo, size var1: $
+                printnumber,var1.size
+                echo, 
+                echo,reserve mem var2: $
+                printnumber,var2.pointer
+                echo, size var2: $
+                printnumber,var2.size
+                echo, 
+                echo,reserve mem var3: $
+                printnumber,var3.pointer
+                echo, size var3: $
+                printnumber,var3.size
+                echo, 
+

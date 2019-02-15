@@ -1,0 +1,19 @@
+	integer,n,-2
+	integer,nn,-32768
+	integer,i,0
+	integer,const0,0
+	integer,const1,1
+	printnumber,n
+	echo,
+	bits.and,i,n,nn
+	like,const0,i,zero
+	bits.not,i,n
+	echo,-$
+	add,i,i,const1
+	printnumber,i
+	echo,
+	exit
+label,zero
+	printnumber,n
+	echo,
+	exit
