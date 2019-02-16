@@ -1,0 +1,17 @@
+                rem,define vars
+        integer,p1,0
+        integer,far.p2,0
+        integer,p3,0
+        integer,size,15
+        integer,count,4
+        set,s,----hello world $............
+        string,ss,50
+        
+	mem.reserve,far.p2,size
+        pointer,p1,s
+        pointer,p3,ss
+	far.into,far.p2,p1,size
+	add,far.p2,far.p2,count
+	far.from,p3,far.p2,size
+        print,ss
+
