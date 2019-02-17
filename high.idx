@@ -1,0 +1,4 @@
+	set,a,hello world.hi.!
+	print,a
+	string.high,a
+	print,a
