@@ -1,0 +1,38 @@
+		rem,type client use text format to save corret size 8+16+16+16 size=56
+	text,number,8
+	text,name,16
+	text,address,16
+	text,phone,16
+		rem,type client
+	integer,file1,0
+	integer,const16,16
+	integer,const8,8
+	integer,size,56
+
+	echo,
+	echo,client number ?
+	input,number,const8
+	echo,
+	print,number
+	echo,
+	echo,client name ?
+	input,name,const16
+	echo,
+	print,name
+	echo,
+	echo,client address ?
+	input,address,const16
+	echo,
+	print,address
+	echo,
+	echo,client phone ?
+	input,phone,const16
+	echo,
+	print,phone
+	echo,
+
+
+	file.creat,client.txt
+	file.open,client.txt,file1
+	file.write,number,file1,size
+	file.close,file1
