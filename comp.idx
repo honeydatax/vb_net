@@ -1,0 +1,18 @@
+        integer,var1,0
+        integer,var2,0
+        integer,var3,1
+        integer,var4,2
+	set,a,hello world.1$
+	set,b,hello world.0$
+	string.comp,var1,a,b
+	like,var1,var3,l1
+	like,var1,var4,l2
+label,l0
+	echo,a=b
+	exit
+label,l1
+	echo,a>b
+	exit
+label,l2
+	echo,a<b
+	exit
