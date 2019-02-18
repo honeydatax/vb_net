@@ -1,0 +1,21 @@
+	integer,chr,0
+	integer,esc,27
+	integer,value,0
+	integer,n,0
+	integer,forn,0
+	integer,into,32000
+	integer,step,0
+
+	for,n,forn,into,step
+		:,loop2
+			inkey,chr
+			diferent,chr,value,onkey
+	next
+
+:,onkey
+	printnumber,chr
+	echo,
+	like,chr,esc,onexit
+	goto,loop2
+
+:,onexit
