@@ -1,0 +1,18 @@
+	integer,n,0
+	integer,nn,-1
+	integer,step,0
+		;,the string
+	set,a,0123456789abcdefghijklmnopqrstuwvxz.
+	set,b,6789$
+	pointer,step,a
+	print,a
+	print,b
+	echo,
+		;,find string
+	string.findstr,n,a,b
+	like,n,nn,onexit
+	sub,n,n,step
+	printnumber,n
+	exit
+:,onexit
+	echo,sub string not find
