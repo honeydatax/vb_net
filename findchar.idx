@@ -1,0 +1,12 @@
+	integer,chr,53
+	integer,n,0
+	integer,forn,0
+	integer,into,32000
+	integer,step,0
+		;,the string
+	set,a,0123456789abcdefghijklmnopqrstuwvxz.
+	print,a
+		;,find char
+	string.findchr,n,a,chr
+	printnumber,n
+:,onexit
