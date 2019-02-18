@@ -1,0 +1,12 @@
+	integer,chr,0
+	integer,esc,27
+	integer,n,0
+	integer,forn,0
+	integer,into,32000
+	integer,step,0
+	echo,press ;esc key to exit
+	for,n,forn,into,step
+		wait,chr
+		like,chr,esc,onexit
+	next
+:,onexit
