@@ -30,6 +30,7 @@ Public Class WinVBApp
 	dim errorssi as integer
 	dim parcount as integer
 	dim par1 as string
+	dim vvv as string
 	dim t1 as string
 	dim tt1 as string
 	dim t as string
@@ -98,11 +99,11 @@ Public Class WinVBApp
 
 
         button2.Location = New Point(560,33)
-        button2.Text = "save out:"
+        button2.Text = "run out.com:"
         button2.Parent = Me
 
         button3.Location = New Point(560,63)
-        button3.Text = "version:"
+        button3.Text = "asm source:"
         button3.Parent = Me
 
         button4.Location = New Point(560,93)
@@ -115,7 +116,7 @@ Public Class WinVBApp
         text2.scrollbars = 3
 
 'sample code
-	text2.text="hello.idx"
+	text2.text="index/hello.idx"
 
 	startcode()
 
@@ -136,26 +137,53 @@ Public Class WinVBApp
 
 
     Private Sub OnClick2(ByVal sender As Object, ByVal e As EventArgs)
-		dim a as string 
-		a=inputbox("write code filename","write code filename","out.asm")
-	try
-	If Not System.IO.File.Exists(a) = True Then
-	    Dim ffile As System.IO.FileStream
-	    ffile = System.IO.File.Create(a)
-	    ffile.Close()
-	End If
-
-	file.WriteAllText(a,text0.text)
-
-                 catch ee as Exception
-			msgbox("error")
-	end try
+		try           	
+			c= "-c 'dosbox out.com '"
+			dim psi as ProcessStartInfo = new ProcessStartInfo()
+			psi = new ProcessStartInfo()
+			psi.FileName = "/bin/bash" 
+			psi.CreateNoWindow=true
+			psi.UseShellExecute = false
+			psi.Arguments =c
+			psi.RedirectStandardInput = true
+			psi.RedirectStandardOutput = true
+			psi.RedirectStandardError = true
+			dim p as Process = Process.Start(psi)
+			p.WaitForExit()
+			text0.text =chr(13)+chr(10)+p.StandardOutput.ReadToEnd()+chr(13)+chr(10) 
+			p.Close()
+			application.doevents
+			text0.text =text0.text+CHR(13)+CHR(10)+":FINISH"+CHR(13)+CHR(10)+"if sucess the exe name will be out.com and asm name will be out.asm"
+			
+                 catch ee as Exception 
+			   text0.text ="open out.asm ERROR same data is not correct"
+			   end try
 
 
     End Sub
 
     Private Sub OnClick3(ByVal sender As Object, ByVal e As EventArgs)
-	msgbox("version 5.1")
+		try           	
+			c= "-c 'mousepad out.asm '"
+			dim psi as ProcessStartInfo = new ProcessStartInfo()
+			psi = new ProcessStartInfo()
+			psi.FileName = "/bin/bash" 
+			psi.CreateNoWindow=true
+			psi.UseShellExecute = false
+			psi.Arguments =c
+			psi.RedirectStandardInput = true
+			psi.RedirectStandardOutput = true
+			psi.RedirectStandardError = true
+			dim p as Process = Process.Start(psi)
+			p.WaitForExit()
+			text0.text =chr(13)+chr(10)+p.StandardOutput.ReadToEnd()+chr(13)+chr(10) 
+			p.Close()
+			application.doevents
+			text0.text =text0.text+CHR(13)+CHR(10)+":FINISH"+CHR(13)+CHR(10)+"if sucess the exe name will be out.com and asm name will be out.asm"
+			
+                 catch ee as Exception 
+			   text0.text ="open out.asm ERROR same data is not correct"
+			   end try
 
 
 
@@ -2792,7 +2820,48 @@ Public Class WinVBApp
 			   text0.text ="ERROR same data is not correct line :"+str(iii+1)
 			goto escapehandler
 			   end try
-			text0.text =tt + t+chr(13)+chr(10)+"endf db '$'"+chr(13)+chr(10)
+			vvv=tt + t+chr(13)+chr(10)+"endf db '$'"+chr(13)+chr(10)
+	
+	try
+	If Not System.IO.File.Exists("out.asm") = True Then
+	    Dim ffile As System.IO.FileStream
+	    ffile = System.IO.File.Create("out.asm")
+	    ffile.Close()
+	End If
+
+	file.WriteAllText("out.asm",vvv)
+
+
+
+                 catch ee as Exception
+			msgbox("error on save out.asm")
+					goto errorhandler
+	end try
+
+		try           	
+			c= "-c 'timeout 59s nasm -o out.com out.asm '"
+			dim psi as ProcessStartInfo = new ProcessStartInfo()
+			psi = new ProcessStartInfo()
+			psi.FileName = "/bin/bash" 
+			psi.CreateNoWindow=true
+			psi.UseShellExecute = false
+			psi.Arguments =c
+			psi.RedirectStandardInput = true
+			psi.RedirectStandardOutput = true
+			psi.RedirectStandardError = true
+			dim p as Process = Process.Start(psi)
+			p.WaitForExit()
+			text0.text =chr(13)+chr(10)+p.StandardOutput.ReadToEnd()+chr(13)+chr(10) 
+			p.Close()
+			application.doevents
+			text0.text =text0.text+CHR(13)+CHR(10)+":FINISH"+CHR(13)+CHR(10)+"if sucess the exe name will be out.com and asm name will be out.asm"
+			
+                 catch ee as Exception 
+			   text0.text ="open out.asm ERROR same data is not correct"
+			   end try
+
+
+
 		
 			goto escapehandler
 			errorhandler:
