@@ -17,13 +17,13 @@ Public Class WinVBApp
 	dim i as integer
 	dim keycount as  integer
 	dim varscount as integer
-	dim keywords(100) as string
-	dim par(100) as integer
-	dim labelss(100) as string
-	dim labeladdress(100) as integer
-	dim labelstate(100) as integer
+	dim keywords(300) as string
+	dim par(300) as integer
+	dim labelss(300) as string
+	dim labeladdress(300) as integer
+	dim labelstate(300) as integer
 	dim labelindex as integer
-	dim vars(100) as string
+	dim vars(300) as string
 	dim errorss as integer
 	dim errorssi as integer
 	dim parcount as integer
@@ -50,14 +50,14 @@ Public Class WinVBApp
 	dim tc4 as string
 	dim tc5 as string
 	dim tc6 as string
-	dim forvar(100) as integer
-	dim forfrom(100) as integer
-	dim forinto(100) as integer
-	dim forstep(100) as integer
-	dim foraddress(100) as integer
+	dim forvar(300) as integer
+	dim forfrom(300) as integer
+	dim forinto(300) as integer
+	dim forstep(300) as integer
+	dim foraddress(300) as integer
 	dim forcount as integer
-	dim varstype(100) as integer
-	dim line11(100) as integer
+	dim varstype(300) as integer
+	dim line11(300) as integer
 	dim debug as string
         Dim button4 As New Button
         Dim button3 As New Button
@@ -2940,6 +2940,7 @@ end function
 private sub clearbody()
 		labelindex=0
 		varscount=0
+		forcount=0
 		errorss=0
 
 
