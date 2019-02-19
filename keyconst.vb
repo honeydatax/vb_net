@@ -63,6 +63,9 @@ Public Class WinVBApp
 	dim line11(300) as integer
 	dim debug as string
 	dim rtxt() as string
+        Dim button7 As New Button
+        Dim button6 As New Button
+        Dim button5 As New Button
         Dim button4 As New Button
         Dim button3 As New Button
         Dim button2 As New Button
@@ -111,6 +114,19 @@ Public Class WinVBApp
         button4.Parent = Me
 
 
+        button5.Location = New Point(560,123)
+        button5.Text = "edit code:"
+        button5.Parent = Me
+
+        button6.Location = New Point(560,153)
+        button6.Text = "load asm:"
+        button6.Parent = Me
+
+        button7.Location = New Point(560,183)
+        button7.Text = "help:"
+        button7.Parent = Me
+
+
         text2.Location = New Point(5,3)
         text2.size = New size(550,32)
         text2.scrollbars = 3
@@ -120,6 +136,9 @@ Public Class WinVBApp
 
 	startcode()
 
+        AddHandler button7.Click, AddressOf Me.OnClick7
+        AddHandler button6.Click, AddressOf Me.OnClick6
+        AddHandler button5.Click, AddressOf Me.OnClick5
         AddHandler button4.Click, AddressOf Me.OnClick4
         AddHandler button3.Click, AddressOf Me.OnClick3
         AddHandler button2.Click, AddressOf Me.OnClick2
@@ -205,6 +224,89 @@ Public Class WinVBApp
 	try
 
 	rtxt=file.readAlllines(text2.text)
+	ss=""
+	s=""
+	for each s in rtxt
+		ss=ss+s+chr(10)
+	next
+		text0.text=ss	
+                 catch ee as Exception
+	end try
+
+    End Sub
+
+    Private Sub OnClick5(ByVal sender As Object, ByVal e As EventArgs)
+		try           	
+			c= "-c 'mousepad "+text2.text+" '"
+			dim psi as ProcessStartInfo = new ProcessStartInfo()
+			psi = new ProcessStartInfo()
+			psi.FileName = "/bin/bash" 
+			psi.CreateNoWindow=true
+			psi.UseShellExecute = false
+			psi.Arguments =c
+			psi.RedirectStandardInput = true
+			psi.RedirectStandardOutput = true
+			psi.RedirectStandardError = true
+			dim p as Process = Process.Start(psi)
+			p.WaitForExit()
+			text0.text =chr(13)+chr(10)+p.StandardOutput.ReadToEnd()+chr(13)+chr(10) 
+			p.Close()
+			application.doevents
+			text0.text =text0.text+CHR(13)+CHR(10)+":FINISH"+CHR(13)+CHR(10)+"if sucess the exe name will be out.com and asm name will be out.asm"
+			
+                 catch ee as Exception 
+			   text0.text ="open out.asm ERROR same data is not correct"
+			   end try
+
+
+
+
+    End Sub
+
+
+
+    Private Sub OnClick6(ByVal sender As Object, ByVal e As EventArgs)
+
+		labelindex=0
+		varscount=0
+		forcount=0
+		errorss=0
+
+
+		t=t1
+		tt=tt1
+
+
+	try
+
+	rtxt=file.readAlllines("out.asm")
+	ss=""
+	s=""
+	for each s in rtxt
+		ss=ss+s+chr(10)
+	next
+		text0.text=ss	
+                 catch ee as Exception
+	end try
+
+    End Sub
+
+
+    Private Sub OnClick7(ByVal sender As Object, ByVal e As EventArgs)
+
+		labelindex=0
+		varscount=0
+		forcount=0
+		errorss=0
+
+
+		t=t1
+		tt=tt1
+
+
+	try
+
+	rtxt=file.readAlllines("index/index.txt")
 	ss=""
 	s=""
 	for each s in rtxt
