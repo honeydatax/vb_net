@@ -11,6 +11,8 @@ Imports System.Runtime.Serialization.Formatters.Binary
 
 Public Class WinVBApp
     Inherits Form
+	dim s as string
+	dim ss as string
 	dim n as integer
 	dim c as string
 	dim ii as integer
@@ -59,13 +61,14 @@ Public Class WinVBApp
 	dim varstype(300) as integer
 	dim line11(300) as integer
 	dim debug as string
+	dim rtxt() as string
         Dim button4 As New Button
         Dim button3 As New Button
         Dim button2 As New Button
         Dim button As New Button
         Dim text0 As New textbox
         Dim text1 As New textbox
-        Dim text2 As New richtextbox
+        Dim text2 As New textbox
 
 
 
@@ -83,8 +86,8 @@ Public Class WinVBApp
     Private Sub InitUI
     
 	ii=0
-        text0.Location = New Point(3,170)
-        text0.size = New size(610,150)
+        text0.Location = New Point(3,38)
+        text0.size = New size(550,290)
         text0.multiline = true
         text0.scrollbars = 3
         text0.Parent = Me
@@ -99,7 +102,7 @@ Public Class WinVBApp
         button2.Parent = Me
 
         button3.Location = New Point(560,63)
-        button3.Text = "save code:"
+        button3.Text = "version:"
         button3.Parent = Me
 
         button4.Location = New Point(560,93)
@@ -108,42 +111,19 @@ Public Class WinVBApp
 
 
         text2.Location = New Point(5,3)
-        text2.size = New size(550,150)
-        text2.multiline = true
+        text2.size = New size(550,32)
         text2.scrollbars = 3
 
 'sample code
-	addcode ("                rem,define vars")
-
-
-
-
-
-
-
-
-	addcode ("")
-
-
-
-
-
-        text2.Text =t1
-
-
-
-
+	text2.text="hello.idx"
 
 	startcode()
-
-
-
 
         AddHandler button4.Click, AddressOf Me.OnClick4
         AddHandler button3.Click, AddressOf Me.OnClick3
         AddHandler button2.Click, AddressOf Me.OnClick2
         AddHandler button.Click, AddressOf Me.OnClick
-        AddHandler text2.SelectionChanged, AddressOf Me.Onchange
+
 
 
         text2.Parent = Me
@@ -154,10 +134,6 @@ Public Class WinVBApp
         
     End Sub
 
-    Private Sub OnChange(ByVal sender As Object, ByVal e As EventArgs)
-		dim lline as integer =(text2.getlinefromcharindex(text2.selectionstart))+1
-                 me.text="line -" +lline.tostring
-    end sub
 
     Private Sub OnClick2(ByVal sender As Object, ByVal e As EventArgs)
 		dim a as string 
@@ -179,40 +155,36 @@ Public Class WinVBApp
     End Sub
 
     Private Sub OnClick3(ByVal sender As Object, ByVal e As EventArgs)
-		dim a as string 
-		a=inputbox("write code filename","write code filename","code.idx")
-	try
-	If Not System.IO.File.Exists(a) = True Then
-	    Dim ffile As System.IO.FileStream
-	    ffile = System.IO.File.Create(a)
-	    ffile.Close()
-	End If
+	msgbox("version 5.1")
 
-	file.WriteAllText(a,text2.text)
-                 catch ee as Exception
-			msgbox("error")
-	end try
 
 
 
     End Sub
 
     Private Sub OnClick4(ByVal sender As Object, ByVal e As EventArgs)
-		dim a as string 
-		dim rtxt() as string
-		a=inputbox("load filename","load code filename","code.idx")
+
+		labelindex=0
+		varscount=0
+		forcount=0
+		errorss=0
+
+
+		t=t1
+		tt=tt1
+
+
 	try
 
-	rtxt=file.readAlllines(a)
-	dim s as string
-	dim ss as string
+	rtxt=file.readAlllines(text2.text)
+	ss=""
+	s=""
 	for each s in rtxt
-	ss=ss+s+chr(13)+chr(10)
+		ss=ss+s+chr(10)
 	next
-	text2.text=ss
+		text0.text=ss	
                  catch ee as Exception
 	end try
-
 
     End Sub
 
@@ -2938,6 +2910,8 @@ end function
 
 
 private sub clearbody()
+
+
 		labelindex=0
 		varscount=0
 		forcount=0
@@ -2947,9 +2921,22 @@ private sub clearbody()
 		t=t1
 		tt=tt1
 
-		c= text2.text
+
+	try
+
+	rtxt=file.readAlllines(text2.text)
+	ss=""
+	s=""
+
+	for each s in rtxt
+	ss=ss+s+chr(10)
+	next
+                 catch ee as Exception
+	end try
+
+		c=ss
 		c=c.replace("	","        ")				
-		c=c.replace(chr(13),"")
+
 
 			iii=0
 
