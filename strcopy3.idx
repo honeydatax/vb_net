@@ -1,0 +1,30 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,32
+	const,15
+	const,19
+	const,20
+	const,70
+	integer,x,0
+	integer,y,0
+	integer,n,0
+	integer,color,1
+	string,s,80
+	set,a,HELLO world.! $
+	memfill,s,32,70
+	strcopy,s,a
+	strcat,s,a
+	strcat,s,a
+	gosub,cls
+	for,n,0,20,1
+		locate,x,y,0
+		print,s
+		add,x,x,2
+		add,y,y,1
+	next
+	exit
+:,cls
+	screen,3
+	return
