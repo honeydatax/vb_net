@@ -1,0 +1,13 @@
+	float,b,12.34
+	float,a,0.34
+	string,s,50
+	str,s,a
+	print,s
+	echo,
+	str,s,b
+	print,s
+	echo,
+	mul,a,a,b
+	str,s,a
+	print,s
+	echo,
