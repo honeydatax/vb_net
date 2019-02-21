@@ -1,0 +1,17 @@
+	float,a,0.00
+	float,b,0.00
+	string,s,50
+	let,a,60.00
+	let,b,0.34
+	str,s,a
+	print,s
+	echo,
+	str,s,b
+	print,s
+	echo,
+;,div
+	div,a,a,b
+;,end div
+	str,s,a
+	print,s
+	echo,
