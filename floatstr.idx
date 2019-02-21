@@ -1,0 +1,13 @@
+	float,a,123.45
+	float,b,12345.67
+	float,c,12.34
+	string,s,50
+	str,s,a
+	print,s
+	echo,
+	str,s,b
+	print,s
+	echo,
+	str,s,c
+	print,s
+	echo,
