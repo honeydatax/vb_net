@@ -1,0 +1,9 @@
+	integer,a,2048
+	integer,b,1
+	echo,befor
+	printnumber,a
+	echo,
+	copy,a,b
+	echo,afther
+	printnumber,a
+	echo,
