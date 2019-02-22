@@ -1,0 +1,12 @@
+	float,a,60.00
+	float,b,3.14
+	string,s,50
+	str,s,a
+	echo,beford
+	print,s
+	echo,
+	copy,a,b
+	str,s,a
+	echo,afhter
+	print,s
+	echo,
