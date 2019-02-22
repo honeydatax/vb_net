@@ -1,0 +1,9 @@
+	string,s,50
+	let,s,hello world
+	print,s
+	let,s,HELLO WORLD
+	print,s
+	let,s,Hello World
+	print,s
+	let,s,HeLlO WoRlD
+	print,s
