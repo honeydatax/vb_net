@@ -19,6 +19,7 @@
 		hline,x,y,y,color
 		
 	next
+	doevents
 	wait,a
 	gosub,cls
 	exit
