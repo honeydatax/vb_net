@@ -1,0 +1,40 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,19
+	const,50
+	const,100
+	const,150
+	const,199
+	const,320
+	integer,a,0
+	integer,n,0
+	integer,x,0
+	integer,y,2
+	integer,x2,2
+	integer,w,100
+	integer,h,50
+	integer,cx,10
+	integer,cy,10
+	integer,step,10
+	integer,color,1
+	integer,bcolor,15
+
+	gosub,video
+	back,bcolor
+	for,n,0,150,step
+		box,n,n,w,h,color
+		add,color,color,1
+	next
+	doevents
+	wait,a
+	gosub,cls
+	exit
+:,video
+	screen,19
+	return
+:,cls
+	screen,3
+	return
