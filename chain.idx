@@ -1,0 +1,2 @@
+	file.chain,hello.com
+	echo,hello.com file error file not find
