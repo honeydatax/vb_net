@@ -1,8 +1,10 @@
-u 100 200
-d 0 100
+n out.com
+l 
+rip
+125
+
+r
+p 50
 
 q
-
 q
-
-exit
