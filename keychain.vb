@@ -63,6 +63,7 @@ Public Class WinVBApp
 	dim line11(300) as integer
 	dim debug as string
 	dim rtxt() as string
+        Dim button8 As New Button
         Dim button7 As New Button
         Dim button6 As New Button
         Dim button5 As New Button
@@ -127,6 +128,12 @@ Public Class WinVBApp
         button7.Text = "help:"
         button7.Parent = Me
 
+        button8.Location = New Point(560,210)
+        button8.Text = "debug:"
+        button8.Parent = Me
+
+
+
 
         text2.Location = New Point(5,3)
         text2.size = New size(550,32)
@@ -137,6 +144,7 @@ Public Class WinVBApp
 
 	startcode()
 
+        AddHandler button8.Click, AddressOf Me.OnClick8
         AddHandler button7.Click, AddressOf Me.OnClick7
         AddHandler button6.Click, AddressOf Me.OnClick6
         AddHandler button5.Click, AddressOf Me.OnClick5
@@ -320,6 +328,89 @@ Public Class WinVBApp
     End Sub
 
 
+    Private Sub OnClick8(ByVal sender As Object, ByVal e As EventArgs)
+		try           	
+			c= "-c 'mousepad input.txt '"
+			dim psi as ProcessStartInfo = new ProcessStartInfo()
+			psi = new ProcessStartInfo()
+			psi.FileName = "/bin/bash" 
+			psi.CreateNoWindow=true
+			psi.UseShellExecute = false
+			psi.Arguments =c
+			psi.RedirectStandardInput = true
+			psi.RedirectStandardOutput = true
+			psi.RedirectStandardError = true
+			dim p as Process = Process.Start(psi)
+			p.WaitForExit()
+			p.Close()
+			application.doevents
+			
+                 catch ee as Exception 
+			   text0.text ="open out.asm ERROR same data is not correct"
+			   end try
+
+
+
+
+		try           	
+
+		vvv="debug.com > output.txt < input.txt " +chr(13)+chr(10)+"echo close me"
+	If Not System.IO.File.Exists("out.bat") = True Then
+	    Dim ffile As System.IO.FileStream
+	    ffile = System.IO.File.Create("out.bat")
+	    ffile.Close()
+	End If
+
+	file.WriteAllText("out.bat",vvv)
+
+
+
+			c= "-c 'timeout 59s dosbox out.bat '"
+			dim psi as ProcessStartInfo = new ProcessStartInfo()
+			psi = new ProcessStartInfo()
+			psi.FileName = "/bin/bash" 
+			psi.CreateNoWindow=true
+			psi.UseShellExecute = false
+			psi.Arguments =c
+			psi.RedirectStandardInput = true
+			psi.RedirectStandardOutput = true
+			psi.RedirectStandardError = true
+			dim p as Process = Process.Start(psi)
+			p.WaitForExit()
+			text0.text =chr(13)+chr(10)+p.StandardOutput.ReadToEnd()+chr(13)+chr(10) 
+			p.Close()
+			application.doevents
+			text0.text =text0.text+CHR(13)+CHR(10)+":FINISH"+CHR(13)+CHR(10)+"open output "
+			
+                 catch ee as Exception 
+			   text0.text =" ERROR same data is not correct"
+			   end try
+
+
+
+		try           	
+			c= "-c 'mousepad OUTPUT.TXT '"
+			dim psi as ProcessStartInfo = new ProcessStartInfo()
+			psi = new ProcessStartInfo()
+			psi.FileName = "/bin/bash" 
+			psi.CreateNoWindow=true
+			psi.UseShellExecute = false
+			psi.Arguments =c
+			psi.RedirectStandardInput = true
+			psi.RedirectStandardOutput = true
+			psi.RedirectStandardError = true
+			dim p as Process = Process.Start(psi)
+			p.WaitForExit()
+			p.Close()
+			application.doevents
+			
+                 catch ee as Exception 
+			   text0.text ="open out.asm ERROR same data is not correct"
+			   end try
+
+
+
+    End Sub
 
 
 
@@ -3477,7 +3568,7 @@ Public Class WinVBApp
 
 
 
-'key chain,filename .com to chain control 
+'key file.chain,filename .com to chain control 
 					if par1=keywords(79) then
 						errorssi=79
 						if par(79)=separete.length then
@@ -3509,6 +3600,95 @@ Public Class WinVBApp
 									addtail("LJMP"+trim(str(iii+9000))+":")
 									addtail("	pop ax")
 									addtail("	pop ax")
+									errorssi=-1
+									errorss=0
+
+								
+						else
+									iii=1+iii
+									goto errorhandler
+						end if
+												
+						goto allkey
+					end if 
+
+'key file.exec,filename .exe 16 bits to chain control 
+					if par1=keywords(80) then
+						errorssi=80
+						if par(80)=separete.length then
+
+
+									addtail("	mov ax,0xffff")
+									addtail("	mov sp,ax")
+									addtail("	mov ax,cs")
+									addtail("	mov ss,ax")
+									addtail("	mov ax,0")
+									addtail("	push ax")
+									addtail("	mov dx,L"+(trim(iii+9000)))
+									addtail("	mov ah,0x3d")
+									addtail("	mov al,2")
+									addtail("	int 0x21")
+									addtail("	jc LJMP"+trim(str(iii+9000)))
+									addbody("L"+trim(str(iii+9000))+" db '"+separete(1)+"',0,0,0,'$'")
+									addbody("LVAR"+trim(str(iii+9000))+" dw 0,0,0")
+									addtail("	mov bx,LVAR"+trim(str(iii+9000)))
+									addtail("	mov [bx],ax")
+									addtail("	mov si,ax")
+									addtail("	jmp LJMPS"+trim(str(iii+9000)))
+									addtail("LJMP"+trim(str(iii+9000))+":")
+									addtail("	xor ax,ax")
+									addtail("	int 0x21")
+									addtail("LJMPS"+trim(str(iii+9000))+":")
+									addtail("	mov ax,cs")
+									addtail("	mov bx,0x1000")
+									addtail("	add ax,bx")
+									addtail("	mov ds,ax")
+									addtail("	mov es,ax")
+									addtail("	mov dx,0x0")
+									addtail("	mov cx,65530")
+									addtail("	mov bx,si")
+									addtail("	mov ah,0x3f")
+									addtail("	int 0x21")
+									addtail("	mov bx,si")
+									addtail("	mov al,2")
+									addtail("	mov ah,0x3e")
+									addtail("	int 0x21")
+									addtail("	mov ax,ds")
+									addtail("	mov dx,16")
+									addtail("	add dx,ax")
+									addtail("	mov bx,0x0e")
+									addtail("	mov ax,[bx]")
+									addtail("	add ax,dx")
+									addtail("	add ax,bx")
+									addtail("	mov ss,ax")
+									addtail("	mov bx,0x10")
+									addtail("	mov ax,[bx]")
+									addtail("	mov sp,ax")
+									addtail("	mov bx,0x16")
+									addtail("	mov ax,[bx]")
+									addtail("	mov bx,16")
+									addtail("	add ax,dx")
+									addtail("	add ax,bx")
+									addtail("	push ax")
+									addtail("	mov bx,0x14")
+									addtail("	mov ax,[bx]")
+									addtail("	push ax")
+									addtail("	mov ax,ds")
+									addtail("	mov bx,16")
+									addtail("	add ax,bx")
+									addtail("	mov ds,ax")
+									addtail("	mov es,ax")
+									addtail("	mov ax,cs")
+									addtail("	mov ds,ax")
+									addtail("	mov cx,0x80")
+									addtail("	mov si,0")
+									addtail("	mov di,si")
+									addtail("	call memcopy")
+									addtail("	mov ax,es")
+									addtail("	mov ds,ax")
+									addtail("	mov cx,0xf000")
+									addtail("	retf")
+									addtail("	ret")
 									errorssi=-1
 									errorss=0
 
@@ -3842,6 +4022,7 @@ private sub startcode()
 		addkey ("doevents",1)
 		addkey ("box",6)
 		addkey ("file.chain",2)
+		addkey ("file.exec",2)
 
 
 'code head
