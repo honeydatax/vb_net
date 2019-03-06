@@ -11,6 +11,7 @@ Imports System.Runtime.Serialization.Formatters.Binary
 
 Public Class WinVBApp
     Inherits Form
+	dim sss as string
 	dim s as string
 	dim ss as string
 	dim n as integer
@@ -19,13 +20,13 @@ Public Class WinVBApp
 	dim i as integer
 	dim keycount as  integer
 	dim varscount as integer
-	dim keywords(300) as string
-	dim par(300) as integer
-	dim labelss(300) as string
-	dim labeladdress(300) as integer
-	dim labelstate(300) as integer
+	dim keywords(600) as string
+	dim par(600) as integer
+	dim labelss(600) as string
+	dim labeladdress(600) as integer
+	dim labelstate(600) as integer
 	dim labelindex as integer
-	dim vars(300) as string
+	dim vars(600) as string
 	dim errorss as integer
 	dim errorssi as integer
 	dim parcount as integer
@@ -63,6 +64,8 @@ Public Class WinVBApp
 	dim line11(300) as integer
 	dim debug as string
 	dim rtxt() as string
+        Dim button10 As New Button
+        Dim button9 As New Button
         Dim button8 As New Button
         Dim button7 As New Button
         Dim button6 As New Button
@@ -132,7 +135,13 @@ Public Class WinVBApp
         button8.Text = "debug:"
         button8.Parent = Me
 
+        button9.Location = New Point(560,240)
+        button9.Text = "hex:"
+        button9.Parent = Me
 
+        button10.Location = New Point(560,270)
+        button10.Text = "bin:"
+        button10.Parent = Me
 
 
         text2.Location = New Point(5,3)
@@ -144,6 +153,8 @@ Public Class WinVBApp
 
 	startcode()
 
+        AddHandler button10.Click, AddressOf Me.OnClick10
+        AddHandler button9.Click, AddressOf Me.OnClick9
         AddHandler button8.Click, AddressOf Me.OnClick8
         AddHandler button7.Click, AddressOf Me.OnClick7
         AddHandler button6.Click, AddressOf Me.OnClick6
@@ -329,6 +340,7 @@ Public Class WinVBApp
 
 
     Private Sub OnClick8(ByVal sender As Object, ByVal e As EventArgs)
+		           	
 		try           	
 			c= "-c 'mousepad input.txt '"
 			dim psi as ProcessStartInfo = new ProcessStartInfo()
@@ -411,6 +423,148 @@ Public Class WinVBApp
 
 
     End Sub
+
+
+    Private Sub OnClick9(ByVal sender As Object, ByVal e As EventArgs)
+
+dim psi as ProcessStartInfo 
+dim p as Process
+
+
+		try           	
+
+			c= "-c 'rm out.out '"
+			psi = new ProcessStartInfo()
+			psi.FileName = "/bin/bash" 
+			psi.CreateNoWindow=true
+			psi.UseShellExecute = false
+			psi.Arguments =c
+			psi.RedirectStandardInput = true
+			psi.RedirectStandardOutput = true
+			psi.RedirectStandardError = true
+			p= Process.Start(psi)
+			p.WaitForExit()
+			text0.text =chr(13)+chr(10)+p.StandardOutput.ReadToEnd()+chr(13)+chr(10) 
+			p.Close()
+			application.doevents
+			text0.text =text0.text+CHR(13)+CHR(10)+":FINISH"+CHR(13)+CHR(10)+"open output "
+
+
+			c= "-c 'cp out.com out.out '"
+			psi = new ProcessStartInfo()
+			psi.FileName = "/bin/bash" 
+			psi.CreateNoWindow=true
+			psi.UseShellExecute = false
+			psi.Arguments =c
+			psi.RedirectStandardInput = true
+			psi.RedirectStandardOutput = true
+			psi.RedirectStandardError = true
+			p= Process.Start(psi)
+			p.WaitForExit()
+			text0.text =chr(13)+chr(10)+p.StandardOutput.ReadToEnd()+chr(13)+chr(10) 
+			p.Close()
+			application.doevents
+			text0.text =text0.text+CHR(13)+CHR(10)+":FINISH"+CHR(13)+CHR(10)+"open output "
+
+
+
+		sss=inputbox("file name to list hex","file","out.out")
+		ss=inputbox("start hex address to list star at 0","hex value","0")
+		s=inputbox("ending hex address to list ","hex value",100)
+
+
+		vvv="debug.com > output.txt < input.txt " +chr(13)+chr(10)+"echo close me"
+	If Not System.IO.File.Exists("out.bat") = True Then
+	    Dim ffile As System.IO.FileStream
+	    ffile = System.IO.File.Create("out.bat")
+	    ffile.Close()
+	End If
+
+	file.WriteAllText("out.bat",vvv)
+
+
+		vvv="n "+sss+chr(13)+chr(10)+"l 100"+chr(13)+chr(10)+"rcx"+chr(13)+chr(10)+"10"+chr(13)+chr(10)+"a 80"+chr(13)+chr(10)+"mov ax,ds"+chr(13)+chr(10)+"add ax,cx"+chr(13)+chr(10)+"mov ds,ax"+chr(13)+chr(10)+""+chr(13)+chr(10)+"rip"+chr(13)+chr(10)+"80"+chr(13)+chr(10)+"p 3"+chr(13)+chr(10)+chr(13)+chr(10)+"d "+ss+" "+s +chr(13)+chr(10)+""+chr(13)+chr(10)+"q"+chr(13)+chr(10)+"q"+chr(13)+chr(10)
+	If Not System.IO.File.Exists("input.txt") = True Then
+	    Dim ffile As System.IO.FileStream
+	    ffile = System.IO.File.Create("input.txt")
+	    ffile.Close()
+	End If
+
+	file.WriteAllText("input.txt",vvv)
+
+
+
+
+
+			c= "-c 'timeout 100s dosbox out.bat '"
+			psi = new ProcessStartInfo()
+			psi.FileName = "/bin/bash" 
+			psi.CreateNoWindow=true
+			psi.UseShellExecute = false
+			psi.Arguments =c
+			psi.RedirectStandardInput = true
+			psi.RedirectStandardOutput = true
+			psi.RedirectStandardError = true
+			p= Process.Start(psi)
+			p.WaitForExit()
+			text0.text =chr(13)+chr(10)+p.StandardOutput.ReadToEnd()+chr(13)+chr(10) 
+			p.Close()
+			application.doevents
+			text0.text =text0.text+CHR(13)+CHR(10)+":FINISH"+CHR(13)+CHR(10)+"open output "
+			
+                 catch ee as Exception 
+			   text0.text =" ERROR same data is not correct"
+			   end try
+
+
+
+		try           	
+			c= "-c 'mousepad OUTPUT.TXT '"
+			psi= new ProcessStartInfo()
+			psi.FileName = "/bin/bash" 
+			psi.CreateNoWindow=true
+			psi.UseShellExecute = false
+			psi.Arguments =c
+			psi.RedirectStandardInput = true
+			psi.RedirectStandardOutput = true
+			psi.RedirectStandardError = true
+			p= Process.Start(psi)
+			p.WaitForExit()
+			p.Close()
+			application.doevents
+			
+                 catch ee as Exception 
+			   text0.text ="open out.asm ERROR same data is not correct"
+			   end try
+
+
+
+    End Sub
+
+
+    Private Sub OnClick10(ByVal sender As Object, ByVal e As EventArgs)
+           dim brtxt() as byte
+	   dim ba as integer
+
+
+
+		try           	
+		sss=inputbox("file name to list bin","file","file.dat")
+
+
+		text0.text="machine "
+	brtxt=file.readallbytes(sss)
+	for ba=0 to brtxt.length
+		text0.text=text0.text+" , "+str(brtxt(ba))
+	next	
+                 catch ee as Exception
+	end try
+
+
+    End Sub
+
+
+
 
 
 
@@ -2543,8 +2697,8 @@ Public Class WinVBApp
 
 
 								if varstype(bbb)=6  then	 
-									addtail("	xor eax,eax")
 									addtail("	mov si,L"+(trim(line11(bbb)+9000)))
+									addtail("	xor eax,eax")
 									addtail("	mov ax,[si]")
 									addtail("	call sleep")
 									errorssi=-1
@@ -3191,8 +3345,10 @@ Public Class WinVBApp
 								if varstype(bbb)<10 then	 
 
 
-									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
 									addtail("	call inkey")
+									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov [bx],ax")
+
 							errorssi=-1
 							errorss=0
 
@@ -3412,7 +3568,9 @@ Public Class WinVBApp
 									addtail("	push es")
 									addtail("	call setrefresh")
 									addtail("	mov al,cl")
+									addtail("	xor ecx,ecx")
 									addtail("	mov cx,64001")
+									addtail("	mov edi,0")
 									addtail("	call memfill")
 									addtail("	pop es")
 
@@ -4042,17 +4200,17 @@ private sub startcode()
 			addcode ("	int 0x21")
 			addcode ("	ret")
 			addcode ("inkey:")
-			addcode ("	mov ah,1")
+			addcode ("	mov ah,0x1")
 			addcode ("	int 0x16")
-			addcode ("	jc waits")
+			addcode ("	jnz waits")
 			addcode ("nwaits:")
 			addcode ("	xor ax,ax")
-			addcode ("	mov [bx],al")
 			addcode ("	ret")
 			addcode ("waits:")
 			addcode ("	xor ax,ax")
 			addcode ("	int 0x16")
-			addcode ("	mov [bx],al")
+			addcode ("	xor cl,cl")
+			addcode ("	mov ah,cl")
 			addcode ("	ret")
 			addcode ("memfill:")
 			addcode ("	cmp cx,0")
@@ -4227,31 +4385,38 @@ private sub startcode()
 			addcode ("	pop bx")
 			addcode ("ret")
 			addcode ("timer:")
-			addcode ("	push bx")
+			addcode ("	push ebx")
 			addcode ("	push ds")
 			addcode ("	mov ax,0x40")
 			addcode ("	mov ds,ax")
-			addcode ("	mov bx,6ch")
+			addcode ("	mov bx,0x6c")
 			addcode ("	mov eax,[bx]")
 			addcode ("	pop ds")
-			addcode ("	pop bx")
+			addcode ("	pop ebx")
 			addcode ("ret")
 			addcode ("sleep:")
 			addcode ("	mov ecx,eax")
-			addcode ("	mov ebx,eax")
+			addcode ("	xor eax,eax")
+			addcode ("	cmp eax,ecx")
+			addcode ("	jz sleep6")
 			addcode ("	call timer")
 			addcode ("	clc")
-			addcode ("	add ebx,eax")
-			addcode ("	mov ecx,ebx")
-			addcode ("	jo sleep5")
+			addcode ("	add ecx,eax")
+			addcode ("	jo sleep8")
+			addcode ("	call timer")
+			addcode ("	cmp eax,ecx")
+			addcode ("	jz sleep6")
 			addcode ("	sleep1:")
 			addcode ("		call timer")
 			addcode ("		cmp eax,ecx")
+			addcode ("		jz sleep6")
 			addcode ("		jb sleep1")
 			addcode ("	jmp sleep6")
+			addcode ("	sleep8:")
 			addcode ("	sleep5:")
 			addcode ("		call timer")
 			addcode ("		cmp eax,ecx")
+			addcode ("		jz sleep6")
 			addcode ("		ja sleep5")
 			addcode ("	jmp sleep1")
 			addcode ("sleep6:")
