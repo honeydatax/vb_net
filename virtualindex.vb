@@ -94,7 +94,10 @@ exits:
 	ss="; obj,x,y,w,h"+chr(13)+chr(10)
 
 	for ssi = 0 to 23
-		if bbox.ww(ssi).closed=0 then ss=ss+";"+str(ssi)+" box,"+str(bbox.ww(ssi).x)+","+str(bbox.ww(ssi).y)+","+str(bbox.ww(ssi).w)+","+str(bbox.ww(ssi).h) +chr(13)+chr(10)
+		if bbox.ww(ssi).closed=0 then ss=ss+";"+str(ssi)+" box,"+str(bbox.ww(ssi).x\2)+","+str((bbox.ww(ssi).y*200)\350)+","+str(bbox.ww(ssi).w\2)+","+str((bbox.ww(ssi).h*200)\350) +chr(13)+chr(10)
+
+
+
 	next
 
 
@@ -412,36 +415,37 @@ Public Class WinVBApp
 	dim iii as integer
     	if e.button>0 and tt=0 then 
 		iii=b1.dragresize(b1,e.x,e.y)
-		b1.saveswin(b1)
       		if iii=-1 then 
 			ii=b1.dragwindows(b1,e.x,e.y)
-			b1.saveswin(b1)
       			if ii=-1 then 
       				if b1.controlevents(b1,e.x,e.y)=-1  then 
 					i=b1.moveNext(b1,e.x,e.y)
-					b1.saveswin(b1)
 					if i>-1 then 
 						tt=1
 						b1.moveToTop(b1,i) 
 					       t.enabled=true
+
+
 					else
 						i=b1.findclose(b1)
 
 						if i>-1 then 
 							b1.parent.Text="reopen windows "+str(b1.order(i))
 							b1.moveToTop(b1,i)
-							b1.saveswin(b1)  
+							b1.saveswin(b1)
 						end if 
 					end if 
 				 else
 					b1.controlclose(b1,b1.order(23))	
 					b1.moveback(b1,23)
 					b1.saveswin(b1)
+
 				end if 
 			else
 				b1.ww(b1.order(23)).drag=1
 				b1.ww(b1.order(23)).dragx=e.x
 				b1.ww(b1.order(23)).dragy=e.y
+
 			end if
 
 
@@ -449,6 +453,7 @@ Public Class WinVBApp
 			b1.ww(b1.order(23)).dragsize=1
 			b1.ww(b1.order(23)).dragxsize=e.x
 			b1.ww(b1.order(23)).dragysize=e.y
+
 		end if
 
 
@@ -467,7 +472,7 @@ Public Class WinVBApp
 			b1.ww(b1.order(23)).x=b1.ww(b1.order(23)).x+(e.x-b1.ww(b1.order(23)).dragx)
 			b1.ww(b1.order(23)).y=b1.ww(b1.order(23)).y+(e.y-b1.ww(b1.order(23)).dragy)
 			b1.parent.refresh()     
-
+			b1.saveswin(b1)
 		end if
 		if b1.ww(b1.order(23)).dragsize=1 then 
 
@@ -480,7 +485,7 @@ Public Class WinVBApp
 			b1.windowresize(b1,b1.order(23))
 			b1.clearwindow(b1,b1.order(23))
 			b1.parent.refresh()     
-
+			b1.saveswin(b1)
 		end if
 
 	end sub 
