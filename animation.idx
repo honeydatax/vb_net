@@ -1,0 +1,79 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,15
+	const,8
+	const,12
+	const,18
+	const,100
+	const,199
+	integer,graphics,19
+	integer,keyesc,27
+	integer,keys,0
+	integer,color,1
+	integer,white,15
+	integer,loops,0
+	integer,x,160
+	integer,y,0
+	integer,x1,161
+	gosub,video19
+	back,white
+:,lloop
+		gosub,draws
+		add,y,y,1
+		sub,x,x,1
+		add,x1,x1,1
+		like,y,100,ajusts
+:,returns1
+:,returns2
+
+		timer.sleep,1
+		gosub,check
+	goto,lloop
+
+:,cls
+	screen,3
+
+
+:,exits
+	exit
+
+:,video19
+	screen,graphics
+	return
+:,check
+		inkey,keys
+		like,keys,keyesc,cls
+		return
+
+:,draws
+		hline,x,y,x1,color
+		doevents
+		return
+
+:,ajusts
+		let,x,160
+		let,y,0
+		let,x1,161
+		add,color,color,1
+		goto,returns1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
