@@ -1,0 +1,136 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,15
+	const,8
+	const,12
+	integer,graphics,19
+	integer,keyesc,27
+	integer,keys,0
+	integer,blue,1
+	integer,white,15
+	integer,loops,0
+	integer,x,30
+	integer,y,30
+	integer,x1,30
+	integer,y1,30
+	integer,x2,30
+	integer,y2,30
+	integer,w1,8
+	integer,w2,16
+	integer,h1,16
+	integer,h2,8
+	integer,dif,4
+	integer,dif2,8
+	integer,ymove,8
+	integer,xmove,8
+	integer,y0move,0
+	integer,x0move,0
+	integer,y1move,15
+	integer,x1move,15
+	integer,y2move,185
+	integer,x2move,300
+	gosub,video19
+:,lloop
+		gosub,draws
+		like,x0move,0,addx
+		like,x0move,1,subx
+:,returns1
+		like,y0move,0,addy
+		like,y0move,1,suby
+:,returns2
+		gosub,draws
+		timer.sleep,3
+		gosub,check
+	goto,lloop
+
+:,cls
+	screen,3
+
+
+:,exits
+	exit
+
+:,video19
+	screen,graphics
+	return
+:,check
+		inkey,keys
+		like,keys,keyesc,cls
+		return
+
+:,draws
+		back,white
+		move,x1,x
+		move,x2,x
+		move,y1,y
+		move,y2,y
+		sub,x1,x1,8
+		sub,x2,x2,12
+		sub,y1,y1,12
+		sub,y2,y2,8
+		box,x1,y1,w1,h1,blue
+		box,x2,y2,w2,h2,blue
+		doevents
+		return
+
+
+:,addx
+		add,x,x,xmove		
+		big,x,x2move,limitx
+		goto,returns1
+:,addy
+		add,y,y,ymove
+		big,y,y2move,limity
+		goto,returns2
+
+:,subx
+		sub,x,x,xmove	
+		less,x,x1move,minx	
+		goto,returns1
+:,suby
+		sub,y,y,ymove		
+		less,y,y1move,miny	
+		goto,returns2
+
+:,limitx
+		let,x,300
+		let,x0move,1
+		goto,returns1
+
+:,limity
+		let,y,185
+		let,y0move,1
+		goto,returns2
+
+
+:,minx
+		let,x,15
+		let,x0move,0
+		goto,returns1
+
+:,miny
+		let,y,15
+		let,y0move,0
+		goto,returns2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
