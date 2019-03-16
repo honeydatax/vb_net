@@ -1,0 +1,42 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,19
+	const,197
+	integer,blue,3
+	integer,brown,6
+	integer,n,0
+	integer,y,10
+	integer,x,0
+	integer,x1,319
+	integer,y1,0
+	integer,key,0
+	integer,esckey,27
+	screen,19
+	back,brown
+	box,x,y1,x1,y,blue
+	for,n,0,1,0
+		doevents
+		timer.cicle,3,3
+		hline,x,y,x1,blue
+		inkey,key
+		like,key,esckey,exits
+		big,y,197,exits
+		add,y,y,1
+	next
+
+:,exits
+	screen,3
+	exit
+
+
+
+
+
+
+
+
+
+
+
