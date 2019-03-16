@@ -5,6 +5,8 @@
 	const,15
 	const,8
 	const,12
+	integer,cicle,1
+	integer,subcicle,1
 	integer,graphics,19
 	integer,keyesc,27
 	integer,keys,0
@@ -40,7 +42,7 @@
 		like,y0move,0,addy
 		like,y0move,1,suby
 :,returns2
-		timer.sleep,3
+		timer.cicle,cicle,subcicle
 		gosub,check
 	goto,lloop
 

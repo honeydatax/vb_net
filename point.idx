@@ -6,6 +6,8 @@
 	const,318
 	const,199
 	const,255
+	integer,cicle,1
+	integer,subcicle,1
 	integer,n,0
 	integer,x,0
 	integer,y,0
@@ -29,7 +31,7 @@
 		add,y1,y,1
 		hline,x,y,x1,color
 		doevents
-		timer.sleep,1
+		timer.cicle,cicle,subcicle
 		gosub,check
 	next
 
