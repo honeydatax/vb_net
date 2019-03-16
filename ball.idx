@@ -40,7 +40,6 @@
 		like,y0move,0,addy
 		like,y0move,1,suby
 :,returns2
-		gosub,draws
 		timer.sleep,3
 		gosub,check
 	goto,lloop
