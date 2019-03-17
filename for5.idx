@@ -1,0 +1,15 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	integer,n,0
+	integer,m,1024
+	for,n,0,1,0
+		printnumber,m
+		echo,
+		like,m,1,exits
+		div,m,m,2
+	next
+
+:,exits
