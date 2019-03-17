@@ -28,7 +28,7 @@
 :,returns1
 :,returns2
 
-		timer.sleep,1
+
 		gosub,check
 	goto,lloop
 
@@ -49,10 +49,11 @@
 
 :,draws
 		hline,x,y,x1,color
-		doevents
 		return
 
 :,ajusts
+		doevents
+		timer.sleep,1
 		let,x,160
 		let,y,0
 		let,x1,161
