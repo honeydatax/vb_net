@@ -1,0 +1,49 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,8
+	integer,n,0
+	integer,m,0	
+	integer,max,50	
+	integer,min,255
+	integer,size,2
+	string,s,200
+	integer,p1,0
+	integer,p2,0
+	pointer,p1,s
+	pointer,p2,m
+	for,n,0,8,1
+		timer.rnd,m
+		mul,m,m,max
+		div,m,m,min
+		copy,p1,p2,size
+		add,p1,p1,size
+	next
+	pointer,p1,s
+	pointer,p2,m
+	for,n,0,8,1
+		copy,p2,p1,size
+		printnumber,m
+		echo,
+		add,p1,p1,size
+	next
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
