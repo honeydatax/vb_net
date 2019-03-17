@@ -41,10 +41,9 @@
 	gosub,video19
 :,return1
 		gosub,draws
-		doevents
 :,lloop
 :,returns2
-		gosub,check
+		goto,check
 	goto,lloop
 
 :,cls
