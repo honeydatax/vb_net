@@ -1,0 +1,46 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,8
+	const,10
+	const,18
+	const,19
+	const,199
+	integer,n,0
+	integer,x,0
+	integer,y,0
+	integer,y1,0
+	integer,x1,0
+	integer,xx,0
+	integer,yy,0
+	integer,white,15
+	integer,color,1
+	integer,a,0
+	screen,19
+	back,white
+	let,x,0
+	let,y,0
+	let,y1,10
+	let,x1,10
+	for,n,0,18,1
+		gosub,rect
+		add,x1,x1,10
+		add,y1,y1,10
+	next	
+	doevents
+	wait,a
+:,exits
+	screen,3
+	exit
+:,rect
+	sub,yy,y1,y
+	hline,x,y,x1,color
+	box,x,y,1,yy,color
+	hline,x,y1,x1,color
+	box,x1,y,1,yy,color
+	return
+
+
+
