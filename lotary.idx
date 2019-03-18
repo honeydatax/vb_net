@@ -1,0 +1,33 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,8
+	integer,n,0
+	integer,m,0
+	integer,i,0
+	integer,divider,28
+	integer,char,48
+	integer,p1,0
+	set,s, $
+	pointer,p1,s
+	for,m,0,8,1
+		for,n,0,8,1
+			timer.rnd,i
+			div,i,i,divider
+			add,i,i,char
+			mem.poke,p1,i
+			print,s
+		next	
+		echo,	
+	next	
+
+
+
+
+
+
+
+
+
