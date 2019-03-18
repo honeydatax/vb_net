@@ -1,0 +1,59 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,8
+	const,9
+	const,15
+	const,14
+	const,19
+	const,20
+	const,90
+	const,12
+	const,93
+	const,100
+	const,102
+	const,110
+	const,109
+	const,199
+	const,319
+	integer,x,0
+	integer,y,0
+	integer,xx,0
+	integer,yy,0
+	integer,a,0
+	integer,n,0
+	integer,white,15
+	integer,blue,1
+	screen,19
+	back,white
+	for,n,0,319,8
+		box,n,0,1,199,blue
+	next
+		
+	for,n,0,199,8
+		hline,0,n,319,blue
+	next
+	box,109,90,102,20,9
+	doevents
+	for,n,1,100,1
+		box,110,93,n,12,14
+		doevents
+		timer.sleep,1
+	next
+
+	wait,0
+	screen,3
+	exit
+
+
+
+
+
+
+
+
+
+
+
