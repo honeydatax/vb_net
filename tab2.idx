@@ -1,0 +1,38 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,127
+	const,32
+	const,36
+	const,18
+	const,9
+	integer,p1,0
+	integer,tt,0
+	integer,n,0
+	integer,m,0
+	integer,i,0
+	integer,size,0
+	integer,diff,0
+	set,b, $
+	set,a,HELLO WORLD.!$	
+	string,s,128
+	for,n,0,4,1
+		move,tt,n
+		gosub,tab
+		print,a
+		echo,
+	next
+	exit
+
+
+:,tab
+	like,tt,0,tabescape
+	pointer,p1,b
+	mem.poke,p1,9
+	for,m,1,tt,1
+		print,b
+	next
+:,tabescape
+	return
