@@ -1,0 +1,90 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,15
+	const,7
+	const,8
+	const,18
+	const,12
+	const,48
+	const,32
+	integer,z,0
+	integer,n,0
+	integer,nn,0
+	integer,cicle,1
+	integer,subcicle,1
+	integer,graphics,19
+	integer,keyesc,27
+	integer,keys,0
+	integer,white,15
+	integer,loops,0
+	integer,x,0
+	integer,y,0
+	integer,color,113
+	integer,l,0
+	integer,maxsx,280
+	integer,maxb,256
+	integer,maxsy,150
+	integer,p1,0
+	integer,p2,0
+	integer,pz,0
+	integer,zz,0
+	integer,size,2
+	integer,tt,0
+	set,title,value     rnd
+	set,tab,  $
+	string,ss,24
+	string,s,250
+
+	pointer,p1,x
+	pointer,p2,s
+	screen,3
+	textout,title,0,color
+
+	for,n,0,18,1
+		timer.rnd,x
+		timer.rnd,y
+		mul,y,y,maxb
+		add,x,x,y
+		copy,p2,p1,size
+		add,p2,p2,size
+	next
+	pointer,p1,x
+	pointer,p2,s
+	for,n,0,18,1
+		copy,p1,p2,size
+		add,nn,n,1
+		let,tt,0
+		str,ss,n
+		gosub,zero
+		let,tt,8
+		str,ss,x
+		gosub,zero
+		echo,
+		add,p2,p2,size
+	next
+
+
+
+
+:,exits
+	exit
+
+:,zero
+		locate,tt,nn,0
+		textout,ss,0,color
+
+		return
+
+
+
+
+
+
+
+
+
