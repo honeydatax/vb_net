@@ -1,0 +1,27 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,127
+	const,32
+	const,36
+	const,18
+	const,7
+	integer,p1,0
+	integer,tt,0
+	integer,n,0
+	set,b, $
+
+
+		gosub,beep
+
+
+	exit
+
+
+:,beep
+	pointer,p1,b
+	mem.poke,p1,7
+	textout,b,0,7
+	return
