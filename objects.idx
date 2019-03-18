@@ -2,6 +2,9 @@
 	const,1
 	const,2
 	const,3
+	const,4
+	const,5
+	const,6
 	const,15
 	const,7
 	const,8
@@ -36,9 +39,9 @@
 	integer,x1move,15
 	integer,y2move,185
 	integer,x2move,300
-	integer,maxsx,280
-	integer,maxb,255
-	integer,maxsy,150
+	integer,maxsx,105
+	integer,maxb,121
+	integer,maxsy,178
 	integer,p1,0
 	integer,p2,0
 	integer,size,6
@@ -46,15 +49,15 @@
 	gosub,video19
 	pointer,p1,x
 	pointer,p2,s
-	for,n,0,7,1
+	for,n,0,8,1
 		timer.rnd,x
 		timer.rnd,y
-		timer.rnd,color
+		move,color,n
 		mul,x,x,maxb
 		div,x,x,maxsx
 		add,x,x,12
-		mul,y,y,maxsy
-		div,y,y,maxb
+		mul,y,y,maxb
+		div,y,y,maxsy
 		add,y,y,12
 		copy,p2,p1,size
 		add,p2,p2,size

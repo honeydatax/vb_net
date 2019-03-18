@@ -1,0 +1,98 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,15
+	const,7
+	const,8
+	const,18
+	const,12
+	const,48
+	const,32
+	integer,z,0
+	integer,n,0
+	integer,cicle,1
+	integer,subcicle,1
+	integer,graphics,19
+	integer,keyesc,27
+	integer,keys,0
+	integer,white,15
+	integer,loops,0
+	integer,x,0
+	integer,y,0
+	integer,color,0
+	integer,l,0
+	integer,maxsx,280
+	integer,maxb,255
+	integer,maxsy,150
+	integer,p1,0
+	integer,p2,0
+	integer,pz,0
+	integer,zz,0
+	integer,size,6
+	string,ss,24
+	string,s,250
+	pointer,p1,x
+	pointer,p2,s
+
+	echo,value      X      Y  COLOR
+
+	for,n,0,18,1
+		timer.rnd,x
+		timer.rnd,y
+		timer.rnd,color
+		mul,x,x,maxb
+		div,x,x,maxsx
+		add,x,x,12
+		mul,y,y,maxsy
+		div,y,y,maxb
+		add,y,y,12
+		copy,p2,p1,size
+		add,p2,p2,size
+	next
+	pointer,p1,x
+	pointer,p2,s
+	for,n,0,18,1
+		copy,p1,p2,size
+		str,ss,n
+		gosub,zero
+		str,ss,x
+		gosub,zero
+		str,ss,y
+		gosub,zero
+		str,ss,color
+		gosub,zero
+		echo,
+		add,p2,p2,size
+	next
+
+
+
+
+:,exits
+	exit
+
+:,zero
+		pointer,pz,ss
+		for,z,0,3,1
+			mem.peek,zz,pz
+			diferent,zz,48,zeroout
+			mem.poke,pz,32
+			add,pz,pz,1
+		next
+:,zeroout
+		print,ss
+		echo,  $
+		return
+
+
+
+
+
+
+
+
+
