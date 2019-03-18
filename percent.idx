@@ -1,0 +1,21 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,100
+	integer,char,13
+	integer,n,0
+	integer,p1,0
+	set,a, $
+	pointer,p1,a
+	mem.poke,p1,char
+	screen,3
+	
+	for,n,0,100,1
+		printnumber,n
+		echo,% .done$
+		timer.sleep,1
+		print,a
+	next
