@@ -1,0 +1,59 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,8
+	const,7
+	const,10
+	const,18
+	const,19
+	const,199
+	integer,n,0
+	integer,x,0
+	integer,y,0
+	integer,y1,0
+	integer,x1,0
+	integer,xx,0
+	integer,yy,0
+	integer,white,15
+	integer,color,1
+	integer,a,0
+	screen,19
+	back,white
+	let,x,10
+	let,y,10
+	let,y1,100
+	let,x1,100
+	gosub,raise
+	let,x,160
+	let,y,10
+	let,y1,100
+	let,x1,260
+	gosub,raise2
+	doevents
+	wait,a
+:,exits
+	screen,3
+	exit
+:,raise
+	sub,yy,y1,y
+	hline,x,y,x1,0
+	box,x,y,1,yy,0
+	hline,x,y1,x1,7
+	box,x1,y,1,yy,7
+	return
+
+:,raise2
+	sub,yy,y1,y
+	hline,x,y,x1,7
+	box,x,y,1,yy,7
+	hline,x,y1,x1,0
+	box,x1,y,1,yy,0
+	return
+
+
+
+
+
+
