@@ -1,0 +1,119 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,15
+	const,7
+	const,8
+	const,12
+	const,199
+	const,319
+	integer,n,0
+	integer,cicle,1
+	integer,subcicle,1
+	integer,graphics,19
+	integer,keyesc,27
+	integer,keys,0
+	integer,white,15
+	integer,blue,1
+	integer,loops,0
+	integer,x,0
+	integer,y,0
+	integer,color,0
+	integer,l,0
+	integer,x1,30
+	integer,y1,30
+	integer,x2,30
+	integer,y2,30
+	integer,w1,8
+	integer,w2,16
+	integer,h1,16
+	integer,h2,8
+	integer,dif,4
+	integer,dif2,8
+	integer,ymove,8
+	integer,xmove,8
+	integer,y0move,0
+	integer,x0move,0
+	integer,y1move,15
+	integer,x1move,15
+	integer,y2move,185
+	integer,x2move,300
+	integer,maxsx,105
+	integer,maxb,121
+	integer,maxsy,178
+	integer,p1,0
+	integer,p2,0
+	integer,size,6
+	string,s,250
+	gosub,video19
+	pointer,p1,x
+	pointer,p2,s
+	for,n,0,8,1
+		timer.rnd,x
+		timer.rnd,y
+		move,color,n
+		mul,x,x,maxb
+		div,x,x,maxsx
+		add,x,x,12
+		mul,y,y,maxb
+		div,y,y,maxsy
+		add,y,y,12
+		copy,p2,p1,size
+		add,p2,p2,size
+	next
+	pointer,p1,x
+	pointer,p2,s
+	for,n,0,7,1
+		copy,p1,p2,size
+		gosub,draws
+		add,p2,p2,size
+	next
+		doevents
+	wait,x
+:,cls
+	screen,3
+
+
+:,exits
+	exit
+
+:,video19
+	screen,graphics
+	back,white
+	for,n,0,319,8
+		box,n,0,1,199,blue
+	next
+		
+	for,n,0,199,8
+		hline,0,n,319,blue
+	next
+	return
+
+:,draws
+		move,x1,x
+		move,x2,x
+		move,y1,y
+		move,y2,y
+		sub,x1,x1,8
+		sub,x2,x2,12
+		sub,y1,y1,12
+		sub,y2,y2,8
+		box,x1,y1,w1,h1,color
+		box,x2,y2,w2,h2,color
+		return
+
+
+
+
+
+
+
+
+
+
+
+
