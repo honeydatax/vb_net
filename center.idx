@@ -1,0 +1,32 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,127
+	const,32
+	const,36
+	const,18
+	integer,max,80
+	integer,n,0
+	integer,i,0
+	integer,size,0
+	integer,diff,0
+	set,a,HELLO WORLD.!$	
+	string,s,128
+	for,n,0,18,1
+		gosub,center
+	next
+	exit
+
+
+:,center
+	memfill,s,36,127
+	string.len,size,a
+	sub,i,max,size
+	div,i,i,2
+	memfill,s,32,i
+	print,s
+	print,a
+	echo,
+	return
