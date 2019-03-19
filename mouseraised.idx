@@ -44,7 +44,6 @@
 :,return1
 	doevents
 	gosub,mouseshow	
-	wait,a
 :,return2
 	let,tt,1
 	for,n,0,1,0
@@ -104,7 +103,7 @@ machine  ,  81 ,  137 ,  198 ,  137 ,  223 ,  184 ,  3 , 0 ,  205 ,  51 ,  137 ,
 	goto,return1
 
 :,xyset
-	diferent,cx,0,xysetr
+	like,cx,0,xysetr
 	less,ax,x,xysetr
 	big,ax,x1,xysetr
 	less,bx,y,xysetr
