@@ -10,7 +10,7 @@
 	integer,cx,0
 	integer,dx,0
 	integer,m,0
-	gosub,sound
+	
 	let,bx,2304
 	call,sound,ax,bx,cx,dx
 	timer.sleep,5
