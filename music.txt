@@ -1,0 +1,58 @@
+n sound.com
+
+rcx
+1b
+
+a
+org 100
+mov dx,61
+in al,dx
+or al,3
+mov dx,61
+out dx,al
+mov al,b6
+mov dx,43
+out dx,al
+mov al,[bx]
+inc bx
+mov dx,42
+out dx,al
+mov al,[bx]
+out dx,al
+ret
+
+w 100
+
+n sound2.com
+
+rcx
+a
+
+
+a
+org 100
+mov dx,61
+in al,dx
+and al,fc
+mov dx,61
+out dx,al
+ret
+
+w 100
+
+
+q
+q
+
+
+
+
+
+
+
+
+
+
+
+
+

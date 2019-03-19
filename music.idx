@@ -1,0 +1,57 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	integer,n,0
+	integer,ax,0
+	integer,bx,0
+	integer,cx,0
+	integer,dx,0
+	integer,m,0
+	gosub,sound
+	let,bx,2304
+	call,sound,ax,bx,cx,dx
+	timer.sleep,5
+	let,bx,2560
+	call,sound,ax,bx,cx,dx
+	timer.sleep,5
+	let,bx,2816
+	call,sound,ax,bx,cx,dx
+	timer.sleep,5
+	let,bx,3072
+	call,sound,ax,bx,cx,dx
+	timer.sleep,5
+	let,bx,3328
+	call,sound,ax,bx,cx,dx
+	timer.sleep,5
+	gosub,nosound
+	exit
+
+
+:,sound
+machine  ,  186 ,  97 , 0 ,  236 ,  12 ,  3 ,  186 ,  97 , 0 ,  238 ,  176 ,  182 ,  186 ,  67 , 0 ,  238 ,  138 ,  7 ,  67 ,  186 ,  66 , 0 ,  238 ,  138 ,  7 ,  238 ,  195
+	return	
+
+:,nosound
+machine  ,  186 ,  97 , 0 ,  236 ,  36 ,  252 ,  186 ,  97 , 0 ,  238
+	return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
