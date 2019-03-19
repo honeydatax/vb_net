@@ -1,0 +1,37 @@
+n mouse.com
+
+rcx
+12
+
+a
+org 100
+push cx
+mov si,ax
+mov di,bx
+mov ax,3
+int 33
+mov [si],cx
+mov [di],dx
+pop si
+mov [si],bx
+ret
+
+w 100
+
+
+
+q
+q
+
+
+
+
+
+
+
+
+
+
+
+
+

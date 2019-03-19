@@ -1,0 +1,67 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,8
+	const,100
+	integer,char,13
+	integer,n,0
+	integer,p1,0
+	integer,key,0
+	integer,esckey,27
+	integer,ax,0
+	integer,bx,0
+	integer,cx,0
+	integer,dx,0
+	integer,ax1,0
+	integer,bx1,0
+	integer,cx1,0
+	integer,dx1,0
+	integer,p2,0
+	integer,p3,0
+	set,a, $
+	pointer,p1,a
+	pointer,p2,ax
+	pointer,p3,ax1
+	mem.poke,p1,char
+	screen,3
+	gosub,mouseshow	
+:,return1
+	for,n,0,1,0
+		inkey,key
+		like,key,esckey,exitdo
+		call,mousexyb,ax,bx,cx,dx
+		diferent,ax,ax1,mousechange
+		diferent,bx,bx1,mousechange
+		diferent,cx,cx1,mousechange
+	next
+
+:,exitdo
+	gosub,mousehide
+	exit
+
+:,mouseshow
+machine  ,  184 ,  1 , 0 ,  205 ,  51 ,  195
+	return
+
+:,mousehide
+machine  ,  184 ,  2 , 0 ,  205 ,  51 ,  195
+	return
+
+:,mousexyb
+machine  ,  81 ,  137 ,  198 ,  137 ,  223 ,  184 ,  3 , 0 ,  205 ,  51 ,  137 ,  12 ,  137 ,  21 ,  94 ,  137 ,  28 ,  195
+	return
+:,mousechange
+	copy,p3,p2,8
+	div,ax,ax,8
+	div,bx,bx,8
+	echo,X:$
+	printnumber,ax	
+	echo, Y:$
+	printnumber,bx
+	echo, button:$
+	printnumber,cx
+	print,a
+	goto,return1
