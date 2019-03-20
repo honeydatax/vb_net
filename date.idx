@@ -7,7 +7,7 @@
 	const,15
 		;,hex function vars
 	integer,hexin,0
-	set,hexout,   $$
+	set,hexout,  $$
 		;,end hex function vars
 		;,x86 registers
 	integer,ax,0
@@ -19,16 +19,19 @@
 	integer,m,0
 	integer,i,16
 		
-		call,clock,ax,bx,cx,dx
+		call,date,ax,bx,cx,dx
+		move,hexin,cx
+		gosub,hex
+		print,hexout
+		echo,/$
+		move,hexin,dx
+		gosub,hex
+		print,hexout
+		echo,/$
 		move,hexin,ax
 		gosub,hex
 		print,hexout
-		echo,:$
 		move,hexin,bx
-		gosub,hex
-		print,hexout
-		echo,:$
-		move,hexin,cx
 		gosub,hex
 		print,hexout
 		echo,
@@ -71,11 +74,8 @@ exit
 	mem.poke,p1,hexl
 	return
 
-:,clock
-machine  ,  81 ,  137 ,  198 ,  137 ,  223 ,  180 ,  2 ,  205 ,  26 ,  136 ,  44 ,  136 ,  13 ,  94 ,  136 ,  52 ,  195
-	return
-
-
+:,date
+machine  ,  82 ,  81 ,  137 ,  198 ,  137 ,  223 ,  180 ,  4 ,  205 ,  26 ,  136 ,  44 ,  136 ,  13 ,  94 ,  95 ,  136 ,  52 ,  136 ,  21 ,  195
 
 
 
