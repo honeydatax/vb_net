@@ -1,0 +1,83 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,15
+	;,hex function vars
+	integer,hexin,0
+	set,hexout,   $$
+	;,end hex function vars
+	integer,n,0
+	integer,m,0
+	integer,i,16
+	for,n,0,15,1
+		printnumber,n
+		gosub,tab
+		move,hexin,n
+		gosub,hex
+		print,hexout
+		gosub,tab
+		mul,m,n,i
+		printnumber,m
+		gosub,tab
+		move,hexin,m
+		gosub,hex
+		print,hexout
+		echo,
+	next
+
+exit
+
+:,tab
+	echo,        $
+	return
+
+		;,hex function vars
+	integer,hexlow,0
+	integer,hexhi,0
+	integer,hexhic,240
+	integer,hexlowc,15
+	integer,hexdiv,16
+	integer,hexbig,10
+	integer,hexl,0
+	integer,hexh,0
+	integer,hexdig0,48
+	integer,hexdiga,7
+	integer,hexdig9,58
+	integer,p1,0
+		;,end hex function vars
+:,hex
+	bits.and,hexh,hexin,hexhic
+	bits.and,hexl,hexin,hexlowc
+	div,hexh,hexh,hexdiv
+	add,hexl,hexl,hexdig0
+	add,hexh,hexh,hexdig0
+	less,hexl,hexdig9,hex1
+	add,hexl,hexl,hexdiga
+:,hex1
+	less,hexh,hexdig9,hex2
+	add,hexh,hexh,hexdiga
+:,hex2
+	pointer,p1,hexout
+	mem.poke,p1,hexh
+	add,p1,p1,1
+	mem.poke,p1,hexl
+	return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
