@@ -1,0 +1,51 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	integer,n,0
+	integer,m,0
+	integer,i,0
+	integer,output,0
+		;, x86 registers
+	integer,ax,0
+	integer,bx,0
+	integer,cx,0
+	integer,dx,0
+		;, end x86 registers
+	echo,0 to exit num from 1 to 255
+	for,n,0,1,0
+		getnumber,m
+		echo,
+		like,m,0,exits
+		getnumber,i
+		echo,
+		like,i,0,exits
+		move,ax,m
+		move,bx,i
+		call,bit.or,ax,bx,cx,dx
+		printnumber,cx
+		echo,
+
+	next		
+
+:,exits
+	exit
+
+:,bit.or
+machine  ,  81 ,  137 ,  198 ,  137 ,  223 ,  139 ,  4 ,  139 ,  29 ,  9 ,  216 ,  94 ,  137 ,  4 ,  195
+	return
+
+
+
+
+
+
+
+
+
+
+
+
+
