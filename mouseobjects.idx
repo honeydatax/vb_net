@@ -46,17 +46,17 @@
 	integer,yy,10
 	integer,ww,20
 	integer,hh,10
-	integer,obj,8
+	integer,obj,54
 	integer,size,10
 	integer,onmouse_up_state,0
 	integer,onmouse_up_state2,0
 	integer,onmouse_up_state3,0
 	string,number,24
-	string,objects,512
 	set,a, $
 	set,var1,X:$
 	set,var2, Y:$
 	set,var3, button:$
+	string,objects,2048
 	pointer,p1,a
 	pointer,p2,ax
 	pointer,p3,ax1
@@ -65,7 +65,7 @@
 	back,9
 	pointer,p1,x
 	pointer,p2,objects
-	for,n,0,8,1
+	for,n,0,obj,1
 		move,x,xx
 		move,y,yy
 		move,w,ww
