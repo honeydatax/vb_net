@@ -1,3 +1,4 @@
+	const,-1
 	const,0
 	const,1
 	const,2
@@ -49,6 +50,7 @@
 	integer,size,10
 	integer,onmouse_up_state,0
 	integer,onmouse_up_state2,0
+	integer,onmouse_up_state3,0
 	string,number,24
 	string,objects,512
 	set,a, $
@@ -119,7 +121,6 @@ machine  ,  81 ,  137 ,  198 ,  137 ,  223 ,  184 ,  3 , 0 ,  205 ,  51 ,  137 ,
 	move,buttonx,ax
 	move,buttony,bx
 	diferent,button,onmouse_up_state,on_mouse
-	locate,0,0,0
         goto,return1
 
 	integer,rect1x,0
@@ -178,16 +179,18 @@ machine  ,  81 ,  137 ,  198 ,  137 ,  223 ,  184 ,  3 , 0 ,  205 ,  51 ,  137 ,
 	pointer,on_mousep2,objects
 	move,on_mousesize,size
 	sub,on_mouseobj,obj,1
-	add,on_mousex1,x,w
-	add,on_mousey1,y,h
 	like,button,0,onmouse_up
 	like,onmouse_up_state2,1,return1
 	for,on_mousenn,0,on_mouseobj,1
+		move,on_mousen,on_mousenn
 		copy,on_mousep1,on_mousep2,on_mousesize
+		add,on_mousex1,x,w
+		add,on_mousey1,y,h
 		less,buttonx,x,on_mouse1
 		less,buttony,y,on_mouse1
 		big,buttonx,on_mousex1,on_mouse1
 		big,buttony,on_mousey1,on_mouse1
+	
 		goto,onmouse_down		
 :,on_mouse1		
 		add,on_mousep2,on_mousep2,on_mousesize
@@ -204,8 +207,9 @@ machine  ,  81 ,  137 ,  198 ,  137 ,  223 ,  184 ,  3 , 0 ,  205 ,  51 ,  137 ,
 	gosub,draw
 	doevents
 	locate,0,24,0
-	echo, on mouse down event $
+	echo,on mouse down button:$
 	printnumber,on_mousenn
+	echo,         $
 	gosub,mouseshow	
 	let,onmouse_up_state2,1
         goto,return1
@@ -213,6 +217,7 @@ machine  ,  81 ,  137 ,  198 ,  137 ,  223 ,  184 ,  3 , 0 ,  205 ,  51 ,  137 ,
 
 :,onmouse_up
 	like,onmouse_up_state2,0,return1
+	let,onmouse_up_state3,-1
 	pointer,on_mousep1,x
 	pointer,on_mousep2,objects
 	move,on_mousesize,size
@@ -223,15 +228,20 @@ machine  ,  81 ,  137 ,  198 ,  137 ,  223 ,  184 ,  3 , 0 ,  205 ,  51 ,  137 ,
 		copy,on_mousep1,on_mousep2,on_mousesize
 		like,click,0,onmouse_up1
 		let,click,0
-		copy,on_mousep2,on_mousep1,on_mousesize		
+		copy,on_mousep2,on_mousep1,on_mousesize	
+		move,onmouse_up_state3,on_mousen
 :,onmouse_up1		
 		add,on_mousep2,on_mousep2,on_mousesize
 	next
 	gosub,mousehide
 	gosub,draw
 	doevents
+	like,onmouse_up_state3,-1,onmouse_up2
 	locate,0,24,0
-	echo, on mouse up event $
+	echo,on mouse up button:$
+	printnumber,onmouse_up_state3
+	echo,     $
+:,onmouse_up2
 	gosub,mouseshow	
 	let,onmouse_up_state2,0
         goto,return1
