@@ -1,0 +1,46 @@
+	const,-1
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,18
+	const,121
+	const,620
+	integer,n,0
+	integer,size,36
+	integer,x,0
+	integer,p0,0
+	integer,p1,0
+	integer,p2,0
+	pointer,p2,x
+:,main
+	alocate,p0,size
+	move,p1,p0
+	screen,3
+	for,n,0,18,1
+		timer.rnd,x
+		mul,x,x,121
+		div,x,x,620
+		copy,p1,p2,2
+		add,p1,p1,2
+	next
+	move,p1,p0
+	for,n,0,18,1
+		copy,p2,p1,2
+		printnumber,x
+		gosub,lineenter
+		add,p1,p1,2
+	next
+
+:,exit
+	wait,0
+	exit
+
+:,lineenter
+	echo,
+	return
