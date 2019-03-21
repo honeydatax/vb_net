@@ -1,0 +1,159 @@
+	const,-1
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,8
+	const,9
+	const,19
+	const,15
+	const,24
+	const,30
+	const,100
+	const,280
+	const,319
+	const,199
+	integer,char,13
+	integer,n,0
+	integer,p1,0
+	integer,key,0
+	integer,esckey,27
+		;,x86 registers
+	integer,ax,0
+	integer,bx,0
+	integer,cx,0
+	integer,dx,0
+	integer,ax1,0
+	integer,bx1,0
+	integer,cx1,0
+	integer,dx1,0
+		;,x86 registers
+	integer,button,0
+	integer,buttonx,0
+	integer,buttony,0
+	integer,p2,0
+	integer,p3,0
+	integer,p0,0
+
+		;,type x
+	integer,x,0
+	integer,y,0
+	integer,w,0
+	integer,h,0
+	integer,click,0
+		;,type x
+	integer,xx,10
+	integer,yy,10
+	integer,ww,20
+	integer,hh,10
+	integer,obj,54
+	integer,size,10
+	integer,white,15
+	integer,blue,1
+	integer,onmouse_up_state,0
+	integer,onmouse_up_state2,0
+	integer,onmouse_up_state3,0
+	string,number,24
+	set,a, $
+	set,var1,X:$
+	set,var2, Y:$
+	set,var3, button:$
+	string,objects,120
+	screen,19
+	back,white
+	for,n,0,319,8
+		box,n,0,1,199,blue
+	next
+		
+	for,n,0,199,8
+		hline,0,n,319,blue
+	next
+	doevents
+	gosub,mouseshow	
+:,return1
+	for,n,0,1,0
+		inkey,key
+		like,key,esckey,exitdo
+		call,mousexyb,ax,bx,cx,dx
+		diferent,ax,ax1,mousechange
+		diferent,bx,bx1,mousechange
+		diferent,cx,cx1,mousechange
+	next
+
+:,exitdo
+	screen,3
+	gosub,mousehide
+	exit
+
+:,background
+machine  ,  137 ,  198 ,  180 ,  11 ,  48 ,  255 ,  138 ,  28 ,  205 ,  16 ,  195
+	return
+
+:,mouseshow
+machine  ,  184 ,  1 , 0 ,  205 ,  51 ,  195
+	return
+
+:,mousehide
+machine  ,  184 ,  2 , 0 ,  205 ,  51 ,  195
+	return
+
+:,mousexyb
+machine  ,  81 ,  137 ,  198 ,  137 ,  223 ,  184 ,  3 , 0 ,  205 ,  51 ,  137 ,  12 ,  137 ,  21 ,  94 ,  137 ,  28 ,  195
+	return
+:,mousechange
+	move,onmouse_up_state,cx1
+	copy,p3,p2,8
+	div,ax,ax,2
+	move,button,cx
+	move,buttonx,ax
+	move,buttony,bx
+	diferent,button,onmouse_up_state,on_mouse
+        goto,return1
+
+
+
+	integer,on_mousen,0
+	integer,on_mousenn,0
+	integer,on_mousex1,0
+	integer,on_mousey1,0
+	integer,on_mouseobj,0
+	integer,on_mousep1,0
+	integer,on_mousep2,0
+	integer,on_mousesize,0
+	integer,on_mouse8,8
+
+:,on_mouse
+	pointer,on_mousep1,x
+	pointer,on_mousep2,objects
+	move,on_mousesize,size
+	move,on_mousex1,buttonx
+	move,on_mousey1,buttony
+	sub,on_mouseobj,obj,1
+	like,button,0,onmouse_up
+	like,onmouse_up_state2,1,return1
+	div,on_mousex1,on_mousex1,on_mouse8
+	div,on_mousey1,on_mousey1,on_mouse8
+	mul,on_mousex1,on_mousex1,on_mouse8
+	mul,on_mousey1,on_mousey1,on_mouse8
+	gosub,mousehide
+	box,on_mousex1,on_mousey1,on_mouse8,on_mouse8,blue
+	doevents
+	gosub,mouseshow	
+        goto,return1
+
+:,onmouse_up
+	let,onmouse_up_state2,0
+        goto,return1
+
+
+
+
+
+
+
+
+
+
+
