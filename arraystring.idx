@@ -1,0 +1,66 @@
+	const,-1
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,18
+	const,32
+	const,50
+	const,121
+	const,620
+	set,h,00000 $
+	string,s,240
+	set,z,my string number $
+	integer,n,0
+	integer,size,36
+	integer,x,0
+	integer,llen,0
+	integer,lllen,0
+	integer,p0,0
+	integer,p1,0
+	integer,p2,0
+	integer,p3,0
+	integer,p4,0
+	
+:,main
+	string.len,llen,z
+	string.len,lllen,h
+	add,lllen,lllen,1
+	pointer,p2,x
+	alocate,p0,size
+	move,p1,p0
+	screen,3
+	for,n,0,18,1
+		alocate,x,50
+		copy,p1,p2,2
+		pointer,p3,z
+		pointer,p4,h
+		copy,x,p3,llen
+		add,x,x,llen
+		str,h,n
+		copy,x,p4,lllen
+		add,p1,p1,2
+	next
+	move,p1,p0
+	add,lllen,lllen,llen
+	pointer,p4,s
+	for,n,0,18,1
+		copy,p2,p1,2
+		copy,p4,x,lllen
+		print,s
+		gosub,lineenter
+		add,p1,p1,2
+	next
+
+:,exit
+	wait,0
+	exit
+
+:,lineenter
+	echo,
+	return
