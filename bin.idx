@@ -1,0 +1,80 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,8
+		;,bin vars
+	integer,binin,0
+	set,binout,00000000 $
+		;,end bin vars
+	integer,n,0
+	integer,m,1
+
+	for,n,1,8,1
+		move,binin,m
+		printnumber,m
+		gosub,tab
+		gosub,bin
+		print,binout
+		gosub,linereturn
+		add,m,m,m
+	next
+
+:,exits
+	exit
+
+:,linereturn
+		echo,
+	return
+
+:,tab
+	echo,        $
+	return
+
+	integer,binn,0
+	integer,binbit,128
+	integer,binnumber,7
+	integer,binp0,0
+	integer,bininput,0
+	integer,binmask,0
+	integer,binn0,48
+	integer,binn1,49
+	
+:,bin
+	pointer,binp0,binout
+	let,binbit,128
+	move,bininput,binin
+	for,binn,0,binnumber,1
+		bits.and,binmask,binbit,bininput
+		mem.poke,binp0,binn0
+		like,binmask,0,bin2
+		mem.poke,binp0,binn1
+		sub,bininput,bininput,binbit
+		
+:,bin2		
+		div,binbit,binbit,2
+		add,binp0,binp0,1
+	next
+	return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
