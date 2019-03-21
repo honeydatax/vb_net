@@ -1,0 +1,59 @@
+	const,-1
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,8
+	const,9
+	const,13
+	const,19
+	integer,white,15
+	integer,b,0
+	
+		;,lline vars
+	integer,llineinx,0
+	integer,llineiny,0
+	integer,llineinw,0
+	integer,llineincolor,9
+		;,lline vars
+
+
+	screen,19
+	back,9
+	doevents
+	mul,llineinw,13,8
+	locate,0,0,0
+	for,b,0,19,1
+		echo,hello world.!
+		gosub,lline
+		add,llineiny,llineiny,8
+	next
+
+
+:,exit
+	wait,b
+	screen,3
+	exit
+
+	integer,llinen,0
+	integer,llineline8,7
+	integer,llineax,0
+	integer,llinebx,0
+	integer,llinecx,0
+	integer,llinedx,0
+	integer,llinesize,320
+:,lline
+	mul,llineax,llineiny,llinesize
+	add,llineax,llineax,llineinx
+	move,llinebx,llineinw
+	move,llinedx,llineincolor
+	for,llinen,0,llineline8,1
+		call,llline,llineax,llinebx,llinecx,llinedx
+		add,llineax,llineax,llinesize
+	next
+	return
+:,llline
+machine  ,  30 ,  137 ,  198 ,  137 ,  223 ,  139 ,  28 ,  139 ,  13 ,  137 ,  222 ,  137 ,  215 ,  139 ,  21 ,  184 , 0 ,  160 ,  142 ,  216 ,  138 ,  4 ,  60 , 0 ,  117 ,  2 ,  136 ,  20 ,  70 ,  73 ,  117 ,  244 ,  31 ,  195
+	return
