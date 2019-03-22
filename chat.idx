@@ -1,0 +1,60 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,9
+	const,19
+	integer,n,0
+	integer,m,0
+	integer,x,0
+	integer,y,0
+	integer,key,0	
+	integer,esckey,27
+	integer,base,170
+	string,data,100
+	screen,19	
+	
+:,return1
+	for,n,0,1,0
+		inkey,key
+		like,key,esckey,omexit
+		timer.sleep,19
+		inkey,key
+		like,key,esckey,omexit
+		gosub,draw
+	next
+
+:,omexit
+	screen,3
+	exit
+
+
+	integer,drawsize,40
+	integer,drawsizez,20
+	integer,drawsizex,10
+	integer,drawsizey,0
+	integer,drawsizeyy,0
+	integer,drawsizey1,121
+	integer,drawsizey2,310
+	integer,drawcolor,0
+:,draw
+	back,9
+	for,m,0,6,1
+		add,drawcolor,m,0
+		mul,x,m,drawsize
+		add,x,x,drawsizex
+		timer.rnd,drawsizey
+		mul,drawsizey,drawsizey,drawsizey1
+		div,drawsizey,drawsizey,drawsizey2
+		sub,drawsizeyy,base,drawsizey
+		box,x,drawsizeyy,drawsizez,drawsizey,drawcolor
+	next
+	doevents
+	return
+
+
