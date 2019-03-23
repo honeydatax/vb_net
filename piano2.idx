@@ -17,6 +17,7 @@
 	integer,m,0
 	integer,key,0
 	integer,esckey,27
+	integer,onchangekey,27
 	set,a, $
 	integer,p1,0
 	pointer,p1,a
@@ -27,15 +28,21 @@
 		inkey,key
 		like,key,esckey,onexit		
 		gosub,checkkey
-		big,key,127,thesound
-		like,key,0,thesound
-		diferent,key,128,play
+		diferent,key,onchangekey,onchange
 	next
 
 
 :,onexit
 	gosub,nosound
 	exit
+
+:,onchange
+	move,onchangekey,key
+	like,key,0,thesound
+	diferent,key,0,play
+	goto,return1
+
+
 
 :,play
 	mul,bx,key,16
