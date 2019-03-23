@@ -1,0 +1,160 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,16
+	const,13
+	const,127
+	const,128
+	const,500
+	integer,n,0
+	integer,counter,0
+	integer,countermax,0
+	integer,ax,0
+	integer,bx,0
+	integer,cx,0
+	integer,dx,0
+	integer,m,0
+	integer,key,0
+	integer,key1,0
+	integer,esckey,27
+	integer,onchangekey,27
+	set,a, $
+	set,b, 0abcdefghhgfedcba 1abcdefghhgfedcba 2abcdefghhgfedcba 3abcdefghhgfedcba 4abcdefghhgfedcba 5abcdefghhgfedcba 6abcdefghhgfedcba 7abcdefghhgfedcba 8abcdefghhgfedcba 9abcdefghhgfedcba$
+	integer,p1,0
+	pointer,p1,a
+	mem.poke,p1,13
+	screen,3
+	string.len,countermax,b
+:,return1
+	for,n,0,1,0
+		move,key1,key
+		inkey,key
+		like,key,esckey,onexit		
+		timer.sleep,6
+		move,key,key1
+		gosub,checkkey
+		diferent,key,onchangekey,onchange
+	next
+
+
+:,onexit
+	gosub,nosound
+	exit
+
+:,onchange
+	move,onchangekey,key
+	like,key,0,thesound
+	diferent,key,0,play
+	goto,return1
+
+
+
+:,play
+	mul,bx,key,16
+	add,bx,bx,500
+	call,sound,ax,bx,cx,dx
+	goto,return1
+
+
+:,thesound
+	gosub,nosound
+	goto,return1
+
+:,sound
+machine  ,  186 ,  97 , 0 ,  236 ,  12 ,  3 ,  186 ,  97 , 0 ,  238 ,  176 ,  182 ,  186 ,  67 , 0 ,  238 ,  138 ,  7 ,  67 ,  186 ,  66 , 0 ,  238 ,  138 ,  7 ,  238 ,  195
+	return	
+
+:,nosound
+machine  ,  186 ,  97 , 0 ,  236 ,  36 ,  252 ,  186 ,  97 , 0 ,  238
+	return
+
+:,check
+machine  ,  137 ,  198 ,  228 ,  96 ,  136 ,  4 ,  195
+	return
+
+
+	integer,checkkey,0
+	integer,checkmask,0
+	integer,checkmask0,48
+	integer,checkmaskh,105
+	integer,checkmask99,58
+	integer,checkmaska_,64
+	integer,checkmaska,96
+	integer,checkmaskh_,73
+	integer,checkmaskspace,32
+	integer,checkacord,0	
+	integer,checkacordv,10	
+	integer,checkp1,0
+	integer,checkp2,0
+
+:,checkkey
+	less,counter,countermax,checkkey1
+	let,counter,0
+:,checkkey1
+	move,key,key1
+	pointer,checkp1,b
+	pointer,checkp2,key
+	add,checkp1,checkp1,counter
+	mem.peek,checkmask,checkp1
+	like,checkmask,checkmaskspace,checkkey10
+	less,checkmask,checkmask0,checkkey11
+	big,checkmask,checkmaskh,checkkey11
+	less,checkmask,checkmask99,checkkey9
+	big,checkmask,checkmaska,checkkey8
+	big,checkmask,checkmaskh_,checkkey11
+	less,checkmask,checkmaska_,checkkey11
+
+	mul,key,checkacord,checkacordv
+	sub,checkmask,checkmask,checkmaska_
+	add,checkmask,checkmask,1
+	add,key,key,checkmask
+	goto,checkkey11
+:,checkkey8
+	big,checkmask,checkmaskh,checkkey11
+	mul,key,checkacord,checkacordv
+	sub,checkmask,checkmask,checkmaska
+	add,checkmask,checkmask,1
+	add,key,key,checkmask
+	goto,checkkey11
+:,checkkey9
+	move,key,key1
+	sub,checkacord,checkmask,checkmask0
+	add,checkacord,checkacord,1
+	goto,checkkey11
+:,checkkey10
+	let,key,0
+:,checkkey11
+	printnumber,key
+	print,a
+	add,counter,counter,1
+	return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
