@@ -1,0 +1,54 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,78
+	const,22
+	integer,color,0
+	integer,n,0
+	integer,m,1
+	integer,x,0
+	integer,y,0
+	integer,p1,0	
+	integer,key,0	
+	integer,esckey,27
+	set,a, $
+	for,n,0,1,0
+		inkey,key
+		like,key,esckey,exits
+		pointer,p1,a
+		mem.poke,p1,m
+		timer.rnd,color
+		locate,x,y,0
+		textout,a,0,color
+		add,x,x,1
+		less,x,78,for1
+		let,x,0
+		add,y,y,1
+:,for1
+		less,y,22,for2
+		let,y,0
+:,for2
+		mul,m,m,3
+		next
+
+:,exits
+	exit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
