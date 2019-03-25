@@ -1,0 +1,81 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,78
+	const,22
+	const,121
+	const,392
+	const,1409
+	integer,color,0
+	integer,binin,0
+	integer,n,0
+	integer,m,1
+	integer,x,0
+	integer,y,0
+	integer,p1,0	
+	integer,key,0	
+	integer,esckey,27
+	set,a, $
+	pointer,p1,a
+	mem.poke,p1,m
+	for,n,0,1,0
+		inkey,key
+		like,key,esckey,exits
+		gosub,rndbin
+		move,color,binin
+		gosub,rndbin
+	mul,binin,binin,121
+	div,binin,binin,392
+		move,x,binin
+		gosub,rndbin
+	mul,binin,binin,121
+	div,binin,binin,1409
+		move,y,binin
+		locate,x,y,0
+		textout,a,0,color
+		add,x,x,1
+		less,x,78,for1
+		let,x,0
+		add,y,y,1
+:,for1
+		less,y,22,for2
+		let,y,0
+:,for2
+	next
+
+:,exits
+	exit
+
+
+	integer,binn,0
+	integer,binbit,128
+	integer,binnumber,7
+	integer,binp0,0
+	integer,bininput,0
+	integer,binmask,0
+	integer,binn0,48
+	integer,binn1,49
+	integer,binm,0
+	integer,binmm,127
+	
+:,rndbin
+	let,binbit,128
+	let,binin,0
+	for,binn,0,binnumber,1
+		timer.rnd,binm
+		less,binm,binmm,bin2
+		add,binin,binin,binbit
+:,bin2		
+		div,binbit,binbit,2
+	next
+	return
+
+
+
+
+
+
+
