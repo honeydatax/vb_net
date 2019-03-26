@@ -1,0 +1,33 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	integer,segment,0
+	integer,address,0
+	integer,cx,0
+	integer,dx,0
+	integer,i,0
+	call,rom,segment,address,cx,dx
+	printnumber,segment
+	echo,:$
+	printnumber,address
+	echo, ROM CHAR DOWN
+	call,rom2,segment,address,cx,dx
+	printnumber,segment
+	echo,:$
+	printnumber,address
+	echo, ROM CHAR TOP
+
+
+
+
+:,rom
+machine  ,  85 ,  137 ,  198 ,  137 ,  223 ,  180 ,  17 ,  176 ,  48 ,  183 ,  3 ,  205 ,  16 ,  140 ,  195 ,  140 ,  200 ,  142 ,  192 ,  137 ,  28 ,  137 ,  232 ,  137 ,  5 ,  93 ,  195
+	return
+
+:,rom2
+machine  ,  85 ,  137 ,  198 ,  137 ,  223 ,  180 ,  17 ,  176 ,  48 ,  183 ,  4 ,  205 ,  16 ,  140 ,  195 ,  140 ,  200 ,  142 ,  192 ,  137 ,  28 ,  137 ,  232 ,  137 ,  5 ,  93 ,  195
+	return
