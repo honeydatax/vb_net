@@ -1,0 +1,119 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,8
+	const,9
+	const,12
+	const,18
+	const,19
+	const,65
+	const,48
+	const,49
+	const,33
+	const,20
+	const,1024
+	const,121
+	const,620
+	integer,segment,0
+	integer,address,0
+	integer,address2,0
+	integer,address3,0
+	integer,printcharsx,0
+	integer,printcharsy,0
+	integer,printcharsin,0
+	integer,printcharsadd,0
+	integer,printcharscolor,0
+	integer,p1,0
+	integer,ax,0
+	integer,bx,0
+	integer,cx,0
+	integer,dx,0
+	integer,i,0
+	integer,n,0
+	integer,nn,0
+	integer,m,0
+		;,type font size
+	integer,w,0
+	integer,h,0
+		;,end type font size
+	set,a,hello world !
+	call,rom,segment,address,cx,dx
+	alocate,printcharsadd,1024
+	let,dx,1024
+	call,farcopy,segment,address,printcharsadd,dx
+	call,rom2,segment,address,cx,dx
+	alocate,address3,1024
+	let,dx,1024
+	call,farcopy,segment,address,address3,dx
+	screen,19
+	back,9
+	pointer,printcharsin,a
+	let,printcharsx,4
+	let,printcharsy,4
+	for,n,0,12,1
+		move,printcharscolor,n
+		gosub,printchars
+		add,printcharsx,printcharsx,4
+		add,printcharsy,printcharsy,12
+	next
+	doevents
+	wait,ax
+:,exits
+	exit
+
+:,rom
+machine  ,  85 ,  137 ,  198 ,  137 ,  223 ,  180 ,  17 ,  176 ,  48 ,  183 ,  3 ,  205 ,  16 ,  140 ,  195 ,  140 ,  200 ,  142 ,  192 ,  137 ,  28 ,  137 ,  232 ,  137 ,  5 ,  93 ,  195
+	return
+
+:,rom2
+machine  ,  85 ,  137 ,  198 ,  137 ,  223 ,  180 ,  17 ,  176 ,  48 ,  183 ,  4 ,  205 ,  16 ,  140 ,  195 ,  140 ,  200 ,  142 ,  192 ,  137 ,  28 ,  137 ,  232 ,  137 ,  5 ,  93 ,  195
+	return
+
+:,farcopy
+machine  ,  137 ,  198 ,  137 ,  223 ,  139 ,  4 ,  139 ,  29 ,  137 ,  206 ,  137 ,  215 ,  139 ,  20 ,  139 ,  13 ,  137 ,  222 ,  137 ,  215 ,  142 ,  216 ,  140 ,  200 ,  142 ,  192 ,  252 ,  243 ,  164 ,  140 ,  200 ,  142 ,  216 ,  195
+	return
+
+:,printchr
+machine  ,  137 ,  198 ,  137 ,  223 ,  139 ,  4 ,  139 ,  29 ,  137 ,  206 ,  138 ,  20 ,  137 ,  198 ,  137 ,  223 ,  140 ,  200 ,  142 ,  216 ,  187 , 0 ,  48 ,  1 ,  216 ,  142 ,  192 ,  177 ,  8 ,  181 ,  8 ,  180 ,  128 ,  138 ,  4 ,  32 ,  224 ,  60 , 0 ,  116 ,  3 ,  38 ,  136 ,  21 ,  248 ,  208 ,  236 ,  71 ,  254 ,  205 ,  128 ,  253 , 0 ,  117 ,  234 ,  129 ,  199 ,  56 ,  1 ,  70 ,  254 ,  201 ,  128 ,  249 , 0 ,  117 ,  218 ,  140 ,  200 ,  142 ,  192 ,  195
+	return
+
+	integer,printcharsp1,0
+	integer,printcharsn,0
+	integer,printcharsnn,0
+	integer,printcharsesc,36
+	integer,printchars8,8
+	integer,printcharsax,0
+	integer,printcharsbx,0
+	integer,printcharscx,0
+	integer,printcharsdx,0
+	integer,printchars320,320
+
+:,printchars
+	move,printcharsp1,printcharsin
+	mul,printcharsbx,printcharsy,printchars320
+	add,printcharsbx,printcharsbx,printcharsx
+	for,printcharsn,0,1,0
+	mem.peek,printcharsnn,printcharsp1
+	like,printcharsnn,printcharsesc,printchars1
+	like,printcharsnn,0,printchars1
+	mul,printcharsax,printcharsnn,printchars8
+	add,printcharsax,printcharsax,printcharsadd
+	move,printcharscx,printcharscolor
+	call,printchr,printcharsax,printcharsbx,printcharscx,printcharsdx
+	add,printcharsp1,printcharsp1,1
+	add,printcharsbx,printcharsbx,8
+	next
+:,printchars1
+	return
+
+
+
+
+
+
+
+
