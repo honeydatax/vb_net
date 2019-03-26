@@ -1,0 +1,58 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,8
+	const,18
+	const,1024
+	const,121
+	const,620
+	integer,segment,0
+	integer,address,0
+	integer,address2,0
+	integer,p1,0
+	integer,cx,0
+	integer,dx,0
+	integer,i,0
+	integer,n,0
+	integer,nn,0
+	integer,m,0
+	call,rom,segment,address,cx,dx
+	alocate,address2,1024
+	let,dx,1024
+	call,farcopy,segment,address,address2,dx
+	move,p1,address2
+	timer.rnd,dx
+	div,dx,dx,2
+	add,p1,p1,dx	
+	add,p1,p1,8	
+	for,n,0,18,1
+		for,nn,0,4,1
+			mem.peek,m,p1
+			mul,m,m,121
+			div,m,m,620
+			add,m,m,1
+			printnumber,m
+			echo, $
+			add,p1,p1,3
+		next
+			echo, 
+	next
+
+:,exits
+	exit
+
+:,rom
+machine  ,  85 ,  137 ,  198 ,  137 ,  223 ,  180 ,  17 ,  176 ,  48 ,  183 ,  3 ,  205 ,  16 ,  140 ,  195 ,  140 ,  200 ,  142 ,  192 ,  137 ,  28 ,  137 ,  232 ,  137 ,  5 ,  93 ,  195
+	return
+
+:,rom2
+machine  ,  85 ,  137 ,  198 ,  137 ,  223 ,  180 ,  17 ,  176 ,  48 ,  183 ,  4 ,  205 ,  16 ,  140 ,  195 ,  140 ,  200 ,  142 ,  192 ,  137 ,  28 ,  137 ,  232 ,  137 ,  5 ,  93 ,  195
+	return
+
+:,farcopy
+machine  ,  137 ,  198 ,  137 ,  223 ,  139 ,  4 ,  139 ,  29 ,  137 ,  206 ,  137 ,  215 ,  139 ,  20 ,  139 ,  13 ,  137 ,  222 ,  137 ,  215 ,  142 ,  216 ,  140 ,  200 ,  142 ,  192 ,  252 ,  243 ,  164 ,  140 ,  200 ,  142 ,  216 ,  195
+	return
