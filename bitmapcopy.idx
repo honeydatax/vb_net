@@ -1,0 +1,112 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,8
+	const,31
+	const,15
+	const,12
+	const,9
+	const,19
+	const,42
+	const,200
+	const,1048
+	integer,n,0
+	integer,nn,0
+	integer,p1,0
+	integer,p2,0
+	integer,p3,0
+	integer,p4,0
+	integer,x,0
+	integer,y,0
+	integer,w,32
+	integer,h,32
+	integer,color,1
+	integer,bitmapx,32
+	integer,bitmapy,32
+	integer,bitmaph,5
+	integer,bitmapw,5
+	integer,bitmapp1,0
+	integer,bitmapcopyx,0
+	integer,bitmapcopyy,0
+	integer,bitmapcopyh,32
+	integer,bitmapcopyw,32
+	integer,bitmapcopyp1,0
+	integer,blue,1
+	integer,red,4
+	alocate,p1,1048
+	move,bitmapp1,p1
+	mem.poke,p1,bitmapx
+	add,p1,p1,1
+	mem.poke,p1,bitmapy
+	add,p1,p1,1
+	screen,19
+	back,9
+	for,n,0,12,1
+		box,x,y,w,h,color
+		add,x,x,1
+		add,y,y,1
+		sub,w,w,2
+		sub,h,h,2
+		add,color,color,1
+	next
+	move,p1,bitmapp1
+	move,bitmapcopyp1,bitmapp1
+	gosub,bitmapcopy
+	let,bitmapy,0
+	let,bitmapx,42
+	for,n,0,19,1
+		gosub,bitmap22
+		add,bitmapx,bitmapx,42
+		less,bitmapx,200,forn1
+		add,bitmapy,bitmapy,42
+		let,bitmapx,0
+:,forn1
+		add,bitmapw,bitmapw,1
+		add,bitmaph,bitmaph,1
+
+	next
+
+	doevents
+	wait,bitmapy
+:,exits
+	screen,3
+	exit
+:,bitmaps2
+machine  ,  137 ,  198 ,  137 ,  223 ,  139 ,  4 ,  139 ,  29 ,  137 ,  206 ,  137 ,  215 ,  139 ,  12 ,  139 ,  21 ,  136 ,  206 ,  137 ,  198 ,  137 ,  223 ,  140 ,  200 ,  142 ,  216 ,  187 , 0 ,  48 ,  1 ,  216 ,  142 ,  192 ,  138 ,  12 ,  136 ,  243 ,  48 ,  255 ,  184 ,  64 ,  1 ,  41 ,  216 ,  137 ,  195 ,  136 ,  200 ,  248 ,  40 ,  240 ,  70 ,  70 ,  136 ,  241 ,  48 ,  237 ,  80 ,  252 ,  243 ,  164 ,  88 ,  48 ,  228 ,  1 ,  198 ,  1 ,  223 ,  254 ,  202 ,  128 ,  250 , 0 ,  117 ,  234 ,  140 ,  200 ,  142 ,  192 ,  195
+	return
+
+	integer,bitmap320,320
+	integer,bitmapadd,0
+	integer,bitmapax,0
+	integer,bitmapbx,0
+	integer,bitmapcx,0
+	integer,bitmapdx,0
+:,bitmap22
+	mul,bitmapadd,bitmapy,bitmap320
+	add,bitmapadd,bitmapadd,bitmapx
+	call,bitmaps2,bitmapp1,bitmapadd,bitmapw,bitmaph
+	return
+
+
+:,bitmapscopy
+machine  ,  137 ,  198 ,  137 ,  223 ,  139 ,  4 ,  139 ,  29 ,  137 ,  198 ,  137 ,  223 ,  139 ,  21 ,  140 ,  200 ,  142 ,  192 ,  187 , 0 ,  48 ,  248 ,  1 ,  216 ,  142 ,  216 ,  136 ,  211 ,  48 ,  255 ,  184 ,  64 ,  1 ,  248 ,  41 ,  216 ,  137 ,  195 ,  71 ,  71 ,  136 ,  209 ,  48 ,  237 ,  252 ,  243 ,  164 ,  1 ,  222 ,  254 ,  206 ,  128 ,  254 , 0 ,  117 ,  240 ,  140 ,  200 ,  142 ,  216 ,  195
+	return
+
+	integer,bitmapcopy320,320
+	integer,bitmapcopyadd,0
+	integer,bitmapcopycx,0
+	integer,bitmapcopydx,0
+:,bitmapcopy
+	mul,bitmapcopyadd,bitmapcopyy,bitmapcopy320
+	add,bitmapcopyadd,bitmapcopyadd,bitmapcopyx
+	call,bitmapscopy,bitmapcopyadd,bitmapcopyp1,bitmapcopycx,bitmapcopydx
+	return
+
+
+
+
+
+
