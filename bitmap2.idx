@@ -47,10 +47,11 @@
 		add,bitmapx,bitmapx,42
 		less,bitmapx,200,forn1
 		add,bitmapy,bitmapy,42
-		add,bitmapw,bitmapw,1
-		add,bitmaph,bitmaph,1
 		let,bitmapx,0
 :,forn1
+		add,bitmapw,bitmapw,1
+		add,bitmaph,bitmaph,1
+
 	next
 	doevents
 	wait,bitmapy
