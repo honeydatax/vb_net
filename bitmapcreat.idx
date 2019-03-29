@@ -23,6 +23,8 @@
 	integer,bitmapp1,0
 	integer,blue,1
 	integer,red,4
+	integer,sp1,0
+	string,s,1048
 	alocate,p1,1048
 	move,bitmapp1,p1
 	mem.poke,p1,bitmapx
@@ -50,9 +52,11 @@
 :,forn1
 	next
 	doevents
+	pointer,sp1,s
+	copy,sp1,bitmapp1,1026
 	file.creat,color.ibm
 	file.open,color.ibm,nn
-		file.write,bitmapp1,nn,1026
+		file.write,s,nn,1026
 	file.close,nn		
 
 	wait,bitmapy
