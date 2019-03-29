@@ -1,0 +1,277 @@
+	const,-1
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,8
+	const,9
+	const,19
+	const,15
+	const,24
+	const,30
+	const,32
+	const,100
+	const,280
+	const,128
+	const,319
+	const,199
+	const,1048
+	const,255
+	integer,char,13
+	integer,n,0
+	integer,p1,0
+	integer,key,0
+	integer,esckey,27
+		;,x86 registers
+	integer,ax,0
+	integer,bx,0
+	integer,cx,0
+	integer,dx,0
+	integer,ax1,0
+	integer,bx1,0
+	integer,cx1,0
+	integer,dx1,0
+		;,x86 registers
+	integer,button,0
+	integer,buttonx,0
+	integer,buttony,0
+	integer,p2,0
+	integer,p3,0
+	integer,p0,0
+
+		;,type x
+	integer,x,0
+	integer,y,0
+	integer,w,0
+	integer,h,0
+	integer,click,0
+		;,type x
+	integer,xx,10
+	integer,yy,10
+	integer,ww,20
+	integer,hh,10
+	integer,obj,54
+	integer,size,10
+	integer,white,15
+	integer,blue,1
+	integer,onmouse_up_state,0
+	integer,onmouse_up_state2,0
+	integer,onmouse_up_state3,0
+	integer,onmousecolor,1
+	integer,bitmapx,0
+	integer,bitmapy,0
+	integer,bitmaph,32
+	integer,bitmapw,32
+	integer,bitmapp1,0
+	integer,bitxx,300
+	integer,bityy,0
+	integer,bitww,16
+	integer,bithh,8
+	integer,bitcolor,0
+	string,number,24
+	set,a, $
+	set,var1,X:$
+	set,var2, Y:$
+	set,var3, button:$
+	string,objects,120
+	string,bitmapmap,1048
+	screen,19
+	back,white
+	pointer,p1,bitmapmap
+	move,bitmapp1,p1
+	memfill,bitmapmap,255,1048
+	mem.poke,p1,32
+	add,p1,p1,1
+	mem.poke,p1,32
+	add,p1,p1,1
+	pointer,p1,bitmapmap
+	for,n,0,128,8
+		move,bityy,n
+		box,bitxx,bityy,bitww,bithh,bitcolor
+		add,bitcolor,bitcolor,1
+	next
+
+	for,n,0,128,4
+		box,n,0,1,128,blue
+	next
+		
+	for,n,0,128,4
+		hline,0,n,128,blue
+	next
+	doevents
+	gosub,mouseshow	
+:,return1
+	for,n,0,1,0
+		inkey,key
+		like,key,esckey,exitdo
+		call,mousexyb,ax,bx,cx,dx
+		diferent,ax,ax1,mousechange
+		diferent,bx,bx1,mousechange
+		diferent,cx,cx1,mousechange
+	next
+
+:,exitdo
+	gosub,mousehide
+	screen,3
+	exit
+
+:,background
+machine  ,  137 ,  198 ,  180 ,  11 ,  48 ,  255 ,  138 ,  28 ,  205 ,  16 ,  195
+	return
+
+:,mouseshow
+machine  ,  184 ,  1 , 0 ,  205 ,  51 ,  195
+	return
+
+:,mousehide
+machine  ,  184 ,  2 , 0 ,  205 ,  51 ,  195
+	return
+
+:,mousexyb
+machine  ,  81 ,  137 ,  198 ,  137 ,  223 ,  184 ,  3 , 0 ,  205 ,  51 ,  137 ,  12 ,  137 ,  21 ,  94 ,  137 ,  28 ,  195
+	return
+:,mousechange
+	move,onmouse_up_state,cx1
+	copy,p3,p2,8
+	div,ax,ax,2
+	move,button,cx
+	move,buttonx,ax
+	move,buttony,bx
+	diferent,button,onmouse_up_state,on_mouse
+        goto,return1
+
+
+
+	integer,on_mousen,0
+	integer,on_mousenn,0
+	integer,on_mousex1,0
+	integer,on_mousey1,0
+	integer,on_mouseobj,0
+	integer,on_mousep1,0
+	integer,on_mousep2,0
+	integer,on_mousesize,0
+	integer,on_mouse4,4
+	integer,on_mouse128,120
+	integer,on_mouse0,120
+
+:,on_mouse
+	pointer,on_mousep1,x
+	pointer,on_mousep2,objects
+	move,on_mousesize,size
+	move,on_mousex1,buttonx
+	move,on_mousey1,buttony
+	sub,on_mouseobj,obj,1
+	less,on_mousex1,0,return1
+	less,on_mousey1,0,return1
+	big,on_mousex1,128,on_mouseselect
+	big,on_mousey1,128,return1
+	goto,onmousedraw
+        goto,return1
+
+:,onmouse_up
+	let,onmouse_up_state2,0
+        goto,return1
+
+	integer,onmousedrawbitmapmap,0
+	integer,onmousedrawacc,0
+	integer,onmousedraw32,32
+	integer,onmousedraw166,166
+	integer,onmousedraw286,286
+	integer,onmousedraw4,4
+
+
+:,onmousedraw
+	pointer,onmousedrawbitmapmap,bitmapmap
+	add,onmousedrawbitmapmap,onmousedrawbitmapmap,2
+	like,button,0,onmouse_up
+	like,onmouse_up_state2,1,return1
+	div,on_mousex1,on_mousex1,on_mouse4
+	div,on_mousey1,on_mousey1,on_mouse4
+	mul,on_mousex1,on_mousex1,on_mouse4
+	mul,on_mousey1,on_mousey1,on_mouse4
+	gosub,mousehide
+	box,on_mousex1,on_mousey1,on_mouse4,on_mouse4,onmousecolor
+	div,on_mousey1,on_mousey1,onmousedraw4
+	div,on_mousex1,on_mousex1,onmousedraw4
+	mul,onmousedrawacc,on_mousey1,onmousedraw32
+	add,onmousedrawbitmapmap,onmousedrawbitmapmap,onmousedrawacc
+	add,onmousedrawbitmapmap,onmousedrawbitmapmap,on_mousex1
+	mem.poke,onmousedrawbitmapmap,onmousecolor
+	move,bitmapy,onmousedraw166
+	move,bitmapx,onmousedraw286
+	gosub,bitmap22
+	doevents
+	gosub,mouseshow	
+        goto,return1
+
+	integer,on_mouseselect318,318
+	integer,on_mouseselectyyhh,0
+	integer,on_mouseselect16,16
+	integer,on_mouseselect8,8
+	integer,on_mouseselect286,286	
+	integer,on_mouseselect166,166
+	integer,on_mouseselect1026,1026
+	integer,on_mousennss,0
+	integer,on_mousep1s,0
+	integer,on_mouse22,22
+	integer,on_mouse32,32
+	integer,on_mousep999,0
+
+:,on_mousesave
+	less,on_mousex1,on_mouseselect286,return1
+	less,on_mousey1,on_mouseselect166,return1
+	pointer,on_mousep1s,bitmapmap
+	locate,0,on_mouse22,0
+	echo,save-$
+	file.creat,bitmap.ibm
+	text,testfile,1
+	file.open,bitmap.ibm,on_mousennss
+	set,testfiles2,$
+	pointer,on_mousep999,testfile
+	mem.poke,on_mousep999,on_mouse32
+	print,testfile
+	echo,file:$
+	printnumber,on_mousennss
+	file.write,bitmapmap,on_mousennss,on_mouseselect1026
+	file.close,on_mousennss
+
+        goto,return1
+
+
+:,on_mousecolor
+	div,onmousecolor,on_mousey1,on_mouseselect8
+        goto,return1
+
+
+:,on_mouseselect
+	mul,on_mouseselectyyhh,on_mouseselect16,bithh
+	big,on_mousey1,on_mouseselectyyhh,on_mousesave
+	less,on_mousex1,bitxx,return1
+	less,on_mousey1,0,return1
+	big,on_mousex1,on_mouseselect318,return1
+	goto,on_mousecolor
+
+:,bitmaps2
+machine  ,  137 ,  198 ,  137 ,  223 ,  139 ,  4 ,  139 ,  29 ,  137 ,  206 ,  137 ,  215 ,  139 ,  12 ,  139 ,  21 ,  136 ,  206 ,  137 ,  198 ,  137 ,  223 ,  140 ,  200 ,  142 ,  216 ,  187 , 0 ,  48 ,  1 ,  216 ,  142 ,  192 ,  138 ,  12 ,  136 ,  243 ,  48 ,  255 ,  184 ,  64 ,  1 ,  41 ,  216 ,  137 ,  195 ,  136 ,  200 ,  248 ,  40 ,  240 ,  70 ,  70 ,  136 ,  241 ,  48 ,  237 ,  80 ,  252 ,  243 ,  164 ,  88 ,  48 ,  228 ,  1 ,  198 ,  1 ,  223 ,  254 ,  202 ,  128 ,  250 , 0 ,  117 ,  234 ,  140 ,  200 ,  142 ,  192 ,  195
+	return
+
+	integer,bitmap320,320
+	integer,bitmapadd,0
+	integer,bitmapax,0
+	integer,bitmapbx,0
+	integer,bitmapcx,0
+	integer,bitmapdx,0
+:,bitmap22
+	mul,bitmapadd,bitmapy,bitmap320
+	add,bitmapadd,bitmapadd,bitmapx
+	call,bitmaps2,bitmapp1,bitmapadd,bitmapw,bitmaph
+	return
+
+
+
+
+
+
+
