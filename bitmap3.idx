@@ -27,7 +27,6 @@
 	integer,red,4
 	string,s,1048
 	pointer,p1,s
-	add,p1,p1,2
 	move,bitmapp1,p1
 	file.open,color.ibm,n
 		file.read,s,n,1026
