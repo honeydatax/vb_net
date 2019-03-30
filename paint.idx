@@ -219,6 +219,7 @@ machine  ,  81 ,  137 ,  198 ,  137 ,  223 ,  184 ,  3 , 0 ,  205 ,  51 ,  137 ,
 	integer,on_mouse32,32
 	integer,on_mousep999,0
 
+
 :,on_mousesave
 	less,on_mousex1,on_mouseselect286,return1
 	less,on_mousey1,on_mouseselect166,return1
@@ -236,7 +237,7 @@ machine  ,  81 ,  137 ,  198 ,  137 ,  223 ,  184 ,  3 , 0 ,  205 ,  51 ,  137 ,
 	printnumber,on_mousennss
 	file.write,bitmapmap,on_mousennss,on_mouseselect1026
 	file.close,on_mousennss
-
+	timer.sleep,on_mouse22
         goto,return1
 
 
