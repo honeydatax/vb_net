@@ -24,6 +24,8 @@
 		;,type font size
 	integer,w,0
 	integer,h,0
+	string,s,1048
+	string,s1,1048
 		;,end type font size
 	call,rom,segment,address,cx,dx
 	alocate,address2,1024
@@ -33,14 +35,17 @@
 	alocate,address3,1024
 	let,dx,1024
 	call,farcopy,segment,address,address3,dx
-	pointer,p1,w
+	pointer,p1,s
+	copy,p1,address2,1024
+	pointer,p1,s1
+	copy,p1,address3,1024
 	file.creat,rom.ift
 	file.open,rom.ift,nn
-		file.write,p1,nn,4
+		file.write,w,nn,4
 		move,p1,address2
-		file.write,p1,nn,1024
+		file.write,s,nn,1024
 		move,p1,address3
-		file.write,p1,nn,1024
+		file.write,s1,nn,1024
 	file.close,nn
 	echo,creat font 8X8 rom.ift
 :,exits
