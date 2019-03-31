@@ -1,0 +1,223 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,9
+	const,12
+	const,18
+	const,24
+	const,22
+	const,315
+	const,319
+	const,199
+	integer,n,0
+	integer,cicle,1
+	integer,subcicle,1
+	integer,graphics,19
+	integer,keyesc,27
+	integer,keys,0
+	integer,blue,1
+	integer,white,15
+	integer,loops,0
+	integer,x,30
+	integer,y,30
+	integer,x1,30
+	integer,y1,30
+	integer,x2,30
+	integer,y2,30
+	integer,w1,8
+	integer,w2,16
+	integer,h1,16
+	integer,h2,8
+	integer,dif,4
+	integer,dif2,8
+	integer,ymove,8
+	integer,xmove,8
+	integer,y0move,0
+	integer,x0move,0
+	integer,y1move,15
+	integer,x1move,15
+	integer,y2move,185
+	integer,x2move,300
+	integer,key,0
+	integer,ax,1
+	integer,bx,9
+	integer,cx,0
+	integer,dx,0
+	integer,counter,0
+	integer,softupsn,4
+	integer,softdownsn,4
+	integer,softleftsn,4
+	integer,softrigthsn,4
+	gosub,video19
+	back,9
+	gosub,redraws
+	doevents
+:,restart
+	for,n,0,1,0
+		gosub,check
+		timer.cicle,1,1
+		gosub,softrigths
+		box,0,0,4,199,9
+		doevents
+		like,counter,24,onrestart
+		add,counter,counter,1
+	next
+
+
+
+
+
+:,cls
+	screen,3
+
+
+:,exits
+	exit
+
+:,video19
+	screen,graphics
+	return
+:,check
+		inkey,keys
+		like,keys,keyesc,cls
+		return
+
+:,onrestart
+	let,counter,0
+	gosub,redraws
+	goto,restart
+:,draws
+		move,x1,x
+		move,x2,x
+		move,y1,y
+		move,y2,y
+		sub,x1,x1,8
+		sub,x2,x2,12
+		sub,y1,y1,12
+		sub,y2,y2,8
+		box,x1,y1,w1,h1,blue
+		box,x2,y2,w2,h2,blue
+		return
+
+
+:,scrolldown
+machine  ,  137 ,  198 ,  137 ,  223 ,  138 ,  4 ,  138 ,  61 ,  181 , 0 ,  177 , 0 ,  182 ,  64 ,  178 ,  36 ,  180 ,  7 ,  205 ,  16 ,  195	
+	return
+
+:,scrollup
+machine  ,  137 ,  198 ,  137 ,  223 ,  138 ,  4 ,  138 ,  61 ,  181 , 0 ,  177 , 0 ,  182 ,  64 ,  178 ,  36 ,  180 ,  6 ,  205 ,  16 ,  195
+	return
+
+
+:,softup
+machine  ,  137 ,  198 ,  137 ,  223 ,  139 ,  4 ,  139 ,  29 ,  137 ,  198 ,  137 ,  223 ,  137 ,  203 ,  139 ,  15 ,  140 ,  200 ,  187 , 0 ,  48 ,  1 ,  216 ,  142 ,  216 ,  142 ,  192 ,  252 ,  243 ,  164 ,  140 ,  200 ,  142 ,  216 ,  142 ,  192 ,  195
+	return
+
+
+	integer,softupsinto,0
+	integer,softupsfrom,0
+	integer,softupsdif,0
+	integer,softupsmul,320
+	integer,softupsmuls,200
+	integer,softupsax,0
+	integer,softupsbx,0
+	integer,softupscx,0
+	integer,softupsdx,0
+:,softups
+	mul,softupsdif,softupsn,softupsmul
+	let,softupsinto,0
+	add,softupsfrom,softupsinto,softupsdif
+	mul,softupscx,softupsmul,softupsmuls
+	sub,softupscx,softupscx,softupsdif
+	call,softup,softupsfrom,softupsinto,softupscx,softupsdx
+	return
+
+:,softdown
+machine  ,  137 ,  198 ,  137 ,  223 ,  139 ,  4 ,  139 ,  29 ,  137 ,  198 ,  137 ,  223 ,  137 ,  203 ,  139 ,  15 ,  140 ,  200 ,  187 , 0 ,  48 ,  1 ,  216 ,  142 ,  216 ,  142 ,  192 ,  253 ,  243 ,  164 ,  252 ,  140 ,  200 ,  142 ,  216 ,  142 ,  192 ,  195
+	return
+
+	integer,softdownsinto,0
+	integer,softdownsfrom,0
+	integer,softdownsdif,0
+	integer,softdownsmul,320
+	integer,softdownsmuls,200
+	integer,softdownsax,0
+	integer,softdownsbx,0
+	integer,softdownscx,0
+	integer,softdownsdx,0
+:,softdowns
+	mul,softdownsdif,softdownsn,softdownsmul
+	mul,softdownscx,softdownsmul,softdownsmuls
+	move,softdownsinto,softdownscx
+	sub,softdownscx,softdownscx,softdownsdif
+	move,softdownsfrom,softdownscx
+	call,softdown,softdownsfrom,softdownsinto,softdownscx,softdownsdx
+	return
+
+	integer,softleftsinto,0
+	integer,softleftsfrom,0
+	integer,softleftsdif,0
+	integer,softleftsmul,320
+	integer,softleftsmuls,200
+	integer,softleftsmulss,1
+	integer,softleftsax,0
+	integer,softleftsbx,0
+	integer,softleftscx,0
+	integer,softleftsdx,0
+:,softlefts
+	mul,softleftsdif,softleftsn,softleftsmulss
+	let,softleftsinto,0
+	add,softleftsfrom,softleftsinto,softleftsdif
+	mul,softleftscx,softleftsmul,softleftsmuls
+	sub,softleftscx,softleftscx,softleftsdif
+	call,softup,softleftsfrom,softleftsinto,softleftscx,softleftsdx
+	return
+
+	integer,softrigthsinto,0
+	integer,softrigthsfrom,0
+	integer,softrigthsdif,0
+	integer,softrigthsmul,320
+	integer,softrigthsmuls,200
+	integer,softrigthsmulsss,1
+	integer,softrigthsax,0
+	integer,softrigthsbx,0
+	integer,softrigthscx,0
+	integer,softrigthsdx,0
+:,softrigths
+	mul,softrigthsdif,softrigthsn,softrigthsmulsss
+	mul,softrigthscx,softrigthsmul,softrigthsmuls
+	move,softrigthsinto,softrigthscx
+	sub,softrigthscx,softrigthscx,softrigthsdif
+	move,softrigthsfrom,softrigthscx
+	call,softdown,softrigthsfrom,softrigthsinto,softrigthscx,softrigthsdx
+	return
+
+
+
+
+
+:,redraws
+	let,x,30
+	let,y,20
+	gosub,draws
+	let,x,30	
+	let,y,80
+	gosub,draws
+	let,x,30
+	let,y,120
+	gosub,draws
+	return
+
+
+
+
+
+
+
+
