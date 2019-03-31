@@ -1,0 +1,90 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,9
+	const,10
+	integer,n,0
+	integer,stackpointn,0
+	gosub,stackpoint
+	echo, push into stack
+	for,n,0,5,1
+		move,stackpointn,n
+		printnumber,stackpointn
+		gosub,stackpointpush
+		echo,
+	next
+
+	echo, pop from stack
+	for,n,0,5,1
+		gosub,stackpointpop
+		printnumber,stackpointn
+		echo,
+	next
+
+
+:,exits
+	exit
+
+
+	integer,stackpoint1024,1024
+	integer,stackpointadd,0
+	integer,stackpointadd2,0
+	integer,stackpointp1,0
+	integer,stackpointp2,0
+	integer,stackpoint2,2
+:,stackpoint
+	alocate,stackpointadd,stackpoint1024
+	sub,stackpointadd2,stackpointadd,stackpoint2
+	return
+
+
+:,stackpointpush
+	pointer,stackpointp1,stackpointn
+	copy,stackpointadd,stackpointp1,stackpoint2
+	add,stackpointadd,stackpointadd,stackpoint2
+	return
+
+:,stackpointpop
+	pointer,stackpointp1,stackpointn
+	sub,stackpointadd,stackpointadd,stackpoint2
+	like,stackpointadd,stackpointadd2,errorstack
+	copy,stackpointp1,stackpointadd,stackpoint2
+	return
+
+
+:,errorstack
+	echo,
+	echo,error out of stack
+	goto,exits
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
