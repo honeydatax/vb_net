@@ -21,12 +21,12 @@ Public Class WinVBApp
 	dim keycount as  integer
 	dim varscount as integer
 	dim keywords(600) as string
-	dim par(600) as integer
-	dim labelss(600) as string
-	dim labeladdress(600) as integer
-	dim labelstate(600) as integer
+	dim par(1600) as integer
+	dim labelss(1600) as string
+	dim labeladdress(1600) as integer
+	dim labelstate(1600) as integer
 	dim labelindex as integer
-	dim vars(600) as string
+	dim vars(1600) as string
 	dim errorss as integer
 	dim errorssi as integer
 	dim parcount as integer
@@ -54,14 +54,14 @@ Public Class WinVBApp
 	dim tc4 as string
 	dim tc5 as string
 	dim tc6 as string
-	dim forvar(300) as integer
-	dim forfrom(300) as integer
-	dim forinto(300) as integer
-	dim forstep(300) as integer
-	dim foraddress(300) as integer
+	dim forvar(1300) as integer
+	dim forfrom(1300) as integer
+	dim forinto(1300) as integer
+	dim forstep(1300) as integer
+	dim foraddress(1300) as integer
 	dim forcount as integer
-	dim varstype(300) as integer
-	dim line11(300) as integer
+	dim varstype(1300) as integer
+	dim line11(1300) as integer
 	dim debug as string
 	dim rtxt() as string
         Dim button11 As New Button
