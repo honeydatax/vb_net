@@ -1,0 +1,430 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,9
+	const,12
+	const,18
+	const,24
+	const,22
+	const,315
+	const,319
+	const,199
+	const,16
+	const,13
+	const,127
+	const,128
+	const,500
+	const,65
+	const,48
+	const,49
+	const,33
+	const,20
+	const,1024
+	const,121
+	const,620
+	const,180
+	const,60
+	const,170	
+	const,189
+	const,10
+	const,28
+	const,309
+	integer,counters,0
+	integer,countermax,0
+	integer,segment,0
+	integer,address,0
+	integer,address2,0
+	integer,address3,0
+	integer,printcharsx,12
+	integer,printcharsy,180
+	integer,printcharsin,0
+	integer,printcharsadd,0
+	integer,printcharscolor,0
+	integer,p1,0
+	integer,ax,0
+	integer,bx,0
+	integer,cx,0
+	integer,dx,0
+	integer,i,0
+	integer,n,0
+	integer,nn,0
+	integer,m,0
+		;,type font size
+	integer,w,0
+	integer,h,0
+		;,end type font size
+	integer,cicle,1
+	integer,subcicle,1
+	integer,graphics,19
+	integer,keyesc,27
+	integer,keys,0
+	integer,blue,1
+	integer,white,15
+	integer,loops,0
+	integer,x,30
+	integer,y,30
+	integer,x1,30
+	integer,y1,30
+	integer,x2,30
+	integer,y2,30
+	integer,w1,8
+	integer,w2,16
+	integer,h1,16
+	integer,h2,8
+	integer,dif,4
+	integer,dif2,8
+	integer,ymove,8
+	integer,xmove,8
+	integer,y0move,0
+	integer,x0move,0
+	integer,y1move,15
+	integer,x1move,15
+	integer,y2move,185
+	integer,x2move,300
+	integer,key,0
+	integer,key1,0
+	integer,counter,0
+	integer,softupsn,4
+	integer,softdownsn,4
+	integer,softleftsn,4
+	integer,softrigthsn,4
+	integer,counter11,0
+	integer,counter111,0
+	integer,onchangekey,27
+	set,b, 0abcdefghhgfedcba 1abcdefghhgfedcba 2abcdefghhgfedcba 3abcdefghhgfedcba 4abcdefghhgfedcba 5abcdefghhgfedcba 6abcdefghhgfedcba 7abcdefghhgfedcba 8abcdefghhgfedcba 9abcdefghhgfedcba$
+	set,a,00000 miles $
+	gosub,video19
+	back,9
+	pointer,printcharsin,a
+	gosub,redraws
+	doevents
+	call,rom,segment,address,cx,dx
+	alocate,printcharsadd,1024
+	let,dx,1024
+	call,farcopy,segment,address,printcharsadd,dx
+	call,rom2,segment,address,cx,dx
+	alocate,address3,1024
+	let,dx,1024
+	call,farcopy,segment,address,address3,dx
+	let,printcharscolor,1
+	box,0,170,319,8,4
+	box,0,189,319,8,4
+	box,0,170,10,28,4
+	box,309,170,10,28,4
+	string.len,countermax,b
+:,restart
+	for,n,0,1,0
+		gosub,check
+		timer.cicle,1,1
+		gosub,softrigths
+		box,0,0,4,170,9
+		doevents
+		like,counter,24,onrestart
+		add,counter,counter,1
+		move,key,key1
+		gosub,checkkey
+		diferent,key,onchangekey,onchange
+	next
+
+
+
+
+
+:,cls
+	gosub,nosound
+	screen,3
+
+
+:,exits
+	exit
+
+:,video19
+	screen,graphics
+	return
+:,check
+		inkey,keys
+		like,keys,keyesc,cls
+		return
+
+:,onrestart
+	let,counter,0
+	add,counter11,counter11,1
+	gosub,redraws
+	str,a,counter11
+	box,12,180,60,9,9
+	gosub,printchars
+	goto,restart
+:,draws
+		move,x1,x
+		move,x2,x
+		move,y1,y
+		move,y2,y
+		sub,x1,x1,8
+		sub,x2,x2,12
+		sub,y1,y1,12
+		sub,y2,y2,8
+		box,x1,y1,w1,h1,blue
+		box,x2,y2,w2,h2,blue
+		return
+
+
+:,scrolldown
+machine  ,  137 ,  198 ,  137 ,  223 ,  138 ,  4 ,  138 ,  61 ,  181 , 0 ,  177 , 0 ,  182 ,  64 ,  178 ,  36 ,  180 ,  7 ,  205 ,  16 ,  195	
+	return
+
+:,scrollup
+machine  ,  137 ,  198 ,  137 ,  223 ,  138 ,  4 ,  138 ,  61 ,  181 , 0 ,  177 , 0 ,  182 ,  64 ,  178 ,  36 ,  180 ,  6 ,  205 ,  16 ,  195
+	return
+
+
+:,softup
+machine  ,  137 ,  198 ,  137 ,  223 ,  139 ,  4 ,  139 ,  29 ,  137 ,  198 ,  137 ,  223 ,  137 ,  203 ,  139 ,  15 ,  140 ,  200 ,  187 , 0 ,  48 ,  1 ,  216 ,  142 ,  216 ,  142 ,  192 ,  252 ,  243 ,  164 ,  140 ,  200 ,  142 ,  216 ,  142 ,  192 ,  195
+	return
+
+
+	integer,softupsinto,0
+	integer,softupsfrom,0
+	integer,softupsdif,0
+	integer,softupsmul,320
+	integer,softupsmuls,200
+	integer,softupsax,0
+	integer,softupsbx,0
+	integer,softupscx,0
+	integer,softupsdx,0
+:,softups
+	mul,softupsdif,softupsn,softupsmul
+	let,softupsinto,0
+	add,softupsfrom,softupsinto,softupsdif
+	mul,softupscx,softupsmul,softupsmuls
+	sub,softupscx,softupscx,softupsdif
+	call,softup,softupsfrom,softupsinto,softupscx,softupsdx
+	return
+
+:,softdown
+machine  ,  137 ,  198 ,  137 ,  223 ,  139 ,  4 ,  139 ,  29 ,  137 ,  198 ,  137 ,  223 ,  137 ,  203 ,  139 ,  15 ,  140 ,  200 ,  187 , 0 ,  48 ,  1 ,  216 ,  142 ,  216 ,  142 ,  192 ,  253 ,  243 ,  164 ,  252 ,  140 ,  200 ,  142 ,  216 ,  142 ,  192 ,  195
+	return
+
+	integer,softdownsinto,0
+	integer,softdownsfrom,0
+	integer,softdownsdif,0
+	integer,softdownsmul,320
+	integer,softdownsmuls,200
+	integer,softdownsax,0
+	integer,softdownsbx,0
+	integer,softdownscx,0
+	integer,softdownsdx,0
+:,softdowns
+	mul,softdownsdif,softdownsn,softdownsmul
+	mul,softdownscx,softdownsmul,softdownsmuls
+	move,softdownsinto,softdownscx
+	sub,softdownscx,softdownscx,softdownsdif
+	move,softdownsfrom,softdownscx
+	call,softdown,softdownsfrom,softdownsinto,softdownscx,softdownsdx
+	return
+
+	integer,softleftsinto,0
+	integer,softleftsfrom,0
+	integer,softleftsdif,0
+	integer,softleftsmul,320
+	integer,softleftsmuls,200
+	integer,softleftsmulss,1
+	integer,softleftsax,0
+	integer,softleftsbx,0
+	integer,softleftscx,0
+	integer,softleftsdx,0
+:,softlefts
+	mul,softleftsdif,softleftsn,softleftsmulss
+	let,softleftsinto,0
+	add,softleftsfrom,softleftsinto,softleftsdif
+	mul,softleftscx,softleftsmul,softleftsmuls
+	sub,softleftscx,softleftscx,softleftsdif
+	call,softup,softleftsfrom,softleftsinto,softleftscx,softleftsdx
+	return
+
+	integer,softrigthsinto,0
+	integer,softrigthsfrom,0
+	integer,softrigthsdif,0
+	integer,softrigthsmul,320
+	integer,softrigthsmuls,200
+	integer,softrigthsmulsss,1
+	integer,softrigths170,170
+	integer,softrigthsi,0
+	integer,softrigthsax,0
+	integer,softrigthsbx,0
+	integer,softrigthscx,0
+	integer,softrigthsdx,0
+
+:,softrigths
+	mul,softrigthsdif,softrigthsn,softrigthsmulsss
+	mul,softrigthscx,softrigthsmul,softrigths170
+	move,softrigthsinto,softrigthscx
+	sub,softrigthscx,softrigthscx,softrigthsdif
+	move,softrigthsfrom,softrigthscx
+	call,softdown,softrigthsfrom,softrigthsinto,softrigthscx,softrigthsdx
+	return
+
+
+:,rom
+machine  ,  85 ,  137 ,  198 ,  137 ,  223 ,  180 ,  17 ,  176 ,  48 ,  183 ,  3 ,  205 ,  16 ,  140 ,  195 ,  140 ,  200 ,  142 ,  192 ,  137 ,  28 ,  137 ,  232 ,  137 ,  5 ,  93 ,  195
+	return
+
+:,rom2
+machine  ,  85 ,  137 ,  198 ,  137 ,  223 ,  180 ,  17 ,  176 ,  48 ,  183 ,  4 ,  205 ,  16 ,  140 ,  195 ,  140 ,  200 ,  142 ,  192 ,  137 ,  28 ,  137 ,  232 ,  137 ,  5 ,  93 ,  195
+	return
+
+:,farcopy
+machine  ,  137 ,  198 ,  137 ,  223 ,  139 ,  4 ,  139 ,  29 ,  137 ,  206 ,  137 ,  215 ,  139 ,  20 ,  139 ,  13 ,  137 ,  222 ,  137 ,  215 ,  142 ,  216 ,  140 ,  200 ,  142 ,  192 ,  252 ,  243 ,  164 ,  140 ,  200 ,  142 ,  216 ,  195
+	return
+
+:,getcs
+machine  ,  137 ,  198 ,  140 ,  200 ,  137 ,  4 ,  195
+	return
+
+
+:,printchr
+machine  ,  137 ,  198 ,  137 ,  223 ,  139 ,  4 ,  139 ,  29 ,  137 ,  206 ,  138 ,  20 ,  137 ,  198 ,  137 ,  223 ,  140 ,  200 ,  142 ,  216 ,  187 , 0 ,  48 ,  1 ,  216 ,  142 ,  192 ,  177 ,  8 ,  181 ,  8 ,  180 ,  128 ,  138 ,  4 ,  32 ,  224 ,  60 , 0 ,  116 ,  3 ,  38 ,  136 ,  21 ,  248 ,  208 ,  236 ,  71 ,  254 ,  205 ,  128 ,  253 , 0 ,  117 ,  234 ,  129 ,  199 ,  56 ,  1 ,  70 ,  254 ,  201 ,  128 ,  249 , 0 ,  117 ,  218 ,  140 ,  200 ,  142 ,  192 ,  195
+	return
+
+	integer,printcharsp1,0
+	integer,printcharsn,0
+	integer,printcharsnn,0
+	integer,printcharsesc,36
+	integer,printchars8,8
+	integer,printcharsax,0
+	integer,printcharsbx,0
+	integer,printcharscx,0
+	integer,printcharsdx,0
+	integer,printchars320,320
+
+:,printchars
+	move,printcharsp1,printcharsin
+	mul,printcharsbx,printcharsy,printchars320
+	add,printcharsbx,printcharsbx,printcharsx
+	for,printcharsn,0,1,0
+	mem.peek,printcharsnn,printcharsp1
+	like,printcharsnn,printcharsesc,printchars1
+	like,printcharsnn,0,printchars1
+	mul,printcharsax,printcharsnn,printchars8
+	add,printcharsax,printcharsax,printcharsadd
+	move,printcharscx,printcharscolor
+	call,printchr,printcharsax,printcharsbx,printcharscx,printcharsdx
+	add,printcharsp1,printcharsp1,1
+	add,printcharsbx,printcharsbx,8
+	next
+:,printchars1
+	return
+
+
+:,onchange
+	move,onchangekey,key
+	diferent,key,0,play
+	goto,restart
+
+
+:,play
+	mul,bx,key,16
+	add,bx,bx,500
+	call,sound,ax,bx,cx,dx
+	goto,restart
+
+
+:,thesound
+	gosub,nosound
+	goto,restart
+
+:,sound
+machine  ,  186 ,  97 , 0 ,  236 ,  12 ,  3 ,  186 ,  97 , 0 ,  238 ,  176 ,  182 ,  186 ,  67 , 0 ,  238 ,  138 ,  7 ,  67 ,  186 ,  66 , 0 ,  238 ,  138 ,  7 ,  238 ,  195
+	return	
+
+:,nosound
+machine  ,  186 ,  97 , 0 ,  236 ,  36 ,  252 ,  186 ,  97 , 0 ,  238
+	return
+
+:,checks
+machine  ,  137 ,  198 ,  228 ,  96 ,  136 ,  4 ,  195
+	return
+
+
+	integer,checkkey,0
+	integer,checkmask,0
+	integer,checkmask0,48
+	integer,checkmaskh,105
+	integer,checkmask99,58
+	integer,checkmaska_,64
+	integer,checkmaska,96
+	integer,checkmaskh_,73
+	integer,checkmaskspace,32
+	integer,checkacord,0	
+	integer,checkacordv,10	
+	integer,checkp1,0
+	integer,checkp2,0
+
+:,checkkey
+	less,counters,countermax,checkkey1
+	let,counters,0
+:,checkkey1
+	move,key,key1
+	pointer,checkp1,b
+	pointer,checkp2,key
+	add,checkp1,checkp1,counters
+	mem.peek,checkmask,checkp1
+	like,checkmask,checkmaskspace,checkkey10
+	less,checkmask,checkmask0,checkkey11
+	big,checkmask,checkmaskh,checkkey11
+	less,checkmask,checkmask99,checkkey9
+	big,checkmask,checkmaska,checkkey8
+	big,checkmask,checkmaskh_,checkkey11
+	less,checkmask,checkmaska_,checkkey11
+
+	mul,key,checkacord,checkacordv
+	sub,checkmask,checkmask,checkmaska_
+	add,checkmask,checkmask,1
+	add,key,key,checkmask
+	goto,checkkey11
+:,checkkey8
+	big,checkmask,checkmaskh,checkkey11
+	mul,key,checkacord,checkacordv
+	sub,checkmask,checkmask,checkmaska
+	add,checkmask,checkmask,1
+	add,key,key,checkmask
+	goto,checkkey11
+:,checkkey9
+	move,key,key1
+	sub,checkacord,checkmask,checkmask0
+	add,checkacord,checkacord,1
+	goto,checkkey11
+:,checkkey10
+	let,key,0
+:,checkkey11
+	add,counters,counters,1
+	return
+
+
+
+
+
+:,redraws
+	let,x,30
+	let,y,20
+	gosub,draws
+	let,x,30	
+	let,y,80
+	gosub,draws
+	let,x,30
+	let,y,120
+	gosub,draws
+	return
+
+
+
+
+
+
+
+
