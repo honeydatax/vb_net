@@ -1,0 +1,90 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,9
+	const,10
+	const,121
+	const,620
+	integer,n,0
+	integer,i,0
+	integer,nn,0
+	integer,listn,0
+	gosub,liststar
+	for,n,1,9,1
+		timer.rnd,i
+		mul,i,i,121
+		div,i,i,620
+		move,listn,i
+		printnumber,listn
+		gosub,listadd
+	next
+
+	echo,
+	gosub,listprint
+	echo,
+	exit
+	
+
+
+	integer,liststar,0
+	integer,liststarn,0
+	integer,liststarp1,0
+	integer,liststarp2,0
+	integer,liststarp3,0
+	integer,liststarp4,0
+	integer,liststarp5,0
+	integer,liststarc,0
+	integer,liststar2048,0
+
+:,liststar
+	alocate,liststarn,liststar2048
+	move,liststarp1,liststarn
+	let,liststarc,0
+	return
+
+	integer,listaddn,0
+	integer,listaddx,0
+	integer,listaddxx,0
+	integer,listaddxxx,0
+
+:,listadd
+	move,liststarp1,liststarn
+	pointer,liststarp2,listn
+	pointer,liststarp3,listaddx
+	pointer,liststarp4,listaddxx
+	pointer,liststarp5,listaddxxx
+	move,listaddxx,listn
+	like,liststarc,0,listadd1
+	for,listaddn,1,liststarc,1
+	copy,liststarp5,liststarp1,2
+	big,listaddxx,listaddxxx,listadd2
+	copy,liststarp1,liststarp4,2
+	move,listaddxx,listaddxxx
+:,listadd2
+	add,liststarp1,liststarp1,2
+	next
+	copy,liststarp1,liststarp4,2	
+	add,liststarc,liststarc,1
+	return
+
+:,listadd1
+	add,liststarc,liststarc,1
+	copy,liststarp1,liststarp2,2
+	return
+	
+:,listprint
+	pointer,liststarp5,listaddxxx
+	move,liststarp1,liststarn
+	for,listaddn,1,liststarc,1
+		copy,liststarp5,liststarp1,2
+		printnumber,listaddxxx
+		add,liststarp1,liststarp1,2	
+	next
+	return
+
