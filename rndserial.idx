@@ -1,0 +1,67 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,9
+	const,10
+	integer,n,0
+	integer,rndserialpt,40
+	integer,rndserialc,0
+	gosub,rndserial
+	gosub,rndprintn
+	exit
+
+
+	integer,rndserialmax,0
+	integer,rndserialmaxm,0
+	integer,rndserialn,0
+	integer,rndserialm,0
+	integer,rndserialt,0
+	integer,rndserialmm,0
+	integer,rndseriali,0
+	integer,rndseriald,0
+	integer,rndserialp1,0
+	integer,rndserialp2,0
+	integer,rndserial2048,0
+
+:,rndserial
+	let,rndserialc,0
+	move,rndserialmax,rndserialpt
+	alocate,rndserialn,rndserial2048
+	move,rndserialpt,rndserialn
+	pointer,rndserialp1,rndseriali
+	sub,rndserialmaxm,rndserialmaxm,2
+	for,rndserialm,1,rndserialmax,1
+
+		move,rndserialmm,rndserialm
+		diferent,rndserialmm,0,rndserial1
+		let,rndserialmm,1
+:,rndserial1
+		div,rndseriald,rndserialmax,rndserialmm
+		like,rndseriald,1,rndserial2
+
+		for,rndseriali,rndseriald,rndserialmax,rndseriald
+			copy,rndserialn,rndserialp1,2
+			add,rndserialn,rndserialn,2
+			add,rndserialc,rndserialc,1
+		next
+	next
+:,rndserial2
+	return
+
+
+
+:,rndprintn
+		move,rndserialn,rndserialpt
+		pointer,rndserialp1,rndseriali
+		for,rndserialm,0,rndserialc,1
+			copy,rndserialp1,rndserialn,2
+			printnumber,rndseriali
+			add,rndserialn,rndserialn,2
+		next
+		return
