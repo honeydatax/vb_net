@@ -1,0 +1,245 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,9
+	const,10
+	integer,n,0
+	integer,stackpointn,0
+	integer,p1,0
+	integer,p2,0
+	integer,p3,0
+	integer,p4,0
+	integer,p5,0
+	integer,p6,0
+	integer,p7,0
+	integer,p8,0
+	integer,p9,0
+	integer,p10,0
+	integer,treep1,0
+	integer,treep2,0
+	integer,treep3,0
+		;,type node
+	integer,treenext,0
+	integer,treechild,0
+	text,treetext,34
+		;,endtype nde
+	integer,treesize,34
+	set,var1,hello world
+	set,var2,<title>
+	set,var3,</title>
+	set,var4,hello world
+	set,var5,<body>
+	set,var6,</body>
+	set,var7,<head>
+	set,var8,</head>
+	set,var9,<html>
+	set,var10,</html>
+	pointer,treep1,treenext
+	gosub,stackpoint
+	gosub,stackreset
+
+	let,treechild,0
+	let,treenext,0
+	strcopy,treetext,var1
+	gosub,addnode
+	move,p1,treep2
+
+	let,treechild,0
+	let,treenext,0
+	strcopy,treetext,var4
+	gosub,addnode
+	move,p4,treep2
+
+
+
+	let,treechild,0
+	let,treenext,0
+	strcopy,treetext,var3
+	gosub,addnode
+	move,p3,treep2
+
+	move,treechild,p1
+	move,treenext,p3
+	strcopy,treetext,var2
+	gosub,addnode
+	move,p2,treep2
+
+	let,treechild,0
+	let,treenext,0
+	strcopy,treetext,var6
+	gosub,addnode
+	move,p6,treep2
+
+	move,treechild,p4
+	move,treenext,p6
+	strcopy,treetext,var5
+	gosub,addnode
+	move,p5,treep2
+
+	let,treechild,0
+	move,treenext,p5
+	strcopy,treetext,var8
+	gosub,addnode
+	move,p8,treep2
+
+	move,treechild,p2
+	move,treenext,p8
+	strcopy,treetext,var7
+	gosub,addnode
+	move,p7,treep2
+
+	let,treechild,0
+	let,treenext,0
+	strcopy,treetext,var10
+	gosub,addnode
+	move,p10,treep2
+
+	move,treechild,p7
+	move,treenext,p10
+	strcopy,treetext,var9
+	gosub,addnode
+	move,p9,treep2
+
+
+		;,--------------------
+	move,treep2,p9
+	echo,report
+	gosub,printallnodes
+
+
+
+:,exits
+	exit
+
+
+	integer,stackpoint1024,1024
+	integer,stackpointadd,0
+	integer,stackpointadd1,0
+	integer,stackpointadd2,0
+	integer,stackpointp1,0
+	integer,stackpointp2,0
+	integer,stackpoint2,2
+:,stackpoint
+	alocate,stackpointadd,stackpoint1024
+	move,stackpointadd1,stackpointadd
+	sub,stackpointadd2,stackpointadd,stackpoint2
+	return
+
+
+:,stackpointpush
+	pointer,stackpointp1,stackpointn
+	copy,stackpointadd,stackpointp1,stackpoint2
+	add,stackpointadd,stackpointadd,stackpoint2
+	return
+
+:,stackpointpop
+	pointer,stackpointp1,stackpointn
+	sub,stackpointadd,stackpointadd,stackpoint2
+	like,stackpointadd,stackpointadd2,errorstack
+	copy,stackpointp1,stackpointadd,stackpoint2
+	return
+
+:,stackreset
+	move,stackpointadd,stackpointadd1
+	return
+
+:,errorstack
+	echo,
+	echo,error out of stack
+	goto,exits
+
+	integer,tree0,0
+	integer,tree1,1
+	integer,tree0n,0
+
+:,addnode
+	alocate,treep2,treesize
+	copy,treep2,treep1,treesize
+	return
+
+:,changenode
+	copy,treep2,treep1,treesize
+	return
+
+:,getnode
+	copy,treep1,treep2,treesize
+	return
+
+:,printnode
+	gosub,getnode	
+	print,treetext
+	return
+
+	integer,printallnodespos,0	
+	integer,printnodetabn,0
+:,printnodetab
+	like,printallnodespos,tree0,printnodetab1
+	for,printnodetabn,tree1,printallnodespos,tree1
+		echo,        $
+	next
+:,printnodetab1
+	return
+
+
+:,printallnodes
+	gosub,stackreset
+	let,printallnodespos,0
+:,printallnodes3
+	for,tree0n,tree0,tree1,tree0
+	gosub,printnodetab
+	gosub,printnode
+	like,treechild,tree0,printallnodes1
+	add,printallnodespos,printallnodespos,tree1
+	move,stackpointn,treep2
+	gosub,stackpointpush
+	move,treep2,treechild
+	goto,printallnodes3
+:,printallnodes1
+	like,treenext,tree0,printallnodes4
+	move,treep2,treenext
+	goto,printallnodes3
+:,printallnodes4
+	like,printallnodespos,tree0,printallnodes2
+	sub,printallnodespos,printallnodespos,tree1
+	gosub,stackpointpop
+	move,treep2,stackpointn
+	gosub,getnode	
+	goto,printallnodes1
+	next
+:,printallnodes2
+	gosub,stackreset
+	return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
