@@ -1,0 +1,47 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,9
+	const,10
+	const,19
+	const,16
+	const,319
+	const,199
+	integer,n,0
+	integer,m,0
+	integer,i,0
+	integer,j,0	
+	integer,h,0	
+	integer,blue,1
+	back,9	
+	for,n,0,199,8
+		box,0,n,319,1,blue
+	next
+	for,n,0,199,16
+		for,m,0,319,16
+			box,m,n,1,8,blue
+		next
+		add,h,n,8
+		for,j,8,319,16
+			box,j,h,1,8,blue
+		next
+	next
+	screen,19
+	doevents
+	wait,n
+	screen,3
+
+
+
+
+
+
+
+
+
