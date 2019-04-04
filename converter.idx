@@ -1,0 +1,42 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	integer,i,1234
+	integer,inttofloati,0
+		;,type float
+	text,inttofloatfp,1	
+	float,inttofloatf,0
+		;,end type float
+	float,f,0
+	string,s,50
+	move,inttofloati,i
+	gosub,inttofloat
+	echo,integer = $
+	printnumber,i
+	echo,
+	echo,float = $
+	printnumber,inttofloatf
+	echo,
+exit
+
+		integer,inttofloatpi,0
+		integer,inttofloatpf,0
+		integer,inttofloat2,2
+		float,inttofloatff,100.00
+:,inttofloat
+	pointer,inttofloatpi,inttofloati
+	pointer,inttofloatpf,inttofloatfp
+	add,inttofloatpf,inttofloatpf,1
+	copy,inttofloatpf,inttofloatpi,inttofloat2
+	mul,inttofloatf,inttofloatf,inttofloatff
+	return
+		
+
+
+
