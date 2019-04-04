@@ -1,0 +1,50 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	integer,i,0
+	integer,inttofloati,0
+		;,type float
+	text,inttofloatfp,1	
+	float,inttofloatf,12345.00
+		;,end type float
+	float,f,0
+	string,s,50
+	echo,float = $
+	printnumber,inttofloatf
+	echo,
+	gosub,floattoint
+	echo,int = $
+	printnumber,inttofloati
+	echo,
+exit
+
+		integer,inttofloatpi,0
+		integer,inttofloatpf,0
+		integer,inttofloatpff,0
+		integer,inttofloat2,2
+		float,inttofloatfff,0.00
+		float,inttofloatff,100.00
+:,inttofloat
+	pointer,inttofloatpi,inttofloati
+	pointer,inttofloatpf,inttofloatfp
+	add,inttofloatpf,inttofloatpf,1
+	copy,inttofloatpf,inttofloatpi,inttofloat2
+	mul,inttofloatf,inttofloatf,inttofloatff
+	return
+		
+:,floattoint
+	pointer,inttofloatpi,inttofloati
+	pointer,inttofloatpf,inttofloatfp
+	add,inttofloatpf,inttofloatpf,1
+	div,inttofloatf,inttofloatf,inttofloatff
+	copy,inttofloatpi,inttofloatpf,inttofloat2
+	return
+
+
+
