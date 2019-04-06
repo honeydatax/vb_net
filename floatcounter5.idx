@@ -1,0 +1,46 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,9
+	const,10
+	const,100
+	const,180
+	integer,n,0
+	integer,p1,0
+	integer,i,0
+	integer,p2,0	
+	float,f,0.00
+	float,ff,10.00
+	float,fff,3.14
+	float,ffff,10.00
+	float,f100,100.00
+
+
+	pointer,p1,n
+	pointer,p2,p2
+	add,p2,p2,2
+	for,n,10,180,10
+		copy,p2,p1,2
+		mul,f,f,f100
+		mul,ffff,f,fff
+		printnumber,f
+		echo, X 3.14 =$
+		printnumber,ffff
+		echo,
+	next
+
+
+
+
+
+
+
+
+
+
