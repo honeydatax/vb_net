@@ -1,0 +1,50 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,9
+	const,10
+	const,16
+	const,18
+	integer,n,0
+	integer,elevatei,0
+	float,elevatenumber,0.00
+	float,elevatenumber2,0.00
+	let,elevatenumber,2.00
+	for,elevatei,0,18,1
+		gosub,elevate
+		echo,>>>$
+		printnumber,elevatei
+		echo,>>>$
+		printnumber,elevatenumber2
+		echo,
+	next
+
+:,exits
+	exit
+
+	integer,elevaten,0
+	float,elevate0,0.00
+	float,elevate1,1.00
+:,elevate
+	add,elevatenumber2,elevate0,elevate1
+	like,elevatei,0,elevateexit
+	for,elevaten,1,elevatei,1
+		mul,elevatenumber2,elevatenumber2,elevatenumber
+	next
+:,elevateexit
+	return
+
+
+
+
+
+
+
+
+  
