@@ -1,0 +1,160 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,9
+	const,19
+	const,18
+	const,318
+	const,198
+	const,270
+	const,75
+	const,50
+	const,150
+	const,100
+
+
+	float,linefloatx,318
+	float,linefloaty,198
+	float,linefloatx1,0
+	float,linefloaty1,0
+	integer,linefloatcolor,1
+	integer,n,0
+	integer,i,0
+	float,f,0.01
+	screen,19
+	back,9
+	let,linefloatx1,1.00
+	let,linefloaty1,1.00
+
+	gosub,linefloat
+
+	box,1,1,1,1,4
+
+	let,linefloatx1,50.00
+	let,linefloaty1,50.00
+
+	gosub,linefloat
+
+	box,50,50,1,1,4
+
+	let,linefloatx1,50.00
+	let,linefloaty1,100.00
+
+	gosub,linefloat
+
+	box,50,100,1,1,4
+
+	doevents
+	wait,n
+
+:,exits
+	screen,3
+	exit
+
+
+	integer,linefloatfucn,0
+	float,linefloatfuc0,0.00
+	integer,linefloatxpfuc,0
+	float,linefloatxfuc,0.00
+	integer,linefloatypfuc,0
+	float,linefloatyfuc,0.00
+	float,linefloatx1fuc,0.00
+	float,linefloaty1fuc,0.00
+	integer,linefloatxxpfuc,0
+	float,linefloatxxfuc,0.00
+	integer,linefloatyypfuc,0
+	float,linefloatyyfuc,0.00
+	integer,intlinefloatxxpfuc,0
+	integer,intlinefloatxxfuc,0.00
+	integer,intlinefloatyypfuc,0
+	integer,intlinefloatyyfuc,0.00
+	integer,intlinefloatxxxpfuc,0
+	integer,intlinefloatxxxfuc,0.00
+	integer,intlinefloatyyypfuc,0
+	integer,intlinefloatyyyfuc,0.00
+	integer,linefloatcolorfuc,0
+	float,linefloatxyfuc,0.00	
+	float,linefloatnfuc1,1.00	
+	integer,linefloatfuc100,100
+
+:,linefloat
+	move,linefloatcolorfuc,linefloatcolor
+	pointer,linefloatxpfuc,linefloatxpfuc
+	pointer,linefloatypfuc,linefloatypfuc
+	add,linefloatxpfuc,linefloatxpfuc,2
+	add,linefloatypfuc,linefloatypfuc,2
+	pointer,linefloatxxpfuc,linefloatxxpfuc
+	pointer,linefloatyypfuc,linefloatyypfuc
+	add,linefloatxxpfuc,linefloatxxpfuc,2
+	add,linefloatyypfuc,linefloatyypfuc,2
+	pointer,intlinefloatxxpfuc,intlinefloatxxpfuc
+	pointer,intlinefloatyypfuc,intlinefloatyypfuc
+	add,intlinefloatxxpfuc,intlinefloatxxpfuc,2
+	add,intlinefloatyypfuc,intlinefloatyypfuc,2
+	pointer,intlinefloatxxxpfuc,intlinefloatxxxpfuc
+	pointer,intlinefloatyyypfuc,intlinefloatyyypfuc
+	add,intlinefloatxxxpfuc,intlinefloatxxxpfuc,2
+	add,intlinefloatyyypfuc,intlinefloatyyypfuc,2
+	add,linefloatxfuc,linefloatx,linefloatfuc0
+	add,linefloatyfuc,linefloaty,linefloatfuc0
+	add,linefloatx1fuc,linefloatx1,linefloatfuc0
+	add,linefloaty1fuc,linefloaty1,linefloatfuc0
+	sub,linefloatxxfuc,linefloatxfuc,linefloatx1fuc
+	sub,linefloatyyfuc,linefloatyfuc,linefloaty1fuc
+	copy,intlinefloatxxpfuc,linefloatxxpfuc,2
+	copy,intlinefloatyypfuc,linefloatyypfuc,2
+	less,intlinefloatxxfuc,intlinefloatyyfuc,linefloat100
+	div,intlinefloatxxfuc,intlinefloatxxfuc,linefloatfuc100
+	div,linefloatxyfuc,linefloatyyfuc,linefloatxxfuc
+	for,linefloatfucn,1,intlinefloatxxfuc,1
+		copy,intlinefloatxxxpfuc,linefloatxpfuc,2
+		copy,intlinefloatyyypfuc,linefloatypfuc,2
+		div,intlinefloatxxxfuc,intlinefloatxxxfuc,linefloatfuc100
+		div,intlinefloatyyyfuc,intlinefloatyyyfuc,linefloatfuc100
+
+		box,intlinefloatxxxfuc,intlinefloatyyyfuc,1,1,linefloatcolorfuc
+
+		sub,linefloatxfuc,linefloatxfuc,linefloatnfuc1
+		sub,linefloatyfuc,linefloatyfuc,linefloatxyfuc
+	next
+
+	goto,linefloat200
+	
+:,linefloat100
+	div,intlinefloatyyfuc,intlinefloatyyfuc,linefloatfuc100
+	div,linefloatxyfuc,linefloatxxfuc,linefloatyyfuc
+	for,linefloatfucn,1,intlinefloatyyfuc,1
+		copy,intlinefloatxxxpfuc,linefloatxpfuc,2
+		copy,intlinefloatyyypfuc,linefloatypfuc,2
+		div,intlinefloatxxxfuc,intlinefloatxxxfuc,linefloatfuc100
+		div,intlinefloatyyyfuc,intlinefloatyyyfuc,linefloatfuc100
+
+		box,intlinefloatxxxfuc,intlinefloatyyyfuc,1,1,linefloatcolorfuc
+
+		sub,linefloatxfuc,linefloatxfuc,linefloatxyfuc
+		sub,linefloatyfuc,linefloatyfuc,linefloatnfuc1
+	next
+	goto,linefloat200
+	
+
+:,linefloat200	
+	return
+
+
+
+
+
+
+
+
+
+
+
+
+
