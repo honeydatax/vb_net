@@ -1,0 +1,74 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	integer,ends,36
+	integer,space,32
+	integer,p1,0
+	integer,p2,0
+	integer,p3,0
+	integer,p4,0
+	integer,p5,0
+	integer,p6,0
+	integer,key,0
+	integer,esckey,27
+	set,s,Hello World.!$
+	integer,size,0
+	integer,size2,0
+	integer,size10,80
+	integer,size11,79
+	integer,counter0,0
+	integer,counter1,0
+	integer,counter2,0
+	integer,counter3,0
+	integer,n,0
+	string,scrolls,200
+	pointer,p1,scrolls
+	pointer,p2,ends
+	pointer,p3,s
+	screen,3
+	string.len,size,s
+	for,n,0,1,0
+		inkey,key
+		like,key,esckey,exits
+		gosub,fillstrings
+		timer.sleep,1
+	next	
+
+:,exits
+	exit
+
+:,fillstrings
+	memfill,scrolls,space,size10
+	sub,counter1,size10,counter0
+	like,counter1,0,fillstringsexits
+	pointer,p6,scrolls
+	add,p6,p6,counter1
+	copy,p6,p3,size
+	diferent,counter0,size11,fillstringsexits
+	let,counter0,0
+
+:,fillstringsexits
+	
+:,fillstringsexits2	
+	pointer,p6,scrolls
+	add,p6,p6,size10
+	copy,p6,p2,1
+	add,counter0,counter0,1
+	locate,0,0,0
+	print,scrolls
+	return
+
+
+
+
+
+
+
+
+
