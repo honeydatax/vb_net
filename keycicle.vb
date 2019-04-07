@@ -21,12 +21,12 @@ Public Class WinVBApp
 	dim keycount as  integer
 	dim varscount as integer
 	dim keywords(600) as string
-	dim par(1600) as integer
-	dim labelss(1600) as string
-	dim labeladdress(1600) as integer
-	dim labelstate(1600) as integer
+	dim par(3000) as integer
+	dim labelss(3000) as string
+	dim labeladdress(3000) as integer
+	dim labelstate(3000) as integer
 	dim labelindex as integer
-	dim vars(1600) as string
+	dim vars(3000) as string
 	dim errorss as integer
 	dim errorssi as integer
 	dim parcount as integer
@@ -60,8 +60,8 @@ Public Class WinVBApp
 	dim forstep(1300) as integer
 	dim foraddress(1300) as integer
 	dim forcount as integer
-	dim varstype(1300) as integer
-	dim line11(1300) as integer
+	dim varstype(3000) as integer
+	dim line11(3000) as integer
 	dim debug as string
 	dim rtxt() as string
         Dim button11 As New Button
@@ -78,6 +78,7 @@ Public Class WinVBApp
         Dim text0 As New textbox
         Dim text1 As New textbox
         Dim text2 As New textbox
+	dim ts as integer
         Dim fi As long
         Dim fn As double
 
@@ -606,6 +607,7 @@ dim p as Process
 
 
 		clearbody()
+		if ts=0 then
 		try           	
 			dim s as string()=c.split(chr(10))
 			dim ss as string
@@ -4018,7 +4020,9 @@ dim p as Process
 				text0.text ="error on line "+str(iii)+" keyword :"+keywords(errorssi)+debug
      			escapehandler:
 
-        
+		else
+				text0.text ="error file "
+		end if        
     End Sub
 
 private sub addkey(name as string,ppar as integer)
@@ -4130,7 +4134,6 @@ end function
 
 private sub clearbody()
 
-
 		labelindex=0
 		varscount=0
 		forcount=0
@@ -4140,7 +4143,7 @@ private sub clearbody()
 		t=t1
 		tt=tt1
 
-
+		ts=1
 	try
 
 	rtxt=file.readAlllines(text2.text)
@@ -4150,15 +4153,16 @@ private sub clearbody()
 	for each s in rtxt
 	ss=ss+s+chr(10)
 	next
-                 catch ee as Exception
-	end try
+
 
 		c=ss
 		c=c.replace("	","        ")				
 
 
 			iii=0
-
+		ts=0
+                 catch ee as Exception
+	end try
 
 end sub
 
