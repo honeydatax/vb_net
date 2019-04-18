@@ -1,0 +1,4 @@
+	integer,b,0
+	set,a,hello world
+	print,a
+	wait,b
