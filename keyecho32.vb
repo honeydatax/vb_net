@@ -762,6 +762,76 @@ dim p as Process
 					end if
 
 
+'key locate,x,y,page
+					if par1=keywords(70) then
+						errorssi=70
+						if par(70)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>""  and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 and varstype(bbb2)=6 then
+
+									addtail("	mov bx,x")
+									addtail("	mov si,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov al,[si]")
+									addtail("	mov [bx],al")
+									addtail("	mov si,L"+(trim(line11(bbb1)+9000)))
+									addtail("	mov al,[si]")
+									addtail("	inc bx")
+									addtail("	mov [bx],al")
+
+									errorssi=-1
+									errorss=0
+
+								
+								else
+									iii=1+iii
+									goto errorhandler
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
+
+'key screen,n
+					if par1=keywords(71) then
+						errorssi=71
+						if par(71)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>""  then
+
+
+								if varstype(bbb)=6  then
+
+
+									addtail("	mov si,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov al,[si]")
+									addtail("	mov ah,0")
+									addtail("	int 0x10")
+
+									errorssi=-1
+									errorss=0
+
+								
+								else
+									iii=1+iii
+									goto errorhandler
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
 
 
 'line count
@@ -1023,6 +1093,82 @@ private sub startcode()
 		addkey ("echo",2)
 		addkey ("wait",2)
 		addkey ("integer",3)
+		addkey ("let",3)
+		addkey ("add",4)
+		addkey ("sub",4)
+		addkey ("exit",1)
+		addkey ("label",2)
+		addkey ("goto",2)
+		addkey ("return",1)
+		addkey ("like",4)
+		addkey ("diferent",4)
+		addkey ("big",4)
+		addkey ("less",4)
+		addkey ("rem",2)
+		addkey ("gosub",2)
+		addkey ("memfill",4)
+		addkey ("memcopy",4)
+		addkey ("string",3)
+		addkey ("strcat",3)
+		addkey ("strcopy",3)
+		addkey ("memmove",4)
+		addkey ("input",3)
+		addkey ("memback",4)
+		addkey ("memford",4)
+		addkey ("strfrom",4)
+		addkey ("for",5)
+		addkey ("next",1)
+		addkey ("pointer",3)
+		addkey ("copy",4)
+		addkey ("str",3)
+		addkey ("val",3)
+		addkey ("getnumber",2)
+		addkey ("printnumber",2)
+		addkey ("machine",2)
+		addkey ("reset",2)
+		addkey ("mul",4)
+		addkey ("div",4)
+		addkey ("move",3)
+		addkey ("alocate",3)
+		addkey ("call",6)
+		addkey ("file.creat",2)
+		addkey ("file.open",3)
+		addkey ("file.close",2)
+		addkey ("file.read",4)
+		addkey ("file.write",4)
+		addkey ("string.len",3)
+		addkey ("timer.sleep",2)
+		addkey ("timer.rnd",2)
+		addkey ("stack.push",2)
+		addkey ("mem.peek",3)
+		addkey ("mem.poke",3)
+		addkey ("bits.and",4)
+		addkey ("bits.not",3)
+		addkey ("mem.reserve",3)
+		addkey ("far.into",4)
+		addkey ("far.from",4)
+		addkey ("text",3)
+		addkey ("string.comp",4)
+		addkey ("string.lower",2)
+		addkey ("string.high",2)
+		addkey (":",2)
+		addkey ("string.findchr",4)
+		addkey (";",2)
+		addkey ("string.findstr",4)
+		addkey ("inkey",2)
+		addkey ("const",2)
+		addkey ("locate",4)
+		addkey ("screen",2)
+		addkey ("textout",4)
+		addkey ("border",2)
+		addkey ("float",3)
+		addkey ("back",2)
+		addkey ("hline",5)
+		addkey ("doevents",1)
+		addkey ("box",6)
+		addkey ("file.chain",2)
+		addkey ("file.exec",2)
+		addkey ("timer.cicle",3)
 
 
 'code head
