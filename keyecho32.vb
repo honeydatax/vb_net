@@ -664,7 +664,7 @@ dim p as Process
 							tc=ucase(trim(separete(1)))
 							if findvar(tc)=-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
 								addvar(tc,0,iii)							
-								addbody("L"+trim(str(iii+9000))+" db '"+separete(2)+"',13,10,0")
+								addbody("L"+trim(str(iii+9000))+" db '"+separete(2)+"',0")
 							else
 									iii=1+iii
 								goto errorhandler
@@ -709,6 +709,57 @@ dim p as Process
 
 						goto allkey
 					end if 
+
+
+'key wait,var to put key code
+					if par1=keywords(4) then
+						errorssi=4
+						if par(4)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>"" then
+
+
+								if varstype(bbb)=6 then
+
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	call waits")
+							errorssi=-1
+							errorss=0
+
+								 
+								else
+									iii=1+iii
+									goto errorhandler
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+'key integer ,var,number value
+					if par1=keywords(5) then 
+						errorssi=5
+
+						if par(5)=separete.length then
+							tc=ucase(trim(separete(1)))
+							if findvar(tc)=-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								addvar(tc,6,iii)
+								n=val(trim(separete(2)))
+								addbody("L"+trim(str(iii+9000))+" dd "+str(n))
+							else
+									iii=1+iii
+								goto errorhandler
+							end if 
+							errorssi=-1
+							errorss=0
+						end if
+						goto allkey
+					end if
 
 
 
@@ -970,6 +1021,8 @@ private sub startcode()
 		addkey ("set",3)
 		addkey ("",1)
 		addkey ("echo",2)
+		addkey ("wait",2)
+		addkey ("integer",3)
 
 
 'code head
@@ -1165,7 +1218,21 @@ private sub startcode()
 			addcode ("          pop ebx              ")  
 			addcode ("          pop eax              ")  
 			addcode ("          RET                ")
-                	addcode ("echo:")
+			addcode ("inkey:")
+			addcode ("	mov ah,0x1")
+			addcode ("	int 0x16")
+			addcode ("	jnz waits")
+			addcode ("nwaits:")
+			addcode ("	xor ax,ax")
+			addcode ("	ret")
+			addcode ("waits:")
+			addcode ("	xor ax,ax")
+			addcode ("	int 0x16")
+			addcode ("	xor cl,cl")
+			addcode ("	mov ah,cl")
+			addcode ("	mov [bx],al")
+			addcode ("	ret")
+	               	addcode ("echo:")
 			addcode ("          push ax")
 			addcode ("          push bx")              
 			addcode ("          push cx")                
