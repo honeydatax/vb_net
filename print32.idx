@@ -1,8 +1,12 @@
 	integer,b,3
-	integer,x,10
-	integer,y,10
+	integer,x,0
+	integer,y,18
+	integer,zero,0
+	integer,nexts,1
 	set,a,hello world
 	screen,b
-	locate,x,y,b
-	print,a
+	for,x,zero,y,nexts
+		locate,x,x,b
+		print,a
+	next
 	wait,b
