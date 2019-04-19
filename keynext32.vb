@@ -984,11 +984,19 @@ dim p as Process
 									addtxtbody("	call MEM32")
 									addtxtbody("	mov esi,eax")
 									addtxtbody("	mov eax,9")
+									addtxtbody("	clc")
 									addtxtbody("	add esi,eax")
 									addtxtbody("	mov edi,esi")
 									addtxtbody("	inc edi")
 									addtxtbody("	mov ecx,2")
 									addtxtbody("	call MOVEMEM32")
+									addtxtbody("	mov al,46")
+									addtxtbody("	mov bp,0")
+									addtxtbody("	mov ds,bp")
+									addtxtbody("	dec esi")
+									addtxtbody("	mov [esi],al")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov ds,ax")
 									addtxtbody("	mov si,L22")
 									addtxtbody("	mov ax,cs")
 									addtxtbody("	call MEM32")
@@ -1016,6 +1024,45 @@ dim p as Process
 						end if 
 						goto allkey
 					end if 
+
+'key ;,ignored text
+					if par1=keywords(66) then
+						errorssi=66
+						if par(66)<=separete.length then
+
+									addtxtbody("; "+separete(1))
+									addbody("; "+separete(1))
+
+						else
+							iii=1+iii
+							goto errorhandler
+
+						end if 
+						errorssi=-1
+						errorss=0
+
+						goto allkey
+					end if 
+
+'key rem,ignored text
+					if par1=keywords(17) then
+						errorssi=17
+						if par(17)<=separete.length then
+
+									addtxtbody("; "+separete(1))
+									addbody("; "+separete(1))
+
+						else
+							iii=1+iii
+							goto errorhandler
+
+						end if 
+						errorssi=-1
+						errorss=0
+
+						goto allkey
+					end if 
+
 
 
 
@@ -1452,22 +1499,16 @@ private sub startcode()
 			addcode ("          push ds                ")
 			addcode ("          mov bp,0                ")
 			addcode ("          mov ds,bp")
-			addcode ("          cmp edx,0")
-			addcode ("          JZ MOVEMEM326")
 			addcode ("          MOVEMEM3211:")
 			addcode ("          cmp ecx,0")
 			addcode ("          JZ MOVEMEM326")
-			addcode ("          clc")
-			addcode ("          add esi,ecx")
-			addcode ("          clc")
-			addcode ("          add edi,ecx")
 			addcode ("          MOVEMEM321:")
 			addcode ("                    ds")
 			addcode ("                    mov al,[esi]")
 			addcode ("                    ds")
 			addcode ("                    mov [edi],al")
-			addcode ("                    inc edi")
-			addcode ("                    inc esi         ")       
+			addcode ("                    dec edi")
+			addcode ("                    dec esi         ")       
 			addcode ("                    dec ecx         ")       
 			addcode ("                    jnz MOVEMEM321")
 			addcode ("                    MOVEMEM326:")
@@ -1693,8 +1734,8 @@ private sub startcode()
 			addcode ("L21 dw 0,0,0,0")
 			addcode ("L6 db 'press a key to go on, esc key to exit scroll',13,10,0")
 			addcode ("L16 db '..........................................',13,10,0")
-			addcode ("L17 db '0000000000 ',0")
-			addcode ("L22 db '00000000000 ',0")
+			addcode ("L17 db '0000000000 ',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
+			addcode ("L22 db '00000000000 ',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
 			addcode (";start tail")
 			addcode ("")
 
