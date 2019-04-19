@@ -761,6 +761,34 @@ dim p as Process
 						goto allkey
 					end if
 
+'key float ,var,number value
+					if par1=keywords(74) then 
+						errorssi=74
+
+						if par(74)=separete.length then
+							tc=ucase(trim(separete(1)))
+							if findvar(tc)=-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								addvar(tc,12,iii)
+								fn=val(trim(separete(2)))
+								fn=fn*100
+								fi=fn
+								addbody("L"+trim(str(iii+9000))+" dd "+str(fi))
+							else
+									iii=1+iii
+								goto errorhandler
+							end if 
+							errorssi=-1
+							errorss=0
+						end if
+						goto allkey
+					end if
+
+
+
+
+
+
+
 
 'key locate,x,y,page
 					if par1=keywords(70) then
@@ -910,6 +938,82 @@ dim p as Process
 								iii=1+iii
 								goto errorhandler
 							end if
+						goto allkey
+					end if 
+'key printnumber,varnumber
+					if par1=keywords(36) then
+						errorssi=36
+						if par(36)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>""   then
+
+
+								if varstype(bbb)=6  then	 
+									addtxtbody("	mov si,L17")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	call MEM32")
+									addtxtbody("	mov edi,eax")
+									addtxtbody("	mov si,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	call STR32")
+									addtxtbody("	mov si,L17")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	call MEM32")
+									addtxtbody("	mov esi,eax")
+									addtxtbody("	call len32")
+									addtxtbody("	mov ecx,eax")
+									addtxtbody("	call PRINT32")
+
+									errorssi=-1
+									errorss=0
+
+								else
+
+									if varstype(bbb)=12  then
+									addtxtbody("	mov si,L22")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	call MEM32")
+									addtxtbody("	mov edi,eax")
+									addtxtbody("	mov si,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	call STR32")
+
+									addtxtbody("	mov si,L22")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	call MEM32")
+									addtxtbody("	mov esi,eax")
+									addtxtbody("	mov eax,9")
+									addtxtbody("	add esi,eax")
+									addtxtbody("	mov edi,esi")
+									addtxtbody("	inc edi")
+									addtxtbody("	mov ecx,2")
+									addtxtbody("	call MOVEMEM32")
+									addtxtbody("	mov si,L22")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	call MEM32")
+									addtxtbody("	mov esi,eax")
+									addtxtbody("	call len32")
+									addtxtbody("	mov ecx,eax")
+									addtxtbody("	call PRINT32")
+
+
+
+
+
+										errorssi=-1
+										errorss=0
+									else
+
+										iii=1+iii
+										goto errorhandler
+									end if 
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
 						goto allkey
 					end if 
 
@@ -1303,8 +1407,7 @@ private sub startcode()
 			addcode ("          mov bp,0                ")
 			addcode ("          mov ds,bp")
 			addcode ("          cmp edx,0")
-			addcode ("          JNZ COPYMEM3211")
-			addcode ("          inc edx                ")
+			addcode ("          JZ COPYMEM326")
 			addcode ("          COPYMEM3211:")
 			addcode ("          cmp ecx,0")
 			addcode ("          JZ COPYMEM326")
@@ -1338,6 +1441,45 @@ private sub startcode()
 			addcode ("          add eax,esi")
 			addcode ("          pop esi                ")
 			addcode ("          RET                ")
+			addcode ("MOVEMEM32:")
+			addcode ("          push eax                ")
+			addcode ("          push ebx                ")
+			addcode ("          push ecx                ")
+			addcode ("          push edx                ")
+			addcode ("          push esi                ")
+			addcode ("          push edi                ")
+			addcode ("          push ebp                ")
+			addcode ("          push ds                ")
+			addcode ("          mov bp,0                ")
+			addcode ("          mov ds,bp")
+			addcode ("          cmp edx,0")
+			addcode ("          JZ MOVEMEM326")
+			addcode ("          MOVEMEM3211:")
+			addcode ("          cmp ecx,0")
+			addcode ("          JZ MOVEMEM326")
+			addcode ("          clc")
+			addcode ("          add esi,ecx")
+			addcode ("          clc")
+			addcode ("          add edi,ecx")
+			addcode ("          MOVEMEM321:")
+			addcode ("                    ds")
+			addcode ("                    mov al,[esi]")
+			addcode ("                    ds")
+			addcode ("                    mov [edi],al")
+			addcode ("                    inc edi")
+			addcode ("                    inc esi         ")       
+			addcode ("                    dec ecx         ")       
+			addcode ("                    jnz MOVEMEM321")
+			addcode ("                    MOVEMEM326:")
+			addcode ("                    pop ds          ")      
+			addcode ("                    pop ebp         ")       
+			addcode ("                    pop edi         ")       
+			addcode ("                    pop esi         ")       
+			addcode ("                    pop edx         ")       
+			addcode ("                    pop ecx         ")        
+			addcode ("                    pop ebx         ")       
+			addcode ("                    pop eax         ")       
+			addcode ("                    RET             ")   
 			addcode ("GOTOXY:                ")
 			addcode ("          push ebx                ")
 			addcode ("          push ecx                ")
@@ -1496,6 +1638,51 @@ private sub startcode()
 			addcode ("          pop bx")                
 			addcode ("          pop ax")                
 			addcode ("          RET")                
+			addcode ("STR32:     ")           
+			addcode ("        push eax                ")
+			addcode ("        push ebx                ")
+			addcode ("        push ecx                ")
+			addcode ("        push edx                ")
+			addcode ("        push edi                ")
+			addcode ("        push esi                ")
+			addcode ("        push ebp                ")
+			addcode ("        push ds                ")
+			addcode ("        mov eax,[si]")
+			addcode ("        mov ebp,0")			
+			addcode ("        mov ds,bp                ")
+			addcode ("        mov ebp,1000000000")
+			addcode ("        STR321:                ")
+			addcode ("                  xor edx,edx")
+			addcode ("                  xor ecx,ecx")
+			addcode ("                  mov ebx,ebp")
+			addcode ("                  clc            ")     
+			addcode ("                  div ebx        ")        
+			addcode ("                  mov esi,edx")
+			addcode ("                  mov ah,'0'")
+			addcode ("                  clc            ")    
+			addcode ("                  add al,ah")
+			addcode ("                  mov [edi],al")
+			addcode ("                  inc edi         ")       
+			addcode ("                  mov eax,ebp")
+			addcode ("                  xor edx,edx")
+			addcode ("                  xor ecx,ecx")
+			addcode ("                  mov ebx,10")
+			addcode ("                  clc            ")    
+			addcode ("                  div ebx        ")        
+			addcode ("                  mov ebp,eax")
+			addcode ("                  mov eax,esi")
+			addcode ("                  cmp ebp,0")
+			addcode ("                  JNZ STR321")
+			addcode ("                          ")
+			addcode ("          pop ds                ")
+			addcode ("          pop ebp                ")
+			addcode ("          pop esi                ")
+			addcode ("          pop edi                ")
+			addcode ("          pop edx                ")
+			addcode ("          pop ecx                ")
+			addcode ("          pop ebx                ")
+			addcode ("          pop eax                ")
+			addcode ("          RET          ")
 			addcode ("section .data")
 			addcode ("x     db 0")
 			addcode ("y     db 0")
@@ -1506,8 +1693,8 @@ private sub startcode()
 			addcode ("L21 dw 0,0,0,0")
 			addcode ("L6 db 'press a key to go on, esc key to exit scroll',13,10,0")
 			addcode ("L16 db '..........................................',13,10,0")
-			addcode ("L17 db '00000 $.........................',13,10,0")
-			addcode ("L22 db '0000000000000000000$............',13,10,0")
+			addcode ("L17 db '0000000000 ',0")
+			addcode ("L22 db '00000000000 ',0")
 			addcode (";start tail")
 			addcode ("")
 
