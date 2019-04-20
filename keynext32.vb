@@ -825,6 +825,64 @@ dim p as Process
 						goto allkey
 					end if
 
+
+'key add,var3,var1,var2
+					if par1=keywords(7) then
+						errorssi=7
+						if par(7)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov eax,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ecx,[bx]")
+									addtxtbody("	add eax,ecx")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov [bx],eax")
+							errorssi=-1
+							errorss=0
+
+								 
+								else
+
+									if varstype(bbb)=12 and varstype(bbb1)=12 and varstype(bbb2)=12 then
+
+										addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov eax,[bx]")
+										addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+										addtxtbody("	mov ecx,[bx]")
+										addtxtbody("	clc")
+										addtxtbody("	add eax,ecx")
+										addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov [bx],eax")
+										errorssi=-1
+										errorss=0
+
+								 
+									else
+										iii=1+iii
+										goto errorhandler
+									end if								
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+
+
 'key memfill,vartext,varchar,varsize
 					if par1=keywords(19) then
 						errorssi=19
@@ -842,14 +900,14 @@ dim p as Process
 
 								if varstype(bbb)=1 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
 
-									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtail("	mov edi,[bx]")
-									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
-									addtail("	mov al,[bx]")
-									addtail("	mov bx,L"+(trim(line11(bbb2)+9000)))
-									addtail("	mov ecx,[bx]")
-									addtail("	mov edx,1")
-									addtail("	call FILL32")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov edi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov al,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ecx,[bx]")
+									addtxtbody("	mov edx,1")
+									addtxtbody("	call FILL32")
 									errorssi=-1
 									errorss=0
 								else
