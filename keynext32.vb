@@ -726,6 +726,53 @@ dim p as Process
 						goto allkey
 					end if 
 
+'key let,var,value number
+					if par1=keywords(6) then
+						errorssi=6
+						if par(6)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>"" then
+
+
+								if varstype(bbb)=6 then	 
+
+									n=val(trim(separete(2)))
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov eax,"+str(n))
+									addtxtbody("	mov [bx],eax")
+									errorssi=-1
+									errorss=0
+
+								else
+
+									if varstype(bbb)=12 then	 
+										fn=val(trim(separete(2)))
+										fn=fn*100
+										fi=fn
+										addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov eax,"+str(fi))
+										addtxtbody("	mov [bx],eax")
+										errorssi=-1
+										errorss=0
+
+									else
+
+
+
+											iii=1+iii
+										
+											goto errorhandler
+										
+									end if
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
+
 
 'key wait,var to put key code
 					if par1=keywords(4) then
@@ -1226,8 +1273,104 @@ dim p as Process
 
 						goto allkey
 					end if 
+'key pointer,varinto,vartopoint
+					if par1=keywords(31) then
+						errorssi=31
+						if par(31)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>""  then
 
 
+								if varstype(bbb)=6 and varstype(bbb1)=1  then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov di,bx")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov eax,[bx]")
+									addtxtbody("	mov [di],eax")
+									errorssi=-1
+									errorss=0
+
+								else
+									if varstype(bbb)=6 and varstype(bbb1)=0  then	 
+
+										addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov di,bx")
+										addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov ax,cs")
+										addtxtbody("	call MEM32")
+										addtxtbody("	mov [di],eax")
+										errorssi=-1
+										errorss=0
+
+									else
+										iii=1+iii
+										goto errorhandler
+		
+									end if 
+	
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+
+
+'key memmove,varinto,varfrom,varsize
+					if par1=keywords(24) then
+						errorssi=24
+						if par(24)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)<5 and varstype(bbb1)<5 and varstype(bbb2)=6 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov edi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ecx,[bx]")
+									addtxtbody("	dec ecx")
+									addtxtbody("	add edi,ecx")
+									addtxtbody("	add esi,ecx")
+									addtxtbody("	inc ecx")
+									addtxtbody("	call MOVEMEM32")
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
 
 
 'key string ,var,number size
@@ -1576,6 +1719,47 @@ dim p as Process
 										goto errorhandler
 									end if								
 								end if
+							end if
+						end if 
+						goto allkey
+					end if 
+
+'key memcopy,varinto,varfrom,varsize
+					if par1=keywords(20) then
+						errorssi=20
+						if par(20)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)<1 and varstype(bbb1)<1 and varstype(bbb2)=6 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov edi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ecx,[bx]")
+									addtxtbody("	mov edx,1")
+									addtxtbody("	call COPYMEM32")
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
 							end if
 						end if 
 						goto allkey
@@ -2754,6 +2938,8 @@ private sub startcode()
 			addcode ("L16 db '..........................................',13,10,0")
 			addcode ("L17 db '0000000000 ',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
 			addcode ("L22 db '00000000000 ',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
+			addcode ("L50 times 260 db 32")
+			addcode ("L51 db 0")
 			addcode ("rreservemem dd 0")
 			addcode ("rreservemem2 dd 0")
 
