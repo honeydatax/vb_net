@@ -1,0 +1,13 @@
+	integer,e,3
+	integer,n,0
+	integer,x,0
+	integer,y,1
+	integer,zero,0
+	integer,into,131000
+	integer,step,16000
+	screen,e
+	for,n,zero,into,step
+	locate,x,x,zero
+	printnumber,n
+	add,x,x,y
+	next

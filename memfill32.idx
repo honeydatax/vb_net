@@ -1,0 +1,10 @@
+	integer,e,3
+	integer,zero,0
+	integer,size,2000
+	integer,c,2002
+	integer,a,46
+	string,s,2000
+	screen,e
+	memfill,s,a,size
+	locate,zero,zero,zero
+	print,s
