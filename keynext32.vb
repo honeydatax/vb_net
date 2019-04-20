@@ -799,6 +799,106 @@ dim p as Process
 						goto allkey
 					end if
 
+'key exit
+					if par1=keywords(9) then
+						errorssi=9
+						if par(9)=separete.length then
+									addtxtbody("	jmp exit")
+						else
+							iii=1+iii
+							goto errorhandler
+
+						end if 
+						errorssi=-1
+						errorss=0
+
+						goto allkey
+					end if 
+
+'key label,label id
+					if par1=keywords(10) then 
+						errorssi=10
+
+						if par(10)=separete.length then
+							tc=ucase(trim(separete(1)))
+							bbb=findlabel(tc)
+							if bbb=-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								addlabel(tc,1,iii,1)
+								addtxtbody("LL"+trim(str(iii+8000))+":")
+							errorssi=-1
+							errorss=0
+
+							else
+
+								if bbb>-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) and labeldefined(bbb)=0 then 
+									labeldefined(bbb)=1
+									addtxtbody("LL"+trim(str(labeladdress(bbb)+8000))+":")
+									labelstate(bbb)=1
+							errorssi=-1
+							errorss=0
+
+								else						
+									iii=1+iii
+									goto errorhandler
+								end if
+							end if 
+						end if
+						goto allkey
+					end if
+
+
+'key goto,label id
+					if par1=keywords(11) then 
+						errorssi=11
+
+						if par(11)=separete.length then
+							tc=ucase(trim(separete(1)))
+							bbb=findlabel(tc)
+							if bbb=-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								addlabel(tc,0,iii,0)
+								addtxtbody("	jmp LL"+trim(str(iii+8000)))
+								errorssi=-1
+								errorss=0
+							errorssi=-1
+							errorss=0
+
+							else
+
+								if bbb>-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+									addtxtbody("	jmp LL"+trim(str(labeladdress(bbb)+8000)))
+									errorssi=-1
+									errorss=0
+							errorssi=-1
+							errorss=0
+
+
+								else						
+									iii=1+iii
+									goto errorhandler
+								end if
+							end if 
+						end if
+						goto allkey
+					end if
+
+'key return
+					if par1=keywords(12) then
+						errorssi=12
+						if par(12)=separete.length then
+									addtxtbody("	ret")
+						else
+							iii=1+iii
+							goto errorhandler
+
+						end if 
+						errorssi=-1
+						errorss=0
+
+						goto allkey
+					end if 
+
+
+
 
 'key string ,var,number size
 					if par1=keywords(21) then 
@@ -824,6 +924,277 @@ dim p as Process
 						end if
 						goto allkey
 					end if
+
+'key gosub,label id
+					if par1=keywords(18) then 
+						errorssi=18
+
+						if par(18)=separete.length then
+							tc=ucase(trim(separete(1)))
+							bbb=findlabel(tc)
+							if bbb=-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								
+								addlabel(tc,0,iii,0)
+								addtxtbody("	call LL"+trim(str(iii+8000)))
+
+								errorssi=-1
+								errorss=0
+							else
+
+								if bbb>-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								
+									addtxtbody("	call LL"+trim(str(labeladdress(bbb)+8000)))
+									errorssi=-1
+									errorss=0
+								else						
+									iii=1+iii
+									goto errorhandler
+								end if
+							end if 
+
+						end if
+						goto allkey
+					end if
+
+'key div,var3,var1,var2
+					if par1=keywords(40) then
+						errorssi=40
+						if par(40)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
+
+									addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov eax,[si]")
+									addtxtbody("	mov si,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ebx,[si]")
+									addtxtbody("	xor ecx,ecx")
+									addtxtbody("	xor edx,edx")
+									addtxtbody("	clc")
+									addtxtbody("	div ebx")
+									addtxtbody("	mov si,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov [si],eax")
+									errorssi=-1
+									errorss=0
+ 
+								else
+
+									if varstype(bbb)=12 and varstype(bbb1)=12 and varstype(bbb2)=12 then
+
+										addtxtbody("	mov si,L"+(trim(line11(bbb2)+9000)))
+										addtxtbody("	mov eax,[si]")
+										addtxtbody("	cmp eax,10")
+										addtxtbody("	jl LE"+(trim(str(iii+9000))))
+										addtxtbody("	cmp eax,100")
+										addtxtbody("	jl LI"+(trim(str(iii+9000))))
+										addtxtbody("	LE"+(trim(str(iii+9000)))+":")
+										addtxtbody("	mov edi,eax")
+										addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov eax,[si]")
+										addtxtbody("	mov ebx,100")
+										addtxtbody("	xor ecx,ecx")
+										addtxtbody("	xor edx,edx")
+										addtxtbody("	clc")
+										addtxtbody("	imul ebx")
+										addtxtbody("	mov ebx,edi")
+										addtxtbody("	xor ecx,ecx")
+										addtxtbody("	xor edx,edx")
+										addtxtbody("	clc")
+										addtxtbody("	idiv ebx")
+										addtxtbody("	mov si,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov [si],eax")
+
+										addtxtbody("	jmp LO"+(trim(str(iii+9000))))
+										addtxtbody("	LI"+(trim(str(iii+9000)))+":")
+										addtxtbody("	mov edi,eax")
+										addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov eax,[si]")
+										addtxtbody("	mov ebx,100")
+										addtxtbody("	xor ecx,ecx")
+										addtxtbody("	xor edx,edx")
+										addtxtbody("	clc")
+										addtxtbody("	imul ebx")
+										addtxtbody("	mov ebx,edi")
+										addtxtbody("	xor ecx,ecx")
+										addtxtbody("	xor edx,edx")
+										addtxtbody("	clc")
+										addtxtbody("	idiv ebx")
+										addtxtbody("	mov si,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov [si],eax")
+										addtxtbody("	LO"+(trim(str(iii+9000)))+":")
+
+										errorssi=-1
+										errorss=0
+ 									else
+
+									iii=1+iii
+									goto errorhandler
+									end if
+								end if
+							end if
+
+						end if 
+						goto allkey
+					end if 
+
+
+
+
+
+
+'key mul,var3,var1,var2
+					if par1=keywords(39) then
+						errorssi=39
+						if par(39)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
+
+									addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov eax,[si]")
+									addtxtbody("	mov si,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ebx,[si]")
+									addtxtbody("	xor ecx,ecx")
+									addtxtbody("	xor edx,edx")
+									addtxtbody("	clc")
+									addtxtbody("	imul ebx")
+									addtxtbody("	mov si,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov [si],eax")
+							errorssi=-1
+							errorss=0
+
+
+								else
+	
+									if varstype(bbb)=12 and varstype(bbb1)=12 and varstype(bbb2)=12 then	 
+	
+										addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov eax,[si]")
+										addtxtbody("	mov si,L"+(trim(line11(bbb2)+9000)))
+										addtxtbody("	mov ebx,[si]")
+
+										addtxtbody("	xor ecx,ecx")
+										addtxtbody("	xor edx,edx")
+										addtxtbody("	clc")
+										addtxtbody("	imul ebx")
+										addtxtbody("	xor ecx,ecx")
+										addtxtbody("	xor edx,edx")
+										addtxtbody("	mov ebx,100")
+										addtxtbody("	clc")
+										addtxtbody("	idiv ebx")
+										addtxtbody("	mov si,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov [si],eax")
+										errorssi=-1
+										errorss=0
+									else
+						
+										iii=1+iii
+										goto errorhandler
+									end if
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+
+
+
+'key machine,value1,value2,...
+					if par1=keywords(37) then 
+						errorssi=37
+
+						if par(37)<=separete.length then
+							txtbody=txtbody+chr(13)+chr(10)+"LC"+trim(str(iii+3000))+" db 0x90"
+							for bbb1=1 to separete.length-1
+	
+								tt=tt+","+str(val(separete(bbb1)))
+
+							next bbb1
+
+							tt=tt+chr(13)+chr(10)
+							errorssi=-1
+							errorss=0
+
+						end if
+						goto allkey
+
+					end if
+
+
+'key sub,var3,var1,var2
+					if par1=keywords(8) then
+						errorssi=8
+						if par(8)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov eax,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ecx,[bx]")
+									addtxtbody("	sub eax,ecx")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov [bx],eax")
+								 	errorssi=-1
+								errorss=0
+
+								else
+
+
+									if varstype(bbb)=12 and varstype(bbb1)=12 and varstype(bbb2)=12 then
+
+										addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov eax,[bx]")
+										addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+										addtxtbody("	mov ecx,[bx]")
+										addtxtbody("	clc")
+										addtxtbody("	sub eax,ecx")
+										addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov [bx],eax")
+										errorssi=-1
+										errorss=0
+
+									else								 
+
+									iii=1+iii
+									goto errorhandler
+									end if								
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
+
 
 
 'key add,var3,var1,var2
