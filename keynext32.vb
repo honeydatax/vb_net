@@ -815,6 +815,41 @@ dim p as Process
 						goto allkey
 					end if 
 
+'key :,label id
+					if par1=keywords(64) then 
+						errorssi=64
+
+						if par(64)=separete.length then
+							tc=ucase(trim(separete(1)))
+							bbb=findlabel(tc)
+							if bbb=-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								addlabel(tc,1,iii,1)
+								addtxtbody("LL"+trim(str(iii+8000))+":")
+							errorssi=-1
+							errorss=0
+
+							else
+
+								if bbb>-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) and labeldefined(bbb)=0 then 
+									labeldefined(bbb)=1
+									addtxtbody("LL"+trim(str(labeladdress(bbb)+8000))+":")
+									labelstate(bbb)=1
+							errorssi=-1
+							errorss=0
+
+								else						
+									iii=1+iii
+									goto errorhandler
+								end if
+							end if 
+						end if
+						goto allkey
+					end if
+
+
+
+
+
 'key label,label id
 					if par1=keywords(10) then 
 						errorssi=10
@@ -845,6 +880,301 @@ dim p as Process
 						end if
 						goto allkey
 					end if
+
+'key less,var1,var2,goto label id
+					if par1=keywords(16) then
+						errorssi=16
+						if par(16)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findlabel(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 then	 
+
+
+
+									if bbb2=-1 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
+										addlabel(tc2,0,iii,0)
+
+										addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov eax,[bx]")
+										addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov ecx,[bx]")
+										addtxtbody("	cmp eax,ecx")
+										addtxtbody("	jge LLZ"+trim(str(iii+7000)))
+										addtxtbody("	jmp LL"+trim(str(iii+8000)))
+										addtxtbody("LLZ"+trim(str(iii+7000))+":")
+										errorssi=-1
+										errorss=0
+
+									else
+	
+										if bbb2>-1 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
+											addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+											addtxtbody("	mov ax,[bx]")
+											addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+											addtxtbody("	mov cx,[bx]")
+											addtxtbody("	cmp ax,cx")
+											addtxtbody("	jge LLZ"+trim(str(iii+7000)))
+											addtxtbody("	jmp LL"+trim(str(labeladdress(bbb2)+8000)))
+											addtxtbody("LLZ"+trim(str(iii+7000))+":")
+											errorssi=-1
+											errorss=0
+
+
+										else
+
+											iii=1+iii
+											goto errorhandler
+										end if
+										
+
+									end if
+								else
+
+									iii=1+iii
+									goto errorhandler
+								end if
+							else
+
+								iii=1+iii
+								goto errorhandler
+
+							end if
+													end if 
+						goto allkey
+					end if 
+
+
+
+
+'key big,var1,var2,goto label id
+					if par1=keywords(15) then
+						errorssi=15
+						if par(15)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findlabel(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 then	 
+
+
+
+									if bbb2=-1 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
+										addlabel(tc2,0,iii,0)
+
+										addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov eax,[bx]")
+										addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov ecx,[bx]")
+										addtxtbody("	cmp eax,ecx")
+										addtxtbody("	jle LLZ"+trim(str(iii+7000)))
+										addtxtbody("	jmp LL"+trim(str(iii+8000)))
+										addtxtbody("LLZ"+trim(str(iii+7000))+":")
+										errorssi=-1
+										errorss=0
+
+									else
+	
+										if bbb2>-1 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
+											addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+											addtxtbody("	mov ax,[bx]")
+											addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+											addtxtbody("	mov cx,[bx]")
+											addtxtbody("	cmp ax,cx")
+											addtxtbody("	jle LLZ"+trim(str(iii+7000)))
+											addtxtbody("	jmp LL"+trim(str(labeladdress(bbb2)+8000)))
+											addtxtbody("LLZ"+trim(str(iii+7000))+":")
+											errorssi=-1
+											errorss=0
+
+
+										else
+
+											iii=1+iii
+											goto errorhandler
+										end if
+										
+
+									end if
+								else
+
+									iii=1+iii
+									goto errorhandler
+								end if
+							else
+
+								iii=1+iii
+								goto errorhandler
+
+							end if
+													end if 
+						goto allkey
+					end if 
+
+
+
+
+'key diferent,var1,var2,goto label id
+					if par1=keywords(14) then
+						errorssi=14
+						if par(14)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findlabel(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 then	 
+
+
+
+									if bbb2=-1 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
+										addlabel(tc2,0,iii,0)
+
+										addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov eax,[bx]")
+										addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov ecx,[bx]")
+										addtxtbody("	cmp eax,ecx")
+										addtxtbody("	jz LLZ"+trim(str(iii+7000)))
+										addtxtbody("	jmp LL"+trim(str(iii+8000)))
+										addtxtbody("LLZ"+trim(str(iii+7000))+":")
+										errorssi=-1
+										errorss=0
+
+									else
+	
+										if bbb2>-1 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
+											addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+											addtxtbody("	mov eax,[bx]")
+											addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+											addtxtbody("	mov ecx,[bx]")
+											addtxtbody("	cmp eax,ecx")
+											addtxtbody("	jz LLZ"+trim(str(iii+7000)))
+											addtxtbody("	jmp LL"+trim(str(labeladdress(bbb2)+8000))) 
+											addtxtbody("LLZ"+trim(str(iii+7000))+":")
+											errorssi=-1
+											errorss=0
+
+
+										else
+
+											iii=1+iii
+											goto errorhandler
+										end if
+										
+
+									end if
+								else
+
+									iii=1+iii
+									goto errorhandler
+								end if
+							else
+
+								iii=1+iii
+								goto errorhandler
+
+							end if
+													end if 
+						goto allkey
+					end if 
+
+
+
+'key like,var1,var2,goto label id
+					if par1=keywords(13) then
+						errorssi=13
+						if par(13)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findlabel(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 then	 
+
+
+
+									if bbb2=-1 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
+										addlabel(tc2,0,iii,0)
+
+										addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov eax,[bx]")
+										addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov ecx,[bx]")
+										addtxtbody("	cmp eax,ecx")
+										addtxtbody("	jnz LLZ"+trim(str(iii+7000)))
+										addtxtbody("	jmp LL"+trim(str(iii+8000)))
+										addtxtbody("LLZ"+trim(str(iii+7000))+":")
+										errorssi=-1
+										errorss=0
+
+									else
+	
+										if bbb2>-1 and tc2<>"" and (asc(tc2)>(asc("A")-1)) and (asc(tc2)<(asc("Z")+1)) then 
+											addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+											addtxtbody("	mov eax,[bx]")
+											addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+											addtxtbody("	mov ecx,[bx]")
+											addtxtbody("	cmp eax,ecx")
+											addtxtbody("	jnz LLZ"+trim(str(iii+7000)))
+											addtxtbody("	jmp LL"+trim(str(labeladdress(bbb2)+8000)))
+											addtxtbody("LLZ"+trim(str(iii+7000))+":")
+											errorssi=-1
+											errorss=0
+
+
+										else
+
+											iii=1+iii
+											goto errorhandler
+										end if
+										
+
+									end if
+								else
+
+									iii=1+iii
+									goto errorhandler
+								end if
+							else
+
+								iii=1+iii
+								goto errorhandler
+
+							end if
+													end if 
+						goto allkey
+					end if 
+
+
+
 
 
 'key goto,label id
