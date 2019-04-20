@@ -1,0 +1,14 @@
+	integer,e,3
+	integer,i,15
+	integer,c,14
+	integer,zero,0
+	integer,a,46
+	integer,x,10
+	integer,y,10
+	string,s,50
+	string,ss,50
+	screen,e
+	memfill,s,a,c
+	memfill,ss,zero,c
+	locate,x,y,zero
+	print,s
