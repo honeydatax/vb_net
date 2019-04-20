@@ -646,8 +646,24 @@ dim p as Process
 
 								
 								else
-									iii=1+iii
-									goto errorhandler
+									
+									if varstype(bbb)=1 then	 
+
+
+										addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov esi,[bx]")
+										addtxtbody("	call len32")
+										addtxtbody("	mov ecx,eax")
+										addtxtbody("	call PRINT32")
+										errorssi=-1
+										errorss=0
+
+								
+									else
+										iii=1+iii
+										goto errorhandler
+									end if
+
 								end if
 							end if
 						end if 
@@ -784,7 +800,69 @@ dim p as Process
 					end if
 
 
+'key string ,var,number size
+					if par1=keywords(21) then 
+						errorssi=21
 
+						if par(21)=separete.length then
+							tc=ucase(trim(separete(1)))
+							if findvar(tc)=-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								addvar(tc,1,iii)
+								n=val(trim(separete(2)))
+								addbody("L"+trim(str(iii+9000))+ " dd 0")
+								addtail("	mov ecx,"+str(n+8))
+								addtail("	call RESERVES")
+								addtail("	mov si,L"+trim(str(iii+9000)))
+								addtail("	mov [si],eax")
+
+							else
+									iii=1+iii
+								goto errorhandler
+							end if 
+							errorssi=-1
+							errorss=0
+						end if
+						goto allkey
+					end if
+
+'key memfill,vartext,varchar,varsize
+					if par1=keywords(19) then
+						errorssi=19
+						if par(19)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=1 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
+
+									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov edi,[bx]")
+									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtail("	mov al,[bx]")
+									addtail("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtail("	mov ecx,[bx]")
+									addtail("	mov edx,1")
+									addtail("	call FILL32")
+									errorssi=-1
+									errorss=0
+								else
+									iii=1+iii
+									goto errorhandler 
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
 
 
 
@@ -1408,6 +1486,20 @@ private sub startcode()
 			addcode ("")
 			addcode (";end of body")
 			addcode ("exit:")
+			addcode ("      mov si,rreservemem")
+			addcode ("      mov eax,[si]")
+			addcode ("	mov ax,0")
+			addcode ("	mov ds,ax")
+			addcode ("      mov ebx,180004h") 
+			addcode ("      mov [ebx],eax")
+			addcode ("	mov ax,cs")
+			addcode ("	mov ds,ax")
+			addcode ("	mov ax,0ffffh")
+			addcode ("	mov sp,ax")
+			addcode ("	mov ax,cs")
+			addcode ("	mov ss,ax")
+			addcode ("	xor ax,ax")
+			addcode ("	push ax")
 			addcode ("	xor ax,ax")
 			addcode ("	int 0x21")
 			addcode ("	ret")
@@ -1628,6 +1720,43 @@ private sub startcode()
 			addcode ("          pop ebx              ")  
 			addcode ("          pop eax              ")  
 			addcode ("          RET                ")
+			addcode ("timer:")
+			addcode ("	push ebx")
+			addcode ("	push ds")
+			addcode ("	mov ax,0x40")
+			addcode ("	mov ds,ax")
+			addcode ("	mov bx,0x6c")
+			addcode ("	mov eax,[bx]")
+			addcode ("	pop ds")
+			addcode ("	pop ebx")
+			addcode ("ret")
+			addcode ("sleep:")
+			addcode ("	mov ecx,eax")
+			addcode ("	xor eax,eax")
+			addcode ("	cmp eax,ecx")
+			addcode ("	jz sleep6")
+			addcode ("	call timer")
+			addcode ("	clc")
+			addcode ("	add ecx,eax")
+			addcode ("	jo sleep8")
+			addcode ("	call timer")
+			addcode ("	cmp eax,ecx")
+			addcode ("	jz sleep6")
+			addcode ("	sleep1:")
+			addcode ("		call timer")
+			addcode ("		cmp eax,ecx")
+			addcode ("		jz sleep6")
+			addcode ("		jb sleep1")
+			addcode ("	jmp sleep6")
+			addcode ("	sleep8:")
+			addcode ("	sleep5:")
+			addcode ("		call timer")
+			addcode ("		cmp eax,ecx")
+			addcode ("		jz sleep6")
+			addcode ("		ja sleep5")
+			addcode ("	jmp sleep1")
+			addcode ("sleep6:")
+			addcode ("ret")
 			addcode ("inkey:")
 			addcode ("	mov ah,0x1")
 			addcode ("	int 0x16")
@@ -1724,6 +1853,136 @@ private sub startcode()
 			addcode ("          pop ebx                ")
 			addcode ("          pop eax                ")
 			addcode ("          RET          ")
+			addcode ("start:")
+			addcode ("		;start stack 64k")
+			addcode ("	mov ax,cs")
+			addcode ("	mov cx,0x1000")
+			addcode ("	add ax,cx")
+			addcode ("	mov ss,ax")
+			addcode ("	mov ax,0xffff")
+			addcode ("	mov sp,ax")
+			addcode ("	xor ax,ax")
+			addcode ("	push ax")
+			addcode ("		;end stack 64k")
+			addcode ("		;start alocate")
+			addcode ("	mov bx,L18")
+			addcode ("	mov ax,endf")
+			addcode ("	mov cx,8")
+			addcode ("	add ax,cx")
+			addcode ("	mov [bx],ax")
+			addcode ("		;end alocate")
+			addcode ("		;start randomize")
+			addcode ("	call timer")
+			addcode ("	mov bx,L20")
+			addcode ("	xor cx,cx")
+			addcode ("	mov cl,al")
+			addcode ("	mov ax,257")
+			addcode ("	add ax,cx")
+			addcode ("	mov [bx],ax")
+			addcode ("		;end randomize")
+			addcode ("      xor ax,ax")
+			addcode ("      mov ds,ax")
+			addcode ("      mov edx,1234567890")
+			addcode ("      mov ebx,180000h") 
+			addcode ("      mov eax,[ebx]")
+			addcode ("      cmp eax,edx")
+			addcode ("      jz reservemem")
+			addcode ("      mov eax,4")
+			addcode ("      clc")
+			addcode ("      add ebx,eax")
+			addcode ("      mov eax,100h")
+			addcode ("      clc")                
+			addcode ("      add eax,ebx")
+			addcode ("      mov [ebx],eax")
+			addcode ("      mov eax,1234567890")
+			addcode ("      mov ebx,180000h") 
+			addcode ("      mov [ebx],eax")
+			addcode ("reservemem:")
+			addcode ("      mov ebx,180004h") 
+			addcode ("      mov eax,[ebx]")
+			addcode ("      mov si,rreservemem")
+			addcode ("      cs")
+			addcode ("      mov [si],eax")
+			addcode ("      mov ax,cs")
+			addcode ("      mov ds,ax")
+			addcode ("")
+			addcode ("jmp mains")
+			addcode ("RESERVES:")
+			addcode ("          push ebx")
+			addcode ("          push ecx")                
+			addcode ("          push edx")                
+			addcode ("          push edi")                
+			addcode ("          push esi")                
+			addcode ("          push ebp")                
+			addcode ("          push ds ")               
+			addcode ("          push es ")               
+			addcode ("          JMP RESERVES2")
+			addcode ("          RESERVES2:")
+			addcode ("          xor ax,ax")
+			addcode ("          mov ds,ax")
+			addcode ("          mov ebx,180004h")
+			addcode ("          mov eax,[ebx]")
+			addcode ("")
+			addcode ("          mov edx,eax")
+			addcode ("          clc               ") 
+			addcode ("          add edx,ecx")
+			addcode ("          add edx,4")
+			addcode ("          mov [ebx],edx")
+			addcode ("          mov ebx,eax")
+			addcode ("          mov esi,eax")
+			addcode ("          mov [ebx],ecx")
+			addcode ("          mov eax,esi")
+			addcode ("          clc")
+			addcode ("          add eax,4")
+			addcode ("          clc")
+			addcode ("          add eax,ecx")
+			addcode ("          dec eax")
+			addcode ("          mov ebx,eax")
+			addcode ("          mov al,0")
+			addcode ("          mov [ebx],al")
+			addcode ("          mov eax,esi")
+			addcode ("          clc")
+			addcode ("          add eax,4")
+			addcode ("          pop es")                
+			addcode ("          pop ds")                
+			addcode ("          pop ebp")                
+			addcode ("          pop esi")                
+			addcode ("          pop edi")                
+			addcode ("          pop edx")                
+			addcode ("          pop ecx")                
+			addcode ("          pop ebx")                
+			addcode ("                   ")       
+			addcode ("          RET     ")           
+			addcode ("FILL32:             ")   
+			addcode ("          push eax  ")              
+			addcode ("          push ebx  ")              
+			addcode ("          push ecx  ")              
+			addcode ("          push edx  ")              
+			addcode ("          push esi  ")              
+			addcode ("          push edi  ")              
+			addcode ("          push ebp  ")              
+			addcode ("          push ds   ")             
+			addcode ("          mov bp,0  ")              
+			addcode ("          mov ds,bp")
+			addcode ("          cmp edx,0")
+			addcode ("          JNZ FILL3211")
+			addcode ("          inc edx       ")         
+			addcode ("          FILL3211:")
+			addcode ("          FILL321:      ")          
+			addcode ("                    mov [edi],al")
+			addcode ("                    clc ")               
+			addcode ("                    add edi,edx")
+			addcode ("                    dec ecx      ")          
+			addcode ("                    JNZ FILL321")
+			addcode ("          pop ds                ")
+			addcode ("          pop ebp                ")
+			addcode ("          pop edi                ")
+			addcode ("          pop esi                ")
+			addcode ("          pop edx                ")
+			addcode ("          pop ecx                ") 
+			addcode ("          pop ebx                ")
+			addcode ("          pop eax                ")
+			addcode ("          RET                ")
 			addcode ("section .data")
 			addcode ("x     db 0")
 			addcode ("y     db 0")
@@ -1736,6 +1995,9 @@ private sub startcode()
 			addcode ("L16 db '..........................................',13,10,0")
 			addcode ("L17 db '0000000000 ',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
 			addcode ("L22 db '00000000000 ',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
+			addcode ("rreservemem dd 0")
+			addcode ("rreservemem2 dd 0")
+
 			addcode (";start tail")
 			addcode ("")
 
@@ -1744,7 +2006,7 @@ private sub startcode()
 			addhead ("section .text")
 			addhead ("org 0x100")
 			addhead ("main:")
-			addhead ("jmp mains")
+			addhead ("jmp start")
 			addhead ("db 'build in index32 developer tools.... '")
 			addhead ("mains:")
 			addhead ("")
