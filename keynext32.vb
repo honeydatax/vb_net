@@ -1354,8 +1354,117 @@ dim p as Process
 									addtxtbody("	dec ecx")
 									addtxtbody("	add edi,ecx")
 									addtxtbody("	add esi,ecx")
+									addtxtbody("	mov edx,1")
 									addtxtbody("	inc ecx")
 									addtxtbody("	call MOVEMEM32")
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+'key input,varinto,varsize
+					if par1=keywords(25) then
+						errorssi=25
+						if par(25)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>""  then
+
+
+								if varstype(bbb)=1 and varstype(bbb1)=6  then	 
+
+									addtail("	mov bx,L50")
+									addtail("	mov dx,bx")
+									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtail("	mov cl,[bx]")
+									addtail("	mov bx,dx")
+									addtail("	xor ch,ch")
+									addtail("	mov [bx],cx")
+									addtail("	mov ah,0xa")
+									addtail("	int 0x21")
+									addtail("	mov bx,L50")
+									addtail("	inc bx")
+									addtail("	mov si,bx")
+									addtail("	mov ax,cs")
+									addtail("	call MEM32")
+									addtail("	mov esi,eax")
+									addtail("	xor ecx,ecx")
+									addtail("	mov cl,[bx]")
+									addtail("	push ecx")
+									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov edi,[bx]")
+									addtail("	inc esi")
+									addtail("	mov edx,1")
+									addtail("	call COPYMEM32")
+									addtail("	pop ecx")
+									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov esi,[bx]")
+									addtail("	mov bp,0")
+									addtail("	mov ds,bp")
+									addtail("	mov al,0")
+									addtail("	add esi,ecx")
+									addtail("	mov [esi],al")
+									addtail("	mov ax,cs")
+									addtail("	mov ds,ax")
+
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+'key memback,varinto,varbacksize,varsize
+					if par1=keywords(26) then
+						errorssi=26
+						if par(26)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=1 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
+
+									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov edi,[bx]")
+									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtail("	mov esi,[bx]")
+									addtail("	add esi,edi")
+									addtail("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtail("	mov ecx,[bx]")
+									addtail("	call COPYMEM32")
 									errorssi=-1
 									errorss=0
 
@@ -1397,6 +1506,87 @@ dim p as Process
 						end if
 						goto allkey
 					end if
+
+'key strcat,varinto,varfrom
+					if par1=keywords(22) then
+						errorssi=22
+						if par(22)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>""  then
+
+
+								if varstype(bbb)=1 and varstype(bbb1)=1  then	 
+
+									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov edi,[bx]")
+									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtail("	mov esi,[bx]")
+									addtail("	call strcat")
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+'key strcopy,varinto,varfrom
+					if par1=keywords(23) then
+						errorssi=23
+						if par(23)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>""  then
+
+
+								if varstype(bbb)<5 and varstype(bbb1)<5  then	 
+
+									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov di,[bx]")
+									addtail("	mov di,[bx]")
+									addtail("	mov ax,0")
+									addtail("	mov ds,ax")
+									addtail("	mov al,0")
+									addtail("	mov [edi],al")
+									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtail("	mov esi,[bx]")
+									addtail("	call strcat")
+									addtail("	mov ax,cs")
+									addtail("	mov ds,ax")
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
 
 'key gosub,label id
 					if par1=keywords(18) then 
@@ -1764,7 +1954,6 @@ dim p as Process
 						end if 
 						goto allkey
 					end if 
-
 
 
 
@@ -2477,6 +2666,28 @@ private sub startcode()
 			addcode ("                    pop ebx         ")       
 			addcode ("	ret")
 			addcode ("ret")
+			addcode ("strcat:")
+			addcode ("	mov ax,0")
+			addcode ("	mov ds,ax")
+			addcode ("	mov ah,0")
+			addcode ("strcat2:")
+			addcode ("	mov al,[edi]")
+			addcode ("	cmp al,ah")
+			addcode ("	jz strcat3")
+			addcode ("	inc edi")
+			addcode ("	jmp strcat2")
+			addcode ("strcat3:")
+			addcode ("	mov al,[esi]")
+			addcode ("	mov [edi],al")
+			addcode ("	cmp al,ah")
+			addcode ("	jz strcat4")
+			addcode ("	inc esi")
+			addcode ("	inc edi")
+			addcode ("	jmp strcat3")
+			addcode ("strcat4:")
+			addcode ("	mov ax,cs")
+			addcode ("	mov ds,ax")
+			addcode ("	ret")
 			addcode ("COPYMEM32:")
 			addcode ("          push eax                ")
 			addcode ("          push ebx                ")
