@@ -1744,6 +1744,47 @@ dim p as Process
 					end if 
 
 
+'key val,varnumberinto,vartext
+					if par1=keywords(34) then
+						errorssi=34
+						if par(34)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>""  then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=1  then	 
+
+									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov di,bx")
+									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtail("	mov esi,[bx]")
+									addtail("	call val")
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+
+
+
+
 'key string ,var,number size
 					if par1=keywords(21) then 
 						errorssi=21
@@ -3223,7 +3264,69 @@ private sub startcode()
 			addcode ("          pop cx")                
 			addcode ("          pop bx")                
 			addcode ("          pop ax")                
-			addcode ("          RET")                
+			addcode ("          RET")   
+			addcode ("val:")
+			addcode ("		mov ax,0")
+			addcode ("		mov ds,ax")
+			addcode ("		mov ecx,0")
+			addcode ("		mov edx,0")
+			addcode ("		mov ebx,1")
+			addcode ("		mov eax,0")
+			addcode ("val2:")
+			addcode ("		mov al,[esi]")
+			addcode ("		cmp al,48")
+			addcode ("		jb val3")
+			addcode ("		cmp al,57")
+			addcode ("		ja val3")
+			addcode ("		jmp val4")
+			addcode ("val3:")
+			addcode ("		cmp cl,0")
+			addcode ("		jz val40")
+			addcode ("		jmp val5")
+			addcode ("val4:")
+			addcode ("		cmp cl,9")
+			addcode ("		jz val55")
+			addcode ("		inc cl")
+			addcode ("		inc esi")
+			addcode ("		jmp val2")
+			addcode ("val55:")
+			addcode ("		dec cl")
+			addcode ("val5:")
+			addcode ("		dec esi")
+			addcode ("val6:")
+			addcode ("		push ecx")
+			addcode ("		push edx")
+			addcode ("		xor eax,eax")
+			addcode ("		mov al,[si]")
+			addcode ("		clc")
+			addcode ("		sub al,48")
+			addcode ("		xor ecx,ecx")
+			addcode ("		xor edx,edx")
+			addcode ("		push ebx")
+			addcode ("		imul ebx")
+			addcode ("		xor ecx,ecx")
+			addcode ("		xor edx,edx")
+			addcode ("		pop ebx")
+			addcode ("		push eax")
+			addcode ("		mov eax,10")
+			addcode ("		imul ebx")
+			addcode ("		mov ebx,eax")
+			addcode ("		pop eax")
+			addcode ("		pop edx")
+			addcode ("		pop ecx")
+			addcode ("		clc")
+			addcode ("		add edx,eax")
+			addcode ("		dec esi")
+			addcode ("		dec cl")
+			addcode ("		cmp cl,0")
+			addcode ("		jz val40")
+			addcode ("		jmp val6")
+			addcode ("val40:")
+			addcode ("		mov eax,edx")
+			addcode ("		mov bp,cs")
+			addcode ("		mov ds,bp")
+			addcode ("		mov [di],eax")
+			addcode ("ret")
 			addcode ("STR32:     ")           
 			addcode ("        push eax                ")
 			addcode ("        push ebx                ")
