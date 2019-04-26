@@ -1625,6 +1625,51 @@ dim p as Process
 					end if 
 
 
+
+'key copy,pointinto,pointfrom,varsize
+					if par1=keywords(32) then
+						errorssi=32
+						if par(32)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
+
+									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov edi,[bx]")
+									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtail("	mov esi,[bx]")
+									addtail("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtail("	mov ecx,[bx]")
+									addtail("	mov edx,1")
+									addtail("	call COPYMEN32")
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+
+
 'key string ,var,number size
 					if par1=keywords(21) then 
 						errorssi=21
