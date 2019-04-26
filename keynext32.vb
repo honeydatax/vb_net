@@ -1668,6 +1668,80 @@ dim p as Process
 					end if 
 
 
+'key str,vartext,varnumber
+					if par1=keywords(33) then
+						errorssi=33
+						if par(33)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>""  then
+
+
+								if varstype(bbb)=1 and varstype(bbb1)=6  then	 
+
+										addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtail("	mov edi,[bx]")
+										addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
+										addtail("	mov esi,[bx]")
+										addtail("	call STR32")
+									errorssi=-1
+									errorss=0
+
+								else
+
+
+									if varstype(bbb)=1 and varstype(bbb1)=12  then	 
+	
+										addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtail("	mov edi,[bx]")
+										addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
+										addtail("	mov esi,[bx]")
+										addtail("	call STR32")
+									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov edi,[bx]")
+									addtail("	mov esi,[bx]")
+									addtail("	mov ecx,9")
+									addtail("	clc")
+									addtail("	add esi,ecx")
+									addtail("	mov ecx,10")
+									addtail("	clc")
+									addtail("	add edi,ecx")
+									addtail("	mov ecx,2")
+									addtail("	call MEMMOVE32")
+									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov esi,[bx]")
+									addtail("	mov ecx,8")
+									addtail("	clc")
+									addtail("	add esi,ecx")
+									addtail("	mov al,46")
+									addtail("	mov [esi],al")
+									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov esi,[bx]")
+									addtail("	mov ecx,11")
+									addtail("	clc")
+									addtail("	add esi,ecx")
+									addtail("	mov al,0")
+									addtail("	mov [esi],al")
+
+										errorssi=-1
+										errorss=0
+
+									else
+										iii=1+iii
+										goto errorhandler
+									end if 
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
 
 
 'key string ,var,number size
