@@ -1572,6 +1572,59 @@ dim p as Process
 
 
 
+'key pointer,varinto,vartopoint
+					if par1=keywords(31) then
+						errorssi=31
+						if par(31)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>""  then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=1  then	 
+
+									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtail("	mov di,[bx]")
+									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtail("	mov eax,[bx]")
+									addtail("	mov [di],eax")
+									errorssi=-1
+									errorss=0
+
+								else
+																	if varstype(bbb)=6 and varstype(bbb1)=1  then	 
+									if varstype(bbb)=6 and varstype(bbb1)=0  then	 
+										addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtail("	mov si,[bx]")
+										addtail("	push si")
+										addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
+										addtail("	mov si,[bx]")
+										addtail("	mov ax,cs")
+										addtail("	call MEM32")
+										addtail("	pop si")
+										addtail("	mov [di],eax")
+										errorssi=-1
+										errorss=0
+
+									else
+										iii=1+iii
+										goto errorhandler
+
+									end if 
+	
+								end if 
+							end if 
+							end if 
+						end if 
+						goto allkey
+					end if 
+
+
 'key string ,var,number size
 					if par1=keywords(21) then 
 						errorssi=21
