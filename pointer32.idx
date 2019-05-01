@@ -1,0 +1,16 @@
+	integer,p1,0
+	integer,p2,0
+	integer,zero,0
+	integer,x,1
+	integer,scr,3
+	string,s,10
+	string,ss,10
+	pointer,p1,s
+	pointer,p2,ss
+	screen,scr
+	locate,x,x,zero
+	printnumber,p1
+	add,x,x,x
+	locate,x,x,zero
+	printnumber,p2
+	wait,x
