@@ -1457,14 +1457,14 @@ dim p as Process
 
 								if varstype(bbb)=1 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
 
-									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtail("	mov edi,[bx]")
-									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
-									addtail("	mov esi,[bx]")
-									addtail("	add esi,edi")
-									addtail("	mov bx,L"+(trim(line11(bbb2)+9000)))
-									addtail("	mov ecx,[bx]")
-									addtail("	call COPYMEM32")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov edi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	add esi,edi")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ecx,[bx]")
+									addtxtbody("	call COPYMEM32")
 									errorssi=-1
 									errorss=0
 
@@ -1499,18 +1499,18 @@ dim p as Process
 
 								if varstype(bbb)=1 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
 
-									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtail("	mov esi,[bx]")
-									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
-									addtail("	mov edi,[bx]")
-									addtail("	add edi,esi")
-									addtail("	mov bx,L"+(trim(line11(bbb2)+9000)))
-									addtail("	mov ecx,[bx]")
-									addtail("	dec ecx")
-									addtail("	add esi,ecx")
-									addtail("	add edi,ecx")
-									addtail("	inc ecx")
-									addtail("	call MOVEMEM32")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov edi,[bx]")
+									addtxtbody("	add edi,esi")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ecx,[bx]")
+									addtxtbody("	dec ecx")
+									addtxtbody("	add esi,ecx")
+									addtxtbody("	add edi,ecx")
+									addtxtbody("	inc ecx")
+									addtxtbody("	call MOVEMEM32")
 									errorssi=-1
 									errorss=0
 
@@ -1546,14 +1546,14 @@ dim p as Process
 
 								if varstype(bbb)=1 and varstype(bbb1)=1 and varstype(bbb2)=6  then	 
 
-									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtail("	mov edi,[bx]")
-									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
-									addtail("	mov esi,[bx]")
-									addtail("	mov bx,L"+(trim(line11(bbb2)+9000)))
-									addtail("	mov ecx,[bx]")
-									addtail("	add esi,ecx")
-									addtail("	call strcat")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov edi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ecx,[bx]")
+									addtxtbody("	add esi,ecx")
+									addtxtbody("	call strcat")
 									errorssi=-1
 									errorss=0
 
@@ -1572,57 +1572,6 @@ dim p as Process
 
 
 
-'key pointer,varinto,vartopoint
-					if par1=keywords(31) then
-						errorssi=31
-						if par(31)=separete.length then
-
-							tc=ucase(trim(separete(1)))
-							tc1=ucase(trim(separete(2)))
-
-							bbb=findvar(tc)
-							bbb1=findvar(tc1)
-
-							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>""  then
-
-
-								if varstype(bbb)=6 and varstype(bbb1)=1  then	 
-
-									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtail("	mov di,[bx]")
-									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
-									addtail("	mov eax,[bx]")
-									addtail("	mov [di],eax")
-									errorssi=-1
-									errorss=0
-
-								else
-																	if varstype(bbb)=6 and varstype(bbb1)=1  then	 
-									if varstype(bbb)=6 and varstype(bbb1)=0  then	 
-										addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-										addtail("	mov si,[bx]")
-										addtail("	push si")
-										addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
-										addtail("	mov si,[bx]")
-										addtail("	mov ax,cs")
-										addtail("	call MEM32")
-										addtail("	pop si")
-										addtail("	mov [di],eax")
-										errorssi=-1
-										errorss=0
-
-									else
-										iii=1+iii
-										goto errorhandler
-
-									end if 
-	
-								end if 
-							end if 
-							end if 
-						end if 
-						goto allkey
-					end if 
 
 
 
@@ -1643,14 +1592,14 @@ dim p as Process
 
 								if varstype(bbb)=6 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
 
-									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtail("	mov edi,[bx]")
-									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
-									addtail("	mov esi,[bx]")
-									addtail("	mov bx,L"+(trim(line11(bbb2)+9000)))
-									addtail("	mov ecx,[bx]")
-									addtail("	mov edx,1")
-									addtail("	call COPYMEN32")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov edi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ecx,[bx]")
+									addtxtbody("	mov edx,1")
+									addtxtbody("	call COPYMEM32")
 									errorssi=-1
 									errorss=0
 
@@ -1683,11 +1632,11 @@ dim p as Process
 
 								if varstype(bbb)=1 and varstype(bbb1)=6  then	 
 
-										addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-										addtail("	mov edi,[bx]")
-										addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
-										addtail("	mov esi,[bx]")
-										addtail("	call STR32")
+									addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov edi,[bx]")
+										addtxtbody("	call STR32")
+
 									errorssi=-1
 									errorss=0
 
@@ -1696,36 +1645,42 @@ dim p as Process
 
 									if varstype(bbb)=1 and varstype(bbb1)=12  then	 
 	
-										addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-										addtail("	mov edi,[bx]")
-										addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
-										addtail("	mov esi,[bx]")
-										addtail("	call STR32")
-									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtail("	mov edi,[bx]")
-									addtail("	mov esi,[bx]")
-									addtail("	mov ecx,9")
-									addtail("	clc")
-									addtail("	add esi,ecx")
-									addtail("	mov ecx,10")
-									addtail("	clc")
-									addtail("	add edi,ecx")
-									addtail("	mov ecx,2")
-									addtail("	call MEMMOVE32")
-									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtail("	mov esi,[bx]")
-									addtail("	mov ecx,8")
-									addtail("	clc")
-									addtail("	add esi,ecx")
-									addtail("	mov al,46")
-									addtail("	mov [esi],al")
-									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtail("	mov esi,[bx]")
-									addtail("	mov ecx,11")
-									addtail("	clc")
-									addtail("	add esi,ecx")
-									addtail("	mov al,0")
-									addtail("	mov [esi],al")
+									addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov edi,[bx]")
+										addtxtbody("	call STR32")
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov edi,[bx]")
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov ecx,9")
+									addtxtbody("	clc")
+									addtxtbody("	add esi,ecx")
+									addtxtbody("	mov ecx,10")
+									addtxtbody("	clc")
+									addtxtbody("	add edi,ecx")
+									addtxtbody("	mov ecx,2")
+									addtxtbody("	call MOVEMEM32")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov ecx,8")
+									addtxtbody("	clc")
+									addtxtbody("	add esi,ecx")
+									addtxtbody("	mov al,46")
+									addtxtbody("	mov bp,0")
+									addtxtbody("	mov ds,bp")
+
+									addtxtbody("	mov [esi],al")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov ds,ax")
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov ecx,11")
+									addtxtbody("	clc")
+									addtxtbody("	add esi,ecx")
+									addtxtbody("	mov al,0")
+									addtxtbody("	mov [esi],al")
 
 										errorssi=-1
 										errorss=0
@@ -1759,11 +1714,11 @@ dim p as Process
 
 								if varstype(bbb)=6 and varstype(bbb1)=1  then	 
 
-									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtail("	mov di,bx")
-									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
-									addtail("	mov esi,[bx]")
-									addtail("	call val")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov di,bx")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	call val")
 									errorssi=-1
 									errorss=0
 
@@ -1825,11 +1780,11 @@ dim p as Process
 
 								if varstype(bbb)=1 and varstype(bbb1)=1  then	 
 
-									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtail("	mov edi,[bx]")
-									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
-									addtail("	mov esi,[bx]")
-									addtail("	call strcat")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov edi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	call strcat")
 									errorssi=-1
 									errorss=0
 
@@ -1861,18 +1816,18 @@ dim p as Process
 
 								if varstype(bbb)<5 and varstype(bbb1)<5  then	 
 
-									addtail("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtail("	mov di,[bx]")
-									addtail("	mov di,[bx]")
-									addtail("	mov ax,0")
-									addtail("	mov ds,ax")
-									addtail("	mov al,0")
-									addtail("	mov [edi],al")
-									addtail("	mov bx,L"+(trim(line11(bbb1)+9000)))
-									addtail("	mov esi,[bx]")
-									addtail("	call strcat")
-									addtail("	mov ax,cs")
-									addtail("	mov ds,ax")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov di,[bx]")
+									addtxtbody("	mov di,[bx]")
+									addtxtbody("	mov ax,0")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov al,0")
+									addtxtbody("	mov [edi],al")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	call strcat")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov ds,ax")
 									errorssi=-1
 									errorss=0
 
