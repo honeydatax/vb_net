@@ -1,0 +1,16 @@
+	integer,i,0
+	integer,x,0
+	integer,scr,3
+	integer,null,0
+	integer,char,46
+	integer,count,40
+	integer,count2,47
+	string,ss,50
+	string,s,50
+	screen,scr
+	memfill,ss,null,count2
+	memfill,ss,char,count
+	memmove,s,ss,count2
+	print,s
+	wait,char
+	
