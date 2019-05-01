@@ -1,0 +1,15 @@
+	integer,n,0
+	integer,stp,1
+	integer,into,100000000
+	integer,intos,18
+	integer,zero,0
+	integer,scr,3
+	screen,scr
+	for,n,zero,into,stp
+		locate,n,n,zero
+		printnumber,n
+		like,n,intos,escapes
+	next
+
+:,escapes
+	wait,n
