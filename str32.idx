@@ -1,0 +1,17 @@
+	integer,i,123456789
+	integer,size,18
+	integer,null,0
+	integer,x,1
+	integer,zero,0
+	integer,scr,3
+	float,f,1234567.89
+	string,s,20
+	screen,scr
+	memfill,s,null,size
+	str,s,i
+	locate,x,x,zero
+	print,s
+	str,s,f
+	locate,scr,scr,zero
+	print,s
+	wait,x
