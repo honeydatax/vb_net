@@ -1,0 +1,16 @@
+	integer,a,0
+	integer,b,0
+	integer,c,0
+	integer,zero,0
+	integer,scr,3
+	integer,x,1
+	integer,y,1
+	screen,scr
+	locate,x,y,zero
+	let,a,65536
+	printnumber,a
+	let,y,2
+	locate,x,y,zero
+	let,b,1000000
+	printnumber,b
+	wait,a
