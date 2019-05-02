@@ -1,0 +1,27 @@
+	integer,p1,0
+	integer,p2,0
+	integer,p3,0
+	integer,p4,0
+	integer,scr,3
+	integer,x,1
+	integer,y,1
+	integer,n,0
+	integer,size,20
+	integer,zero,0
+	set,s1,hello world!.
+	set,s2,world.! 
+	string,ss1,50
+	string,ss2,50
+	pointer,p1,s1
+	pointer,p2,s2
+	pointer,p3,ss1
+	pointer,p4,ss2
+	copy,p4,p1,size
+	screen,scr
+	locate,x,x,zero
+	print,s1
+	add,x,x,y
+	strcopy,ss1,ss2
+	locate,x,x,zero
+	print,ss1
+	wait,n
