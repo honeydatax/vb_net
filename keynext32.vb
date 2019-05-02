@@ -1814,15 +1814,16 @@ dim p as Process
 							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>""  then
 
 
-								if varstype(bbb)<5 and varstype(bbb1)<5  then	 
+								if varstype(bbb)=1 and varstype(bbb1)=1  then	 
 
 									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtxtbody("	mov di,[bx]")
 									addtxtbody("	mov di,[bx]")
 									addtxtbody("	mov ax,0")
 									addtxtbody("	mov ds,ax")
 									addtxtbody("	mov al,0")
 									addtxtbody("	mov [edi],al")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov ds,ax")
 									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
 									addtxtbody("	mov esi,[bx]")
 									addtxtbody("	call strcat")
