@@ -1570,6 +1570,26 @@ dim p as Process
 						goto allkey
 					end if 
 
+'key const ,value
+					if par1=keywords(69) then 
+						errorssi=69
+
+						if par(69)=separete.length then
+							tc=ucase(trim(separete(1)))
+							if findvar(tc)=-1 and tc<>"" then 
+								addvar(tc,6,iii)
+								n=val(trim(separete(1)))
+								addbody("L"+trim(str(iii+9000))+" dd "+str(n))
+							else
+									iii=1+iii
+								goto errorhandler
+							end if 
+							errorssi=-1
+							errorss=0
+						end if
+						goto allkey
+					end if
+
 
 
 
@@ -1737,6 +1757,26 @@ dim p as Process
 
 
 
+'key memory ,var,address
+					if par1=keywords(82) then 
+						errorssi=82
+
+						if par(82)=separete.length then
+							tc=ucase(trim(separete(1)))
+							if findvar(tc)=-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								addvar(tc,1,iii)
+								n=val(trim(separete(2)))
+								addbody("L"+trim(str(iii+9000))+ " dd "+str(n))
+
+							else
+									iii=1+iii
+								goto errorhandler
+							end if 
+							errorssi=-1
+							errorss=0
+						end if
+						goto allkey
+					end if
 
 
 
@@ -2049,11 +2089,11 @@ dim p as Process
 							txtbody=txtbody+chr(13)+chr(10)+"LC"+trim(str(iii+3000))+" db 0x90"
 							for bbb1=1 to separete.length-1
 	
-								tt=tt+","+str(val(separete(bbb1)))
+								txtbody=txtbody+","+str(val(separete(bbb1)))
 
 							next bbb1
 
-							tt=tt+chr(13)+chr(10)
+							txtbody=txtbody+chr(13)+chr(10)
 							errorssi=-1
 							errorss=0
 
@@ -2188,7 +2228,7 @@ dim p as Process
 							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
 
 
-								if varstype(bbb)<1 and varstype(bbb1)<1 and varstype(bbb2)=6 then	 
+								if varstype(bbb)=1 and varstype(bbb1)=1 and varstype(bbb2)=6 then	 
 
 									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
 									addtxtbody("	mov edi,[bx]")
@@ -2202,8 +2242,28 @@ dim p as Process
 									errorss=0
 
 								else
-									iii=1+iii
-									goto errorhandler
+									if varstype(bbb)=1 and varstype(bbb1)=0 and varstype(bbb2)=6 then	 
+	
+
+									addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	call MEM32")
+									addtxtbody("	mov esi,eax")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+										addtxtbody("	mov edi,[bx]")
+										addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+										addtxtbody("	mov ecx,[bx]")
+										addtxtbody("	mov edx,1")
+										addtxtbody("	call COPYMEM32")
+										errorssi=-1
+										errorss=0
+	
+									else
+										iii=1+iii
+										goto errorhandler
+
+									end if 
+
 
 								end if 
 								else
@@ -2255,6 +2315,49 @@ dim p as Process
 						goto allkey
 					end if 
 
+
+
+'key fillstep,vartext,varchar,varsize,,varstep
+					if par1=keywords(83) then
+						errorssi=83
+						if par(83)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+							tc3=ucase(trim(separete(4)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							bbb3=findvar(tc3)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=1 and varstype(bbb1)=6 and varstype(bbb2)=6 and varstype(bbb3)=6 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov edi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov al,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ecx,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb3)+9000)))
+									addtxtbody("	mov edx,[bx]")
+									addtxtbody("	call FILL32")
+									errorssi=-1
+									errorss=0
+								else
+									iii=1+iii
+									goto errorhandler 
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
 
 
 
@@ -2327,6 +2430,39 @@ dim p as Process
 						end if 
 						goto allkey
 					end if 
+
+'key color,n
+					if par1=keywords(84) then
+						errorssi=84
+						if par(84)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>""  then
+
+
+								if varstype(bbb)=6  then
+
+
+									addtxtbody("	mov si,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov al,[si]")
+									addtxtbody("	mov si,color")
+									addtxtbody("	mov [si],al")
+
+									errorssi=-1
+									errorss=0
+
+								
+								else
+									iii=1+iii
+									goto errorhandler
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
 
 'key for,var,varfrom,varinto,varstep
 					if par1=keywords(29) then
@@ -2870,6 +3006,9 @@ private sub startcode()
 		addkey ("file.chain",2)
 		addkey ("file.exec",2)
 		addkey ("timer.cicle",3)
+		addkey ("memory",3)
+		addkey ("fillstep",5)
+		addkey ("color",2)
 
 
 'code head
