@@ -1,0 +1,54 @@
+	const,16
+	const,1
+	const,18
+	const,0
+	integer,chr,0
+	integer,esc,27
+	integer,value,0
+	integer,n,0
+	integer,forn,0
+	integer,into,32000
+	integer,c,7
+	integer,i,0
+	integer,scr,3
+	integer,chrs,113
+	integer,step,2
+	integer,size,2000
+	integer,zero,0
+	integer,x,1
+	integer,y,1
+	set,s,hello world.
+	memory,ss,753665
+	screen,scr
+	fillstep,ss,chrs,size,step
+	locate,x,y,zero
+		;,for
+	for,n,0,1,0
+		;,fors
+			inkey,chr
+			diferent,chr,value,onkey
+			;,loop
+			:,loop2
+			;,loops
+		;,next
+	next
+		;,nexts
+	exit
+
+:,onkey
+	locate,1,y,0
+	printnumber,chr
+	add,y,y,1
+	less,y,18,loop2
+
+
+
+
+
+
+
+
+
+
+
+

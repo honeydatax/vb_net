@@ -1,0 +1,36 @@
+	const,16
+	const,1
+	const,18
+	const,0
+	integer,c,113
+	integer,i,0
+	integer,n,11
+	integer,scr,3
+	integer,chrs,113
+	integer,step,2
+	integer,sizes,9
+	integer,size,2000
+	integer,zero,0
+	integer,x,1
+	integer,y,10
+	string,s,50
+	memory,ss,753665
+	screen,scr
+	fillstep,ss,chrs,size,step
+	locate,x,y,zero
+	color,c
+	locate,x,x,0
+	echo,x:?
+	add,x,x,1
+	locate,x,x,0		
+	getnumber,i
+	add,x,x,1
+	locate,x,x,0		
+	printnumber,i
+	
+
+
+
+
+
+
