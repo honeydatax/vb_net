@@ -788,8 +788,40 @@ dim p as Process
 								if varstype(bbb)=6 then
 
 
-									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
 									addtxtbody("	call waits")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov [bx],ax")
+							errorssi=-1
+							errorss=0
+
+								 
+								else
+									iii=1+iii
+									goto errorhandler
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
+
+'key inkey,var to put key code
+					if par1=keywords(68) then
+						errorssi=68
+						if par(68)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>"" then
+
+
+								if varstype(bbb)=6 then	 
+
+
+									addtxtbody("	call inkey")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov [bx],ax")
+
 							errorssi=-1
 							errorss=0
 
@@ -1438,6 +1470,62 @@ dim p as Process
 						end if 
 						goto allkey
 					end if 
+
+'key getnumber,varinto
+					if par1=keywords(35) then
+						errorssi=35
+						if par(35)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>""  then
+
+
+								if varstype(bbb)=6   then	 
+
+									addtxtbody("	mov bx,L50")
+									addtxtbody("	mov dx,bx")
+									addtxtbody("	mov cl,10")
+									addtxtbody("	mov bx,dx")
+									addtxtbody("	xor ch,ch")
+									addtxtbody("	mov [bx],cx")
+									addtxtbody("	mov ah,0xa")
+									addtxtbody("	int 0x21")
+									addtxtbody("	mov si,L50")
+									addtxtbody("	inc si")
+									addtxtbody("	mov al,[si]")
+									addtxtbody("	mov ah,0")
+									addtxtbody("	add si,ax")
+									addtxtbody("	inc si")
+									addtxtbody("	mov al,0")
+									addtxtbody("	mov [si],al")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov si,L50")
+									addtxtbody("	inc si")
+									addtxtbody("	inc si")
+									addtxtbody("	call MEM32 ")
+									addtxtbody("	mov esi,eax")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov di,bx")
+									addtxtbody("	call val")
+
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
 
 
 'key memback,varinto,varbacksize,varsize
@@ -2387,6 +2475,17 @@ dim p as Process
 									addtxtbody("	inc bx")
 									addtxtbody("	mov [bx],al")
 
+									addtxtbody("	mov si,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov dl,[si]")
+									addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov dh,[si]")
+									addtxtbody("	mov ah,2")
+									addtxtbody("	mov si,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov bh,[si]")
+									addtxtbody("	int 0x10")
+
+
+
 									errorssi=-1
 									errorss=0
 
@@ -3321,7 +3420,6 @@ private sub startcode()
 			addcode ("	int 0x16")
 			addcode ("	xor cl,cl")
 			addcode ("	mov ah,cl")
-			addcode ("	mov [bx],al")
 			addcode ("	ret")
 	               	addcode ("echo:")
 			addcode ("          push ax")
