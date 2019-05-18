@@ -1,0 +1,17 @@
+	integer,size,11
+	integer,sizes,15
+	integer,null,0
+	integer,x,1
+	integer,y,10
+	integer,scr,3
+	set,ss,hello world
+	string,s,50
+	memfill,s,null,sizes
+		;,mem copy
+	memcopy,s,ss,size
+		;,end mem copy
+	screen,scr
+	locate,x,y,null
+	print,s
+
+

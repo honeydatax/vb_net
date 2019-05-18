@@ -1,7 +1,16 @@
+	integer,x,1
+	integer,y,10
+	integer,scr,3
+	integer,zero,0
+
                 rem,define vars
+	screen,scr
+	locate,x,y,zero
         echo,hello world
-                rem,machine code int 20
+                ;,machine code int 20
         machine,205,32
-                rem,code never gets this
+		add,y,y,x
+		locate,x,y,zero
+                ;,code never gets this
         echo,end.
 

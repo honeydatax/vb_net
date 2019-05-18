@@ -1,0 +1,15 @@
+	integer,i,0
+	integer,n,0
+	integer,scr,3
+	integer,space,32
+	integer,size,4000
+	integer,zero,0
+	integer,x,1
+	integer,y,10
+	set,s,hello world.
+	memory,ss,753664
+	screen,scr
+	memfill,ss,space,size
+	locate,x,y,zero
+	print,s
+	
