@@ -3208,6 +3208,57 @@ dim p as Process
 						goto allkey
 					end if 
 
+'key hline,x,y,x2,color
+					if par1=keywords(76) then
+						errorssi=76
+						if par(76)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+							tc3=ucase(trim(separete(4)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							bbb3=findvar(tc3)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" and bbb3<>-1 and tc3<>""  then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 and varstype(bbb2)=6 and varstype(bbb3)=6 then	 
+
+									addtxtbody("	mov si,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov ax,[si]")
+									addtxtbody("	mov si,hlinex")
+									addtxtbody("	mov [si],ax")
+									addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov ax,[si]")
+									addtxtbody("	mov si,hliney")
+									addtxtbody("	mov [si],ax")
+									addtxtbody("	mov si,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ax,[si]")
+									addtxtbody("	mov si,hlinex1")
+									addtxtbody("	mov [si],ax")
+									addtxtbody("	mov si,L"+(trim(line11(bbb3)+9000)))
+									addtxtbody("	mov al,[si]")
+									addtxtbody("	mov si,hlinecolor")
+									addtxtbody("	mov [si],al")
+									addtxtbody("	call hline32")
+
+
+									errorssi=-1
+									errorss=0
+								else
+									iii=1+iii
+									goto errorhandler 
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
 
 
 'line count
@@ -4167,7 +4218,86 @@ private sub startcode()
 			addcode ("	cmp dx,bx")
 			addcode ("	jb setvideo2")
 			addcode ("	ret")
+			addcode ("hline32:")
+			addcode ("	mov si,hlinex")
+			addcode ("	mov ax,[si]")
+			addcode ("	mov bx,640")
+			addcode ("	cmp ax,bx")
+			addcode ("	jb hline32xxl")
+			addcode ("	dec bx")
+			addcode ("	mov [si],bx")
+			addcode ("hline32xxl:")
+			addcode ("	mov bx,-1")
+			addcode ("	cmp ax,bx")
+			addcode ("	jg hline32xxh")
+			addcode ("	inc bx")
+			addcode ("	mov [si],bx")
+			addcode ("hline32xxh:")
+			addcode ("	mov si,hliney")
+			addcode ("	mov ax,[si]")
+			addcode ("	mov bx,400")
+			addcode ("	cmp ax,bx")
+			addcode ("	jb hline32yyl")
+			addcode ("	dec bx")
+			addcode ("	mov [si],bx")
+			addcode ("hline32yyl:")
+			addcode ("	mov bx,-1")
+			addcode ("	cmp ax,bx")
+			addcode ("	jg hline32yyh")
+			addcode ("	inc bx")
+			addcode ("	mov [si],bx")
+			addcode ("hline32yyh:")
+			addcode ("	mov si,hlinex1")
+			addcode ("	mov ax,[si]")
+			addcode ("	mov bx,640")
+			addcode ("	cmp ax,bx")
+			addcode ("	jb hline32xxxl")
+			addcode ("	dec bx")
+			addcode ("	mov [si],bx")
+			addcode ("hline32xxxl:")
+			addcode ("	mov bx,-1")
+			addcode ("	cmp ax,bx")
+			addcode ("	jg hline32xxxh")
+			addcode ("	inc bx")
+			addcode ("	mov [si],bx")
+			addcode ("hline32xxxh:")
+			addcode ("	mov si,hlinex")
+			addcode ("	mov ax,[si]")
+			addcode ("	mov si,hlinex1")
+			addcode ("	mov bx,[si]")
+			addcode ("	cmp ax,bx")
+			addcode ("	ja hline32end")
+			addcode ("	mov si,hliney")
+			addcode ("	xor eax,eax")
+			addcode ("	mov ax,[si]")
+			addcode ("	mov ebx,640")
+			addcode ("	mov ecx,0")
+			addcode ("	mov edx,0")
+			addcode ("	mul ebx")
+			addcode ("	mov ebx,140000h")
+			addcode ("	add eax,ebx")
+			addcode ("	mov si,hlinex")
+			addcode ("	xor ebx,ebx")
+			addcode ("	mov bx,[si]")
+			addcode ("	add eax,ebx")
+			addcode ("	mov edi,eax")
+			addcode ("	mov si,hlinex1")
+			addcode ("	xor eax,eax")
+			addcode ("	mov ax,[si]")
+			addcode ("	sub eax,ebx")
+			addcode ("	mov ecx,eax")
+			addcode ("	mov si,hlinecolor")
+			addcode ("	mov al,[si]")
+			addcode ("	mov edx,1")
+			addcode ("	call FILL32")
+			addcode ("hline32end:")
+			addcode ("	ret")
 			addcode ("section .data")
+			addcode ("hlinex     dw 0")
+			addcode ("hliney     dw 0")
+			addcode ("hlinex1     dw 0")
+			addcode ("hliney1     dw 0")
+			addcode ("hlinecolor     db 0")
 			addcode ("x     db 0")
 			addcode ("y     db 0")
 			addcode ("color dw 07h")
