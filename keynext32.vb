@@ -2898,9 +2898,8 @@ dim p as Process
 
 
 									addtxtbody("	mov si,L"+(trim(line11(bbb)+9000)))
-									addtxtbody("	mov al,[si]")
-									addtxtbody("	mov ah,0")
-									addtxtbody("	int 0x10")
+									addtxtbody("	mov eax,[si]")
+									addtxtbody("	call scr")
 
 									errorssi=-1
 									errorss=0
@@ -3152,6 +3151,62 @@ dim p as Process
 						goto allkey
 					end if 
 
+'key back,color
+					if par1=keywords(75) then
+						errorssi=75
+						if par(75)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>""  then
+
+
+								if varstype(bbb)=6 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov al,[bx]")
+									addtxtbody("	mov edi,140000h") 
+									addtxtbody("	mov ecx,3ffffh") 
+									addtxtbody("	mov edx,1")
+									addtxtbody("	call FILL32")
+
+
+									errorssi=-1
+									errorss=0
+								else
+									iii=1+iii
+									goto errorhandler 
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+'key doevents refresh screen graphics
+					if par1=keywords(77) then
+						errorssi=77
+						if par(77)=separete.length then
+
+
+
+
+									addtxtbody("	call setvideo")
+
+
+
+									errorssi=-1
+									errorss=0
+							else
+									iii=1+iii
+									goto errorhandler 
+
+							end if 
+						goto allkey
+					end if 
 
 
 
@@ -4080,6 +4135,38 @@ private sub startcode()
 			addcode ("          pop ebx                ")
 			addcode ("          pop eax                ")
 			addcode ("          RET                ")
+			addcode ("scr:")
+			addcode ("	mov ebx,255")
+			addcode ("	cmp eax,ebx")
+			addcode ("	ja scr1")
+			addcode ("	mov ah,0")
+			addcode ("	int 10h")
+			addcode ("	ret")
+			addcode ("scr1:")
+			addcode ("	mov bx,ax")
+			addcode ("	mov ax,4f02h")
+			addcode ("	int 10h")
+			addcode ("	ret")
+			addcode ("setvideo:")
+			addcode ("	mov dx,0")
+			addcode ("	mov esi,140000h")
+			addcode ("setvideo2:")
+			addcode ("	mov ax,4f05h")
+			addcode ("	mov bx,0")
+			addcode ("	int 10h")
+			addcode ("	inc dx")
+			addcode ("	push dx")
+			addcode ("setvideo3:")
+			addcode ("	mov edi,0a0000h")
+			addcode ("	mov ecx,10000h")
+			addcode ("	mov edx,1")
+			addcode ("	call COPYMEM32")
+			addcode ("	add esi,ecx")
+			addcode ("	pop dx")
+			addcode ("	mov bx,4")
+			addcode ("	cmp dx,bx")
+			addcode ("	jb setvideo2")
+			addcode ("	ret")
 			addcode ("section .data")
 			addcode ("x     db 0")
 			addcode ("y     db 0")
