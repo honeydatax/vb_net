@@ -703,6 +703,128 @@ dim p as Process
 					end if 
 
 
+'key timer.rnd,varnumber
+					if par1=keywords(51) then
+						errorssi=51
+						if par(51)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>""   then
+
+
+								if varstype(bbb)=6  then	 
+
+									addtxtbody("	mov si,L20")
+									addtxtbody("	mov cx,[si]")
+									addtxtbody("	mov ax,4")
+									addtxtbody("	add cx,ax")
+									addtxtbody("	mov [si],cx")
+									addtxtbody("	mov ax,endf")
+									addtxtbody("	cmp cx,ax")
+									addtxtbody("	jl LJ"+(trim(str(iii+9000))))
+									addtxtbody("	sub cx,ax")
+									addtxtbody("	mov ax,257")
+									addtxtbody("	add cx,ax")
+									addtxtbody("	mov [si],cx")
+									addtxtbody("LJ"+(trim(str(iii+9000)))+":")
+									addtxtbody("	mov si,cx")
+									addtxtbody("	xor ax,ax")
+									addtxtbody("	mov eax,[si]")
+									addtxtbody("	mov di,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov [di],eax")
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+'key stack.push,label id
+					if par1=keywords(52) then 
+						errorssi=52
+
+						if par(52)=separete.length then
+							tc=ucase(trim(separete(1)))
+							bbb=findlabel(tc)
+							if bbb=-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								
+								addlabel(tc,0,iii,0)
+								addtxtbody("	mov ax,LL"+trim(str(iii+8000)))
+								addtxtbody("	push ax")
+
+								errorssi=-1
+								errorss=0
+							else
+
+								if bbb>-1 and tc<>"" and (asc(tc)>(asc("A")-1)) and (asc(tc)<(asc("Z")+1)) then 
+								
+									addtxtbody("	mov ax, LL"+trim(str(labeladdress(bbb)+8000)))
+									addtxtbody("	push ax")
+									errorssi=-1
+									errorss=0
+								else						
+									iii=1+iii
+									goto errorhandler
+								end if
+							end if 
+
+						end if
+						goto allkey
+					end if
+
+'key mem.poke,pointinto,varinteger
+					if par1=keywords(54) then
+						errorssi=54
+						if par(54)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov edi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov al,[bx]")
+									addtxtbody("	mov dx,0")
+									addtxtbody("	mov ds,dx")
+									addtxtbody("	mov [edi],al")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov ds,ax")
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+
 'key call,label1,var1ax,var2bx,var3cx,var4dx
 					if par1=keywords(43) then
 						errorssi=43
