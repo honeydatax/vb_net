@@ -1,0 +1,36 @@
+	const,16
+	const,1
+	const,18
+	const,0
+	const,113
+	const,36
+	integer,c,7
+	integer,i,0
+	integer,n,0
+	integer,scr,3
+	integer,chrs,113
+	integer,step,2
+	integer,size,2000
+	integer,zero,0
+	integer,x,1
+	integer,y,10
+	set,s,hello world.
+	memory,ss,753665
+	screen,scr
+	fillstep,ss,chrs,size,step
+	locate,x,y,zero
+	color,113
+	locate,n,n,0
+	echo,wait 2 seconds.
+	add,n,n,1
+	timer.sleep,36
+	locate,n,n,0
+	echo,end.
+
+	
+
+
+
+
+
+
