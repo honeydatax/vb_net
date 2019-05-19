@@ -671,6 +671,158 @@ dim p as Process
 					end if 
 
 
+'key timer.sleep,varnumber
+					if par1=keywords(50) then
+						errorssi=50
+						if par(50)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>""  then
+
+
+								if varstype(bbb)=6  then	 
+									addtxtbody("	mov si,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov eax,[si]")
+									addtxtbody("	call sleep")
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+'key call,label1,var1ax,var2bx,var3cx,var4dx
+					if par1=keywords(43) then
+						errorssi=43
+						if par(43)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+							tc3=ucase(trim(separete(4)))
+							tc4=ucase(trim(separete(5)))
+
+							bbb=findlabel(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							bbb3=findvar(tc3)
+							bbb4=findvar(tc4)
+							if bbb<>-1 and tc<>"" then 
+								if bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" and bbb3<>-1 and tc3<>"" and bbb4<>-1 and tc4<>"" then
+
+
+									if varstype(bbb1)<7 and varstype(bbb2)<7 and varstype(bbb3)<7 and varstype(bbb4)<7 then	 
+										addtxtbody("	mov ax,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+										addtxtbody("	mov cx,L"+(trim(line11(bbb3)+9000)))
+										addtxtbody("	mov dx,L"+(trim(line11(bbb4)+9000)))
+										addtxtbody("	call LL"+trim(str(labeladdress(bbb)+8000)))
+										errorssi=-1
+										errorss=0
+
+									 
+									else
+										iii=1+iii
+										goto errorhandler
+									end if
+								end if
+							else
+
+								if bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" and bbb3<>-1 and tc3<>"" and bbb4<>-1 and tc4<>"" then
+
+
+									if varstype(bbb1)<7 and varstype(bbb2)<7 and varstype(bbb3)<7 and varstype(bbb4)<7 then	 
+										addlabel(tc,0,iii,0)
+										addtxtbody("	mov ax,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+										addtxtbody("	mov cx,L"+(trim(line11(bbb3)+9000)))
+										addtxtbody("	mov dx,L"+(trim(line11(bbb4)+9000)))
+									 	addtxtbody("	call LL"+trim(str(iii+8000)))
+										errorssi=-1
+										errorss=0
+
+									 
+									else
+										iii=1+iii
+										goto errorhandler
+									end if
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+
+
+
+'key string.len,varnumber,vartext
+					if par1=keywords(49) then
+						errorssi=49
+						if par(49)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>""  then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=1  then	 
+
+										addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov esi,[bx]")
+										addtxtbody("	call len32")
+									addtxtbody("	mov di,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov [di],eax")
+									errorssi=-1
+									errorss=0
+
+								else
+								if varstype(bbb)=6 and varstype(bbb1)=0  then	 
+
+										addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+										addtxtbody("	mov si,bx")
+										addtxtbody("	mov ax,cs")
+										addtxtbody("	call MEM32")
+										addtxtbody("	mov esi,eax")
+										addtxtbody("	call len32")
+									addtxtbody("	mov di,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov [di],eax")
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+
 
 'key set ,constant,text
 					if par1=keywords(1) then 
