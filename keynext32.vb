@@ -783,6 +783,49 @@ dim p as Process
 						goto allkey
 					end if
 
+'key mem.peek,varinto,pointfrom
+					if par1=keywords(53) then
+						errorssi=53
+						if par(53)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov di,bx")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov dx,0")
+									addtxtbody("	mov ds,dx")
+									addtxtbody("	mov eax,[esi]")
+									addtxtbody("	mov dx,cs")
+									addtxtbody("	mov ds,dx")
+									addtxtbody("	mov [di],eax")
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+
 'key mem.poke,pointinto,varinteger
 					if par1=keywords(54) then
 						errorssi=54
@@ -823,6 +866,42 @@ dim p as Process
 						goto allkey
 					end if 
 
+'key bits.and,var3,var1,var2
+					if par1=keywords(55) then
+						errorssi=55
+						if par(55)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov eax,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov ecx,[bx]")
+									addtxtbody("	and eax,ecx")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov [bx],eax")
+							errorssi=-1
+							errorss=0
+
+								 
+								else
+									iii=1+iii
+									goto errorhandler
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
 
 
 'key call,label1,var1ax,var2bx,var3cx,var4dx
