@@ -1,0 +1,42 @@
+	const,16
+	const,1
+	const,18
+	const,0
+	const,27
+	const,113
+	const,255
+	const,65535
+	integer,c,7
+	integer,i,0
+	integer,n,0
+	integer,scr,3
+	integer,chrs,113
+	integer,key,0
+	integer,step,2
+	integer,size,2000
+	integer,zero,0
+	integer,x,1
+	integer,y,1
+	integer,p,1132
+	set,s,hello world.
+	memory,ss,753665
+	screen,scr
+	fillstep,ss,chrs,size,step
+	color,113
+	for,n,0,1,0
+		mem.peek,c,p
+		bits.and,c,c,65535
+		div,c,c,18
+		locate,x,y,zero
+		printnumber,c
+		inkey,key
+		like,key,27,exits
+	next
+:,exits
+	
+
+
+
+
+
+
