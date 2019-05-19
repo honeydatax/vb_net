@@ -1,0 +1,56 @@
+	const,16
+	const,1
+	const,18
+	const,0
+	const,27
+	const,113
+	const,255
+	const,65535
+	integer,c,7
+	integer,i,0
+	integer,n,0
+	integer,scr,3
+	integer,chrs,113
+	integer,key,0
+	integer,step,2
+	integer,size,2000
+	integer,zero,0
+	integer,x,1
+	integer,y,1
+	integer,p,0
+	string,s,30
+	memory,ss,753665
+	screen,scr
+	fillstep,ss,chrs,size,step
+		locate,x,y,zero
+	color,113
+	echo,write a string to cript not
+	add,y,y,1
+		locate,x,y,zero
+	input,s,27
+	gosub,printstring
+	gosub,criptnot
+	gosub,criptnot
+:,exits
+	exit
+
+	integer,criptnotvalue,0
+	integer,criptnotn,0
+	integer,criptnotlen,0
+:,criptnot
+	pointer,p,s
+	string.len,criptnotlen,s
+	for,criptnotn,1,criptnotlen,1	
+		mem.peek,criptnotvalue,p
+		bits.not,criptnotvalue,criptnotvalue
+		mem.poke,p,criptnotvalue
+		add,p,p,1
+	next
+:,printstring
+	add,y,y,1
+	locate,x,y,0
+	print,s
+	return
+
+
+
