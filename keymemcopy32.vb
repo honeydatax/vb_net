@@ -3474,6 +3474,86 @@ dim p as Process
 						goto allkey
 					end if 
 
+'key nosound stop sound
+					if par1=keywords(86) then
+						errorssi=86
+						if par(86)=separete.length then
+
+
+
+
+									addtxtbody("	call nosound")
+
+
+
+									errorssi=-1
+									errorss=0
+							else
+									iii=1+iii
+									goto errorhandler 
+
+							end if 
+						goto allkey
+					end if 
+
+'key sound,freq
+					if par1=keywords(87) then
+						errorssi=87
+						if par(87)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>""  then
+
+
+								if varstype(bbb)=6 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov eax,[bx]")
+									addtxtbody("	call sound")
+
+
+
+									errorssi=-1
+									errorss=0
+								else
+									iii=1+iii
+									goto errorhandler 
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+'key beep 
+					if par1=keywords(88) then
+						errorssi=88
+						if par(88)=separete.length then
+
+
+									addtxtbody("	mov eax,750")
+									addtxtbody("	call sound")
+									addtxtbody("	mov eax,8")
+									addtxtbody("	call sleep")
+									addtxtbody("	call nosound")
+
+
+
+									errorssi=-1
+									errorss=0
+							else
+									iii=1+iii
+									goto errorhandler 
+
+							end if 
+						goto allkey
+					end if 
+
 
 
 'line count
@@ -3815,7 +3895,9 @@ private sub startcode()
 		addkey ("fillstep",5)
 		addkey ("color",2)
 		addkey ("vline",5) 'key 85
-
+		addkey ("nosound",1) 'key 86
+		addkey ("sound",2) 'key 87
+		addkey ("beep",1) 'key 88
 
 'code head
 			t1=""
@@ -4998,6 +5080,30 @@ private sub startcode()
 			addcode ("	pop es")
 			addcode ("	pop ds")
 			addcode ("hlined32end:")
+			addcode ("	ret")
+			addcode ("nosound:")
+			addcode ("	mov dh,0fch")
+			addcode ("	in al,61h")
+			addcode ("	and al,dh")
+			addcode ("	out 61h,al")
+			addcode ("	ret")
+			addcode ("sound:")
+			addcode ("	mov ebx,eax")
+			addcode ("	mov eax,1193181")
+			addcode ("	mov ecx,0")
+			addcode ("	mov edx,0")
+			addcode ("	div ebx")
+			addcode ("	mov bx,ax")
+			addcode ("	mov dh,3")
+			addcode ("	in al,61h")
+			addcode ("	or al,dh")
+			addcode ("	out 61h,al")
+			addcode ("	mov al,0b6h")
+			addcode ("	out 43h,al")
+			addcode ("	mov al,bl")
+			addcode ("	out 42h,al")
+			addcode ("	mov al,bh")
+			addcode ("	out 42h,al")
 			addcode ("	ret")
 			addcode ("section .data")
 			addcode ("hlinex     dw 0")
