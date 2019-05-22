@@ -1,19 +1,30 @@
-	const,0
-	const,1
-	const,2
-	const,3
-	const,4
-	const,5
-	integer,n,0
-	gosub,sound
-	timer.sleep,5
-	gosub,nosound
+	const,523
+	const,587
+	const,659
+	const,689
+	const,784
+	const,880
+	const,988
+	const,1046
+	integer,freq,523
+	integer,p,8
+	sound,523
+	timer.sleep,p
+	sound,587
+	timer.sleep,p
+	sound,659
+	timer.sleep,p
+	sound,689
+	timer.sleep,p
+	sound,784
+	timer.sleep,p
+	sound,880
+	timer.sleep,p
+	sound,988
+	timer.sleep,p
+	sound,1046
+	timer.sleep,p
+	nosound
 	exit
 
-:,sound
-	machine  ,  186 ,  97 , 0 ,  236 ,  12 ,  3 ,  186 ,  97 , 0 ,  238 ,  176 ,  182 ,  186 ,  67 , 0 ,  238 ,  176 ,  48 ,  186 ,  66 , 0 ,  238 ,  176 ,  10 ,  238	
-	return	
 
-:,nosound
-machine  ,  186 ,  97 , 0 ,  236 ,  36 ,  252 ,  186 ,  97 , 0 ,  238
-	return
