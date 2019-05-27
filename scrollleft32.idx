@@ -1,0 +1,46 @@
+	const,256
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,15
+	const,100
+	const,639
+	const,399
+	const,10
+	integer,key,0
+	integer,esc,27
+	integer,n,0
+	integer,x,0
+	integer,x3,635
+	integer,x1,639
+	integer,x2,640
+	integer,y1,399
+	integer,y,0
+	integer,m,255996
+	memory,m1,1310720
+	memory,m2,1310724
+	screen,256
+	back,15
+	for,n,0,399,10
+		hline,x,n,x1,2
+	next
+	for,n,0,x1,10
+		vline,n,y,y1,2
+	next
+	doevents
+	for,n,1,100,1
+		inkey,key
+		like,key,esc,exits
+		box,x3,y,x2,y1,15
+		memcopy,m1,m2,m
+		doevents
+	next
+:,exits
+	screen,3
+
+
+
+
+
