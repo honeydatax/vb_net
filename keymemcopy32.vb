@@ -1970,20 +1970,22 @@ dim p as Process
 							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
 
 
-								if varstype(bbb)=1 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
+								if varstype(bbb)=1 and varstype(bbb1)=1 and varstype(bbb2)=6 then	 
 
-									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
-									addtxtbody("	mov esi,[bx]")
 									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
 									addtxtbody("	mov edi,[bx]")
-									addtxtbody("	add edi,esi")
 									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
 									addtxtbody("	mov ecx,[bx]")
-									addtxtbody("	dec ecx")
-									addtxtbody("	add esi,ecx")
-									addtxtbody("	add edi,ecx")
-									addtxtbody("	inc ecx")
-									addtxtbody("	call MOVEMEM32")
+									addtxtbody("	mov bp,0")
+									addtxtbody("	mov ds,bp")
+									addtxtbody("	mov es,bp")
+									addtxtbody("	call memford")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	call memford")
 									errorssi=-1
 									errorss=0
 
@@ -4959,6 +4961,16 @@ private sub startcode()
 			addcode ("cld")
 			addcode ("memcopyd10 db 66h,67h")
 			addcode ("rep movsd")
+			addcode ("ret")
+			addcode ("memford:")
+			addcode ("cmp ecx,0")
+			addcode ("jnz memford2")
+			addcode ("ret")
+			addcode ("memford2:")
+			addcode ("std")
+			addcode ("memford10 db 66h,67h")
+			addcode ("rep movsb")
+			addcode ("cld")
 			addcode ("ret")
 			addcode ("memcopy:")
 			addcode ("cmp ecx,0")
