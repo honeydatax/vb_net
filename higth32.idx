@@ -1,0 +1,20 @@
+	const,0	
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,18
+	integer,scr,3
+	integer,i,50
+	integer,x,1
+	integer,zero,0
+	string,ss,50
+	set,s,hello world
+	memcopy,ss,s,18
+	screen,scr
+	locate,x,x,zero
+	print,s
+	string.high,ss
+	locate,1,2,zero
+	print,ss
