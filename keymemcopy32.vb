@@ -3712,6 +3712,64 @@ dim p as Process
 
 
 
+'key string.comp,varinto,string1,string2
+					if par1=keywords(61) then
+						errorssi=61
+						if par(61)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>""then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=1 and varstype(bbb1)=1 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov ax,0")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	call memlen")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov edi,[bx]")
+									addtxtbody("	mov bp,0")
+									addtxtbody("	mov es,bp")
+									addtxtbody("	mov ds,bp")
+									addtxtbody("	call comps")
+									addtxtbody("	mov ecx,eax")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov [bx],ecx")
+
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
 
 
 
@@ -5277,12 +5335,16 @@ private sub startcode()
 			addcode ("	ret")
 			addcode ("memlen:")
 			addcode ("mov edi,esi")
+			addcode ("mov al,[esi]")
+			addcode ("cmp al,0")
+			addcode ("jz memlen22")
 			addcode ("mov ecx,100000h")
 			addcode ("mov al,0")
 			addcode ("cld")
 			addcode ("memlen10 db 66h,67h")
 			addcode ("repne scasb")
 			addcode ("je memlen11")
+			addcode ("memlen22:")
 			addcode ("mov ecx,0")
 			addcode ("ret")
 			addcode ("memlen11:")
@@ -5290,6 +5352,8 @@ private sub startcode()
 			addcode ("sub ecx,esi")
 			addcode ("ret")
 			addcode ("memlower:")
+			addcode ("cmp ecx,0")
+			addcode ("jz memlower22")
 			addcode ("mov edi,esi")
 			addcode ("memlower20:")
 			addcode ("memlower30 db 66h,67h")
@@ -5306,8 +5370,11 @@ private sub startcode()
 			addcode ("cld")
 			addcode ("memlower10 db 66h,67h")
 			addcode ("rep movsb")
+			addcode ("memlower22:")
 			addcode ("ret")
 			addcode ("memhigth:")
+			addcode ("cmp ecx,0")
+			addcode ("jz memhigth22")
 			addcode ("mov edi,esi")
 			addcode ("memhigth20:")
 			addcode ("memhigth30 db 66h,67h")
@@ -5324,20 +5391,48 @@ private sub startcode()
 			addcode ("cld")
 			addcode ("memhigth10 db 66h,67h")
 			addcode ("rep movsb")
+			addcode ("memhigth22:")
 			addcode ("ret")
 			addcode ("findchr:")
+			addcode ("cmp ecx,0")
+			addcode ("jz findchr22")
 			addcode ("mov edi,esi")
 			addcode ("findchr30 db 66h,67h")
 			addcode ("cld")
 			addcode ("findchr10 db 66h,67h")
 			addcode ("repne scasb")
 			addcode ("je findchr20")
+			addcode ("findchr22:")
 			addcode ("mov eax,-1")
 			addcode ("ret")
 			addcode ("findchr20:")
 			addcode ("mov eax,edi")
 			addcode ("sub eax,esi")
 			addcode ("dec eax")
+			addcode ("ret")
+			addcode ("comps:")
+			addcode ("cmp ecx,0")
+			addcode ("jz comps20")
+			addcode ("comps30 db 66h,67h")
+			addcode ("cld")
+			addcode ("comps10 db 66h,67h")
+			addcode ("repe cmpsb")
+			addcode ("jecxz comps20")
+			addcode ("mov ecx,2")
+			addcode ("dec esi")
+			addcode ("dec edi")
+			addcode ("mov ax,0")
+			addcode ("mov bx,0")
+			addcode ("mov al,[esi]")
+			addcode ("mov bl,[edi]")
+			addcode ("cmp ax,bx")
+			addcode ("ja comps21")
+			addcode ("mov ecx,1")
+			addcode ("comps21:")
+			addcode ("mov eax,ecx")
+			addcode ("ret")
+			addcode ("comps20:")
+			addcode ("mov eax,0")
 			addcode ("ret")
 			addcode ("section .data")
 			addcode ("hlinex     dw 0")
