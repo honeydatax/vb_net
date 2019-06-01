@@ -1,0 +1,43 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,16
+	integer,pos,0
+	integer,o,111
+	string,s2,50
+	string,s3,50
+	set,s1,hello world.
+	set,s4,orl
+	stack.push,exits
+	screen,3
+	locate,1,4,0
+	print,s1
+	locate,1,1,0
+	print,s4
+	memcopy,s2,s1,16
+	memcopy,s3,s4,16
+	locate,1,2,0
+	string.findstr,pos,s2,s3
+	printnumber,pos
+	return
+	locate,1,5,0
+	echo,error
+	exit
+
+:,exits
+	locate,1,6,0
+	echo,exit
+	
+
+
+
+
+
+
+
+
+
