@@ -3770,6 +3770,56 @@ dim p as Process
 					end if 
 
 
+'key string.findstr,intinto,string1,string2
+					if par1=keywords(67) then
+						errorssi=67
+						if par(67)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=1 and varstype(bbb2)=1 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov edi,[bx]")
+									addtxtbody("	mov bp,0")
+									addtxtbody("	mov es,bp")
+									addtxtbody("	mov ds,bp")
+									addtxtbody("	call findstr")
+									addtxtbody("	mov ecx,eax")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov [bx],ecx")
+
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
 
 
 
@@ -5433,6 +5483,55 @@ private sub startcode()
 			addcode ("ret")
 			addcode ("comps20:")
 			addcode ("mov eax,0")
+			addcode ("ret")
+			addcode ("findstr:")
+			addcode ("push esi")
+			addcode ("findstrs:")
+			addcode ("mov al,[edi]")
+			addcode ("mov bp,ax")
+			addcode ("push edi")
+			addcode ("push esi")
+			addcode ("call memlen")
+			addcode ("pop esi")
+			addcode ("cmp ecx,0")
+			addcode ("jz findstr223")
+			addcode ("mov ax,bp")
+			addcode ("call findchr")
+			addcode ("cmp eax,-1")
+			addcode ("jz findstr223")
+			addcode ("mov esi,edi")
+			addcode ("pop edi")
+			addcode ("push esi")
+			addcode ("push edi")
+			addcode ("mov esi,edi")
+			addcode ("call memlen")
+			addcode ("pop edi")
+			addcode ("pop esi")
+			addcode ("cmp ecx,0")
+			addcode ("jz findstr22")
+			addcode ("push esi")
+			addcode ("push edi")
+			addcode ("dec esi")
+			addcode ("call comps")
+			addcode ("pop edi")
+			addcode ("pop esi")
+			addcode ("cmp eax,0")
+			addcode ("jz findstr20")
+			addcode ("jmp findstrs")
+			addcode ("findstr222:")
+			addcode ("pop esi")
+			addcode ("findstr223:")
+			addcode ("pop esi")
+			addcode ("findstr22:")
+			addcode ("mov eax,-1")
+			addcode ("pop esi")
+			addcode ("ret")
+			addcode ("findstr20:")
+			addcode ("mov edi,esi")
+			addcode ("pop esi")
+			addcode ("mov eax,edi")
+			addcode ("sub eax,esi")
+			addcode ("dec eax")
 			addcode ("ret")
 			addcode ("section .data")
 			addcode ("hlinex     dw 0")
