@@ -1,0 +1,19 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,16
+	integer,pos,0
+	integer,o,111
+	string,s2,50
+	set,s1,hello world.
+	screen,3
+	locate,1,1,0
+	print,s1
+	memcopy,s2,s1,16
+	locate,1,2,0
+	string.findchr,pos,s2,o
+	printnumber,pos
