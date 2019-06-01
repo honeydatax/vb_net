@@ -3556,6 +3556,164 @@ dim p as Process
 						goto allkey
 					end if 
 
+'key string.lower,var
+					if par1=keywords(62) then
+						errorssi=62
+						if par(62)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 then
+
+
+								if varstype(bbb)=1 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov ax,0")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	call memlen")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov ax,0")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	call memlower")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+
+
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+'key string.high,var
+					if par1=keywords(63) then
+						errorssi=63
+						if par(63)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 then
+
+
+								if varstype(bbb)=1 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov ax,0")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	call memlen")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov ax,0")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	call memhigth")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+'key string.findchr,intinto,string1,intchr
+					if par1=keywords(65) then
+						errorssi=65
+						if par(65)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=1 and varstype(bbb2)=6 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov ax,0")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	call memlen")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov esi,[bx]")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
+									addtxtbody("	mov al,[bx]")
+									addtxtbody("	mov bp,0")
+									addtxtbody("	mov es,bp")
+									addtxtbody("	mov ds,bp")
+									addtxtbody("	call findchr")
+									addtxtbody("	mov ecx,eax")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov [bx],ecx")
+									errorssi=-1
+									errorss=0
+
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+
+
+
 
 
 'line count
@@ -5117,6 +5275,70 @@ private sub startcode()
 			addcode ("	mov al,bh")
 			addcode ("	out 42h,al")
 			addcode ("	ret")
+			addcode ("memlen:")
+			addcode ("mov edi,esi")
+			addcode ("mov ecx,100000h")
+			addcode ("mov al,0")
+			addcode ("cld")
+			addcode ("memlen10 db 66h,67h")
+			addcode ("repne scasb")
+			addcode ("je memlen11")
+			addcode ("mov ecx,0")
+			addcode ("ret")
+			addcode ("memlen11:")
+			addcode ("mov ecx,edi")
+			addcode ("sub ecx,esi")
+			addcode ("ret")
+			addcode ("memlower:")
+			addcode ("mov edi,esi")
+			addcode ("memlower20:")
+			addcode ("memlower30 db 66h,67h")
+			addcode ("lodsb")
+			addcode ("cmp al,65")
+			addcode ("jb memlower90")
+			addcode ("cmp al,90")
+			addcode ("ja memlower90")
+			addcode ("or al,20h")
+			addcode ("memlower90:")
+			addcode ("memlower40 db 66h,67h")
+			addcode ("stosb")
+			addcode ("loop memlower20")
+			addcode ("cld")
+			addcode ("memlower10 db 66h,67h")
+			addcode ("rep movsb")
+			addcode ("ret")
+			addcode ("memhigth:")
+			addcode ("mov edi,esi")
+			addcode ("memhigth20:")
+			addcode ("memhigth30 db 66h,67h")
+			addcode ("lodsb")
+			addcode ("cmp al,97")
+			addcode ("jb memhigth90")
+			addcode ("cmp al,122")
+			addcode ("ja memhigth90")
+			addcode ("and al,223")
+			addcode ("memhigth90:")
+			addcode ("memhigth40 db 66h,67h")
+			addcode ("stosb")
+			addcode ("loop memhigth20")
+			addcode ("cld")
+			addcode ("memhigth10 db 66h,67h")
+			addcode ("rep movsb")
+			addcode ("ret")
+			addcode ("findchr:")
+			addcode ("mov edi,esi")
+			addcode ("findchr30 db 66h,67h")
+			addcode ("cld")
+			addcode ("findchr10 db 66h,67h")
+			addcode ("repne scasb")
+			addcode ("je findchr20")
+			addcode ("mov eax,-1")
+			addcode ("ret")
+			addcode ("findchr20:")
+			addcode ("mov eax,edi")
+			addcode ("sub eax,esi")
+			addcode ("dec eax")
+			addcode ("ret")
 			addcode ("section .data")
 			addcode ("hlinex     dw 0")
 			addcode ("hliney     dw 0")
