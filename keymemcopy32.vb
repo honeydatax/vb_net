@@ -3820,6 +3820,27 @@ dim p as Process
 					end if 
 
 
+'key file.creat,filename
+					if par1=keywords(44) then
+						errorssi=44
+						if par(44)=separete.length then
+
+									addtxtbody("	mov dx,L"+(trim(iii+9000)))
+									addtxtbody("	mov ah,0x3c")
+									addtxtbody("	mov cx,0")
+									addtxtbody("	int 0x21")
+									addbody("L"+trim(str(iii+9000))+" db '"+separete(1)+"',0,0,0,'$'")
+
+						else
+							iii=1+iii
+							goto errorhandler
+
+						end if 
+						errorssi=-1
+						errorss=0
+
+						goto allkey
+					end if 
 
 
 
