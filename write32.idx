@@ -1,0 +1,19 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	integer,t,16
+	integer,i,0
+	string,ss,50
+	set,s,hello world .
+	file.creat,my.txt
+	file.open,my.txt,i
+	memcopy,ss,s,t
+	screen,3
+	locate,1,1,0
+	print,ss
+	file.write,ss,i,t
+	file.close,i
