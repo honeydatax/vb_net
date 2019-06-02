@@ -3843,6 +3843,73 @@ dim p as Process
 					end if 
 
 
+'key file.open,filename,filenumber
+					if par1=keywords(45) then
+						errorssi=45
+						if par(45)=separete.length then
+
+							tc=ucase(trim(separete(2)))
+
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>"" then
+
+
+								if varstype(bbb)=6 then	 
+
+									addtxtbody("	mov dx,L"+(trim(iii+9000)))
+									addtxtbody("	mov ah,0x3d")
+									addtxtbody("	mov al,2")
+									addtxtbody("	int 0x21")
+									addbody("L"+trim(str(iii+9000))+" db '"+separete(1)+"',0,0,0,'$'")
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	xor edx,edx")
+									addtxtbody("	mov dx,ax")
+									addtxtbody("	mov [bx],edx")
+									errorssi=-1
+									errorss=0
+
+								
+								else
+									iii=1+iii
+									goto errorhandler
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
+
+'key file.close,filenumber
+					if par1=keywords(46) then
+						errorssi=46
+						if par(46)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+
+							bbb=findvar(tc)
+							if bbb<>-1 and tc<>"" then
+
+
+								if varstype(bbb)=6 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov ax,[bx]")
+									addtxtbody("	mov bx,ax")
+									addtxtbody("	mov al,2")
+									addtxtbody("	mov ah,0x3e")
+									addtxtbody("	int 0x21")
+									errorssi=-1
+									errorss=0
+
+								
+								else
+									iii=1+iii
+									goto errorhandler
+								end if
+							end if
+						end if 
+						goto allkey
+					end if 
 
 
 'line count
