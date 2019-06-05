@@ -4214,6 +4214,42 @@ dim p as Process
 						goto allkey
 					end if
 
+'key alocate,varpointer,varsize
+					if par1=keywords(42) then
+						errorssi=42
+						if par(42)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>""  then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 then	 
+								addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+								addtxtbody("	mov ecx,[bx]")
+								addtxtbody("	call RESERVES")
+								addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+								addtxtbody("	mov [bx],eax")
+
+										errorssi=-1
+										errorss=0
+ 
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if
+							end if
+
+						end if 
+						goto allkey
+					end if 
+
 
 
 
