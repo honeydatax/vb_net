@@ -1,0 +1,7 @@
+	integer,a,3
+	integer,x,1
+	integer,y,10
+	locate,x,y,a
+	screen,a
+	echo,chain control into hello.com
+	file.chain,hello.com
