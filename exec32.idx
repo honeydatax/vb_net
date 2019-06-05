@@ -1,0 +1,7 @@
+	integer,a,3
+	integer,x,1
+	integer,y,10
+	screen,a
+	locate,x,y,a
+	echo,exec control into hello.exe     >
+	file.exec,hello.exe
