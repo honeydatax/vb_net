@@ -3987,6 +3987,50 @@ dim p as Process
 						goto allkey
 					end if 
 
+'key file.chain,filename .com to chain control 
+					if par1=keywords(79) then
+						errorssi=79
+						if par(79)=separete.length then
+
+
+									addtxtbody("	mov ax,0xffff")
+									addtxtbody("	mov sp,ax")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov ss,ax")
+									addtxtbody("	mov ax,0")
+									addtxtbody("	push ax")
+									addtxtbody("	mov ax,0x100")
+									addtxtbody("	push ax")
+									addtxtbody("	mov ax,0x80")
+									addtxtbody("	push ax")
+									addtxtbody("	mov di,0x80")
+									addtxtbody("	mov si,chain")
+									addtxtbody("	mov cx,0x60")
+									addtxtbody("	call memcopy")
+									addtxtbody("	mov dx,L"+(trim(iii+9000)))
+									addtxtbody("	mov ah,0x3d")
+									addtxtbody("	mov al,2")
+									addtxtbody("	int 0x21")
+									addtxtbody("	jc LJMP"+trim(str(iii+9000)))
+									addbody("L"+trim(str(iii+9000))+" db '"+separete(1)+"',0,0,0,'$'")
+									addtxtbody("	mov bx,65298")
+									addtxtbody("	mov [bx],ax")
+									addtxtbody("	ret")
+									addtxtbody("LJMP"+trim(str(iii+9000))+":")
+									addtxtbody("	pop ax")
+									addtxtbody("	pop ax")
+									errorssi=-1
+									errorss=0
+
+								
+						else
+									iii=1+iii
+									goto errorhandler
+						end if
+												
+						goto allkey
+					end if 
+
 
 
 'line count
@@ -6038,6 +6082,23 @@ private sub startcode()
 			addcode ("                    pop ebx      ")          
 			addcode ("                    pop eax      ")          
 			addcode ("                    RET         ")
+			addcode ("chain:")
+			addcode ("	mov bx,0x100")
+			addcode ("	mov dx,bx")
+			addcode ("	mov cx,65050")
+			addcode ("	mov bx,65298")
+			addcode ("	mov ax,[bx]")
+			addcode ("	mov bx,ax")
+			addcode ("	mov ah,0x3f")
+			addcode ("	int 0x21")
+			addcode ("	mov bx,65298")
+			addcode ("	mov ax,[bx]")
+			addcode ("	mov bx,ax")
+			addcode ("	mov al,2")
+			addcode ("	mov ah,0x3e")
+			addcode ("	int 0x21")
+			addcode ("	ret")
+			addcode ("")
 			addcode ("section .data")
 			addcode ("          read32addrs1 dd 0")
 			addcode ("          read32addrs2 dd 0")
