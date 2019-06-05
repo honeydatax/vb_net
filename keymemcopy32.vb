@@ -4031,6 +4031,96 @@ dim p as Process
 						goto allkey
 					end if 
 
+'key file.exec,filename .exe 16 bits to chain control 
+					if par1=keywords(80) then
+						errorssi=80
+						if par(80)=separete.length then
+
+
+									addtxtbody("	mov ax,0xffff")
+									addtxtbody("	mov sp,ax")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov ss,ax")
+									addtxtbody("	mov ax,0")
+									addtxtbody("	push ax")
+									addtxtbody("	mov dx,L"+(trim(iii+9000)))
+									addtxtbody("	mov ah,0x3d")
+									addtxtbody("	mov al,2")
+									addtxtbody("	int 0x21")
+									addtxtbody("	jc LJMP"+trim(str(iii+9000)))
+									addbody("L"+trim(str(iii+9000))+" db '"+separete(1)+"',0,0,0,'$'")
+									addbody("LVAR"+trim(str(iii+9000))+" dw 0,0,0")
+									addtxtbody("	mov bx,LVAR"+trim(str(iii+9000)))
+									addtxtbody("	mov [bx],ax")
+									addtxtbody("	mov si,ax")
+									addtxtbody("	jmp LJMPS"+trim(str(iii+9000)))
+									addtxtbody("LJMP"+trim(str(iii+9000))+":")
+									addtxtbody("	xor ax,ax")
+									addtxtbody("	int 0x21")
+									addtxtbody("LJMPS"+trim(str(iii+9000))+":")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov bx,0x1000")
+									addtxtbody("	add ax,bx")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov dx,0x0")
+									addtxtbody("	mov cx,65530")
+									addtxtbody("	mov bx,si")
+									addtxtbody("	mov ah,0x3f")
+									addtxtbody("	int 0x21")
+									addtxtbody("	mov bx,si")
+									addtxtbody("	mov al,2")
+									addtxtbody("	mov ah,0x3e")
+									addtxtbody("	int 0x21")
+									addtxtbody("	mov ax,ds")
+									addtxtbody("	mov dx,16")
+									addtxtbody("	add dx,ax")
+									addtxtbody("	mov bx,0x0e")
+									addtxtbody("	mov ax,[bx]")
+									addtxtbody("	add ax,dx")
+									addtxtbody("	add ax,bx")
+									addtxtbody("	mov ss,ax")
+									addtxtbody("	mov bx,0x10")
+									addtxtbody("	mov ax,[bx]")
+									addtxtbody("	mov sp,ax")
+									addtxtbody("	mov bx,0x16")
+									addtxtbody("	mov ax,[bx]")
+									addtxtbody("	mov bx,16")
+									addtxtbody("	add ax,dx")
+									addtxtbody("	add ax,bx")
+									addtxtbody("	push ax")
+									addtxtbody("	mov bx,0x14")
+									addtxtbody("	mov ax,[bx]")
+									addtxtbody("	push ax")
+									addtxtbody("	mov ax,ds")
+									addtxtbody("	mov bx,16")
+									addtxtbody("	add ax,bx")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov cx,0x80")
+									addtxtbody("	mov si,0")
+									addtxtbody("	mov di,si")
+									addtxtbody("	call memcopy")
+									addtxtbody("	mov ax,es")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov cx,0xf000")
+									addtxtbody("	retf")
+									addtxtbody("	ret")
+									errorssi=-1
+									errorss=0
+
+								
+						else
+									iii=1+iii
+									goto errorhandler
+						end if
+												
+						goto allkey
+					end if 
+
+
 
 
 'line count
