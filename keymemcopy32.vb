@@ -2119,8 +2119,14 @@ dim p as Process
 									addtxtbody("	mov esi,[bx]")
 									addtxtbody("	mov bx,L"+(trim(line11(bbb2)+9000)))
 									addtxtbody("	mov ecx,[bx]")
-									addtxtbody("	mov edx,1")
-									addtxtbody("	call COPYMEM32")
+									addtxtbody("	mov ax,0")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	call memcopy")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov es,ax")
+
 									errorssi=-1
 									errorss=0
 
@@ -4152,10 +4158,8 @@ dim p as Process
 						if par(81)=separete.length then
 
 							tc=ucase(trim(separete(1)))
-							tc1=ucase(trim(separete(1)))
 
 							bbb=findvar(tc)
-							bbb1=findvar(tc1)
 							if bbb<>-1 and tc<>"" and bbb1<>-1 then
 
 
@@ -4179,6 +4183,36 @@ dim p as Process
 						goto allkey
 					end if 
 
+
+'key memory.set ,var,number size
+					if par1=keywords(89) then 
+						errorssi=89
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 then
+
+
+								if varstype(bbb)=1 and varstype(bbb1)=6 then	 
+
+									addtxtbody("	mov di,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+									addtxtbody("	mov eax,[si]")
+									addtxtbody("	mov [di],eax")
+									addtxtbody("	")
+
+									errorssi=-1
+									errorss=0
+								else
+									iii=1+iii
+									goto errorhandler 
+								end if 
+						end if
+						goto allkey
+					end if
 
 
 
@@ -4526,6 +4560,8 @@ private sub startcode()
 		addkey ("nosound",1) 'key 86
 		addkey ("sound",2) 'key 87
 		addkey ("beep",1) 'key 88
+		addkey ("memory.set",3) 'key 89
+
 
 'code head
 			t1=""
