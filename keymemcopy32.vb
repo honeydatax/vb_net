@@ -4120,6 +4120,41 @@ dim p as Process
 						goto allkey
 					end if 
 
+'key cicle,cicles
+					if par1=keywords(81) then
+						errorssi=81
+						if par(81)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(1)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							if bbb<>-1 and tc<>"" and bbb1<>-1 then
+
+
+								if varstype(bbb)=6 then	 
+
+									addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+									addtxtbody("	mov eax,[bx]")
+									addtxtbody("	call cicle")
+
+									errorssi=-1
+									errorss=0
+								else
+									iii=1+iii
+									goto errorhandler 
+								end if 
+								else
+									iii=1+iii
+									goto errorhandler
+							end if
+						end if 
+						goto allkey
+					end if 
+
+
+
 
 
 
@@ -4457,7 +4492,7 @@ private sub startcode()
 		addkey ("box",6)
 		addkey ("file.chain",2)
 		addkey ("file.exec",2)
-		addkey ("timer.cicle",3)
+		addkey ("timer.cicle",2)
 		addkey ("memory",3)
 		addkey ("fillstep",5)
 		addkey ("color",2)
@@ -6188,6 +6223,16 @@ private sub startcode()
 			addcode ("	mov ah,0x3e")
 			addcode ("	int 0x21")
 			addcode ("	ret")
+			addcode ("cicle:")
+			addcode ("	cmp eax,0")
+			addcode ("	jz cicle2")
+			addcode ("	mov ecx,eax")
+			addcode ("	cicle1:")
+			addcode ("		dec ecx")
+			addcode ("		cmp ecx,0")
+			addcode ("		jnz cicle1")
+			addcode ("cicle2:")
+			addcode ("ret")
 			addcode ("")
 			addcode ("section .data")
 			addcode ("          read32addrs1 dd 0")
