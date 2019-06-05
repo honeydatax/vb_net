@@ -1,0 +1,17 @@
+	const,0
+	const,1
+	const,2
+	const,3
+	const,4
+	const,5
+	const,6
+	const,7
+	const,8
+	const,4000
+	integer,p1,0
+	memory,m1,0
+	integer,chrs,1
+	screen,3
+	let,p1,753664
+	memory.set,m1,p1
+	memfill,m1,chrs,4000
