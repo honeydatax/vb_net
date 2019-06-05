@@ -1727,16 +1727,42 @@ dim p as Process
 										errorss=0
 
 									else
-										iii=1+iii
-										goto errorhandler
+										if varstype(bbb)=6 and varstype(bbb1)=6  then	 
+
+											addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+											addtxtbody("	mov di,bx")
+											addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+											addtxtbody("	mov ax,cs")
+											addtxtbody("	call MEM32")
+											addtxtbody("	mov [di],eax")
+											errorssi=-1
+											errorss=0
+	
+												else
+											if varstype(bbb)=6 and varstype(bbb1)=12  then	 
+		
+												addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+												addtxtbody("	mov di,bx")
+												addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+												addtxtbody("	mov ax,cs")
+												addtxtbody("	call MEM32")
+												addtxtbody("	mov [di],eax")
+												errorssi=-1
+												errorss=0
+
+											else
+												iii=1+iii
+												goto errorhandler
+				
+											end if 
+
+										end if 
+
 		
 									end if 
 	
 
 								end if 
-								else
-									iii=1+iii
-									goto errorhandler
 							end if
 						end if 
 						goto allkey
