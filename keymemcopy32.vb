@@ -638,8 +638,15 @@ dim p as Process
 									addtxtbody("	mov ax,cs")
 									addtxtbody("	call MEM32")
 									addtxtbody("	mov esi,eax")
-									addtxtbody("	call len32")
-									addtxtbody("	mov ecx,eax")
+									addtxtbody("	mov ax,0")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov es,ax")
+									addtxtbody("	push esi")
+									addtxtbody("	call memlen")
+									addtxtbody("	pop esi")
+									addtxtbody("	mov ax,cs")
+									addtxtbody("	mov ds,ax")
+									addtxtbody("	mov es,ax")
 									addtxtbody("	call PRINT32")
 									errorssi=-1
 									errorss=0
@@ -1018,9 +1025,15 @@ dim p as Process
 
 										addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
 										addtxtbody("	mov esi,[bx]")
-										addtxtbody("	call len32")
+										addtxtbody("	mov bp,0")
+										addtxtbody("	mov ds,bp")
+										addtxtbody("	mov es,bp")
+										addtxtbody("	call memlen")
+										addtxtbody("	mov bx,cs")
+										addtxtbody("	mov ds,bx")
+										addtxtbody("	mov es,bx")
 									addtxtbody("	mov di,L"+(trim(line11(bbb)+9000)))
-									addtxtbody("	mov [di],eax")
+									addtxtbody("	mov [di],ecx")
 									errorssi=-1
 									errorss=0
 
@@ -4187,7 +4200,7 @@ dim p as Process
 'key memory.set ,var,number size
 					if par1=keywords(89) then 
 						errorssi=89
-
+						if par(89)=separete.length then
 							tc=ucase(trim(separete(1)))
 							tc1=ucase(trim(separete(2)))
 
@@ -4209,7 +4222,9 @@ dim p as Process
 								else
 									iii=1+iii
 									goto errorhandler 
+
 								end if 
+							end if
 						end if
 						goto allkey
 					end if
@@ -4237,6 +4252,128 @@ dim p as Process
 								addtxtbody("	mov [bx],eax")
 
 										errorssi=-1
+										errorss=0
+ 
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if
+							end if
+
+						end if 
+						goto allkey
+					end if 
+
+'key bitmap.creat,varpointer,w,h
+					if par1=keywords(90) then
+						errorssi=90
+						if par(90)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 and varstype(bbb2)=6 then	 
+								addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+								addtxtbody("	mov eax,[si]")
+								addtxtbody("	mov si,L"+(trim(line11(bbb2)+9000)))
+								addtxtbody("	mov ebx,[si]")
+								addtxtbody("	mov ecx,0")
+								addtxtbody("	mov edx,0")
+								addtxtbody("	mul ebx")
+								addtxtbody("	mov ebx,8")
+								addtxtbody("	add eax,ebx")
+								addtxtbody("	mov ecx,eax")
+								addtxtbody("	call RESERVES")
+								addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+								addtxtbody("	mov [bx],eax")
+								addtxtbody("	mov edi,eax")
+								addtxtbody("	mov si,L"+(trim(line11(bbb1)+9000)))
+								addtxtbody("	mov ecx,[si]")
+								addtxtbody("	mov si,L"+(trim(line11(bbb2)+9000)))
+								addtxtbody("	mov ebx,[si]")
+								addtxtbody("	mov ax,0")
+								addtxtbody("	mov ds,ax")
+								addtxtbody("	mov es,ax")
+								addtxtbody("	mov [edi],ecx")
+								addtxtbody("	inc edi")
+								addtxtbody("	inc edi")
+								addtxtbody("	inc edi")
+								addtxtbody("	inc edi")
+								addtxtbody("	mov [edi],ebx")
+								addtxtbody("	mov ax,cs")
+								addtxtbody("	mov ds,ax")
+								addtxtbody("	mov es,ax")
+
+									errorssi=-1
+										errorss=0
+ 
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if
+							end if
+
+						end if 
+						goto allkey
+					end if 
+
+
+'key bitmap.back,varpointer,color
+					if par1=keywords(91) then
+						errorssi=91
+						if par(91)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 then	 
+								addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+								addtxtbody("	mov esi,[bx]")
+								addtxtbody("	mov bx,L"+(trim(line11(bbb1)+9000)))
+								addtxtbody("	mov al,[bx]")
+								addtxtbody("	push ax")
+								addtxtbody("	mov ax,0")
+								addtxtbody("	mov ds,ax")
+								addtxtbody("	mov es,ax")
+								addtxtbody("	mov eax,[esi]")
+								addtxtbody("	inc esi")
+								addtxtbody("	inc esi")
+								addtxtbody("	inc esi")
+								addtxtbody("	inc esi")
+								addtxtbody("	mov ebx,[esi]")
+								addtxtbody("	inc esi")
+								addtxtbody("	inc esi")
+								addtxtbody("	inc esi")
+								addtxtbody("	inc esi")
+								addtxtbody("	mov ecx,0")
+								addtxtbody("	mov edx,0")
+								addtxtbody("	mul ebx")
+								addtxtbody("	mov ecx,eax")
+								addtxtbody("	mov edi,esi")
+								addtxtbody("	pop ax")
+								addtxtbody("	call memfill")
+								addtxtbody("	mov ax,cs")
+								addtxtbody("	mov ds,ax")
+								addtxtbody("	mov es,ax")
+
+									errorssi=-1
 										errorss=0
  
 								else
@@ -4597,6 +4734,8 @@ private sub startcode()
 		addkey ("sound",2) 'key 87
 		addkey ("beep",1) 'key 88
 		addkey ("memory.set",3) 'key 89
+		addkey ("bitmap.creat",4) 'key 90
+		addkey ("bitmap.back",3) 'key 91
 
 
 'code head
@@ -5832,6 +5971,7 @@ private sub startcode()
 			addcode ("memlen11:")
 			addcode ("mov ecx,edi")
 			addcode ("sub ecx,esi")
+			addcode ("dec ecx")
 			addcode ("ret")
 			addcode ("memlower:")
 			addcode ("cmp ecx,0")
@@ -5895,6 +6035,7 @@ private sub startcode()
 			addcode ("comps:")
 			addcode ("cmp ecx,0")
 			addcode ("jz comps20")
+			addcode ("inc ecx")
 			addcode ("comps30 db 66h,67h")
 			addcode ("cld")
 			addcode ("comps10 db 66h,67h")
