@@ -11,6 +11,9 @@
 	const,50
 	integer,p1,0
 	integer,p2,0
+	integer,p3,0
+	integer,w,0
+	integer,h,0
 	memory,dinamic,0
 	screen,3
 	bitmap.creat,p1,8,8
@@ -25,6 +28,21 @@
 	memory.set,dinamic,p2
 	memfill,dinamic,0,16
 	locate,1,3,0
+	add,p3,p1,0
 	add,p1,p1,8
 	memory.set,dinamic,p1	
 	print,dinamic
+	bitmap.attr,p3,w,h
+	locate,1,4,0
+	printnumber,w
+	locate,1,5,0	
+	printnumber,h
+	locate,1,8,0	
+
+
+
+
+
+
+
+
