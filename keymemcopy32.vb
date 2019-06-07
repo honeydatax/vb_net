@@ -4388,6 +4388,52 @@ dim p as Process
 					end if 
 
 
+'key bitmap.attr,varpointer,w,h
+					if par1=keywords(92) then
+						errorssi=92
+						if par(92)=separete.length then
+
+							tc=ucase(trim(separete(1)))
+							tc1=ucase(trim(separete(2)))
+							tc2=ucase(trim(separete(3)))
+
+							bbb=findvar(tc)
+							bbb1=findvar(tc1)
+							bbb2=findvar(tc2)
+
+							if bbb<>-1 and tc<>"" and bbb1<>-1 and tc1<>"" and bbb2<>-1 and tc2<>"" then
+
+
+								if varstype(bbb)=6 and varstype(bbb1)=6 and varstype(bbb1)=6 then	 
+								addtxtbody("	mov bx,L"+(trim(line11(bbb)+9000)))
+								addtxtbody("	mov esi,[bx]")
+								addtxtbody("	mov ax,0")
+								addtxtbody("	mov ds,ax")
+								addtxtbody("	mov es,ax")
+								addtxtbody("	call bitmapattr")
+								addtxtbody("	mov cx,cs")
+								addtxtbody("	mov ds,cx")
+								addtxtbody("	mov es,cx")
+								addtxtbody("	mov di,L"+(trim(line11(bbb1)+9000)))
+								addtxtbody("	mov [di],eax")
+								addtxtbody("	mov di,L"+(trim(line11(bbb2)+9000)))
+								addtxtbody("	mov [di],ebx")
+
+
+									errorssi=-1
+										errorss=0
+ 
+								else
+									iii=1+iii
+									goto errorhandler
+
+								end if
+							end if
+
+						end if 
+						goto allkey
+					end if 
+
 
 
 
@@ -4736,6 +4782,7 @@ private sub startcode()
 		addkey ("memory.set",3) 'key 89
 		addkey ("bitmap.creat",4) 'key 90
 		addkey ("bitmap.back",3) 'key 91
+		addkey ("bitmap.attr",4) 'key 92
 
 
 'code head
@@ -6472,6 +6519,13 @@ private sub startcode()
 			addcode ("		jnz cicle1")
 			addcode ("cicle2:")
 			addcode ("ret")
+			addcode ("bitmapattr:")
+			addcode ("	mov eax,[esi]")
+			addcode ("	mov ecx,4")
+			addcode ("	add esi,ecx")
+			addcode ("	mov ebx,[esi]")
+			addcode ("	add esi,ecx")
+			addcode ("	ret")
 			addcode ("")
 			addcode ("section .data")
 			addcode ("          read32addrs1 dd 0")
